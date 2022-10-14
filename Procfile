@@ -1,0 +1,1 @@
+web: java -jar target/ecse428-peaceofmind-1.0.jar
