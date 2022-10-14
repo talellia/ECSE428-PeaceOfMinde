@@ -14,7 +14,7 @@
 	<name>peaceOfMinde</name>
 	<description>ECSE 428 project: a e-commerce website for babysitting jobs</description>
 	<properties>
-		<java.version>19</java.version>
+		<java.version>1.8</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
