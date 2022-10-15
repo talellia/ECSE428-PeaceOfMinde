@@ -149,7 +149,7 @@ public class PersonController {
 	@PostMapping(value = { "/person/worker/login", "/person/worker/login/" })
 	public ResponseEntity<?> loginWorker(@RequestBody WorkerDto workerDto) {
 		try {
-			Worker Worker = personService.loginWorker(workerDto.getEmail(), workerDto.getPassword());
+			Worker worker = personService.loginWorker(workerDto.getEmail(), workerDto.getPassword());
 			return new ResponseEntity<>(LibraryUtil.convertToDto(worker), HttpStatus.OK);
 		} catch (PersonException e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);

@@ -17,7 +17,7 @@ public class Worker extends Person {
     //------------------------
 
     public Worker(Integer aId, String aFirst_name, String aLast_name, String aResidential_address) {
-        super(aId, aFirst_name, aLast_name, aResidential_address, aIs_community_member);
+        super(aId, aFirst_name, aLast_name, aResidential_address);
     }
 
     public Worker() {
