@@ -1,13 +1,17 @@
 package ecse428.peaceOfMinde.service;
 
+import ecse428.peaceOfMinde.dao.AdminRepository;
 import ecse428.peaceOfMinde.dao.WorkerRepository;
 import ecse428.peaceOfMinde.dao.BuyerRepository;
+import ecse428.peaceOfMinde.dto.AdminDto;
 import ecse428.peaceOfMinde.dto.BuyerDto;
 import ecse428.peaceOfMinde.dto.WorkerDto;
+import ecse428.peaceOfMinde.model.Admin;
 import ecse428.peaceOfMinde.model.Worker;
 import ecse428.peaceOfMinde.model.Buyer;
 import ecse428.peaceOfMinde.utility.LibraryUtil;
 import ecse428.peaceOfMinde.utility.PersonException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,12 +26,18 @@ import java.util.Optional;
  * @author Gohar Saqib Fazal
  */
 @Service
+@RequiredArgsConstructor
 public class PersonService {
 
-    @Autowired
-    WorkerRepository workerRepository;
-    @Autowired
-    BuyerRepository buyerRepository;
+    private final WorkerRepository workerRepository;
+    private final BuyerRepository buyerRepository;
+    private final AdminRepository adminRepository;
+
+    /*******************************************
+     *
+     *   BUYER METHODS
+     *
+     *******************************************/
 
     /**
      * This method creates a buyer if the input is valid
@@ -64,8 +74,7 @@ public class PersonService {
         buyer.setPassword(password);
         buyer.setResidentialAddress(residentialAddress);
         buyerRepository.save(buyer);
-        return buyer;
-
+        return  buyer;
     }
 
     /**
@@ -169,6 +178,14 @@ public class PersonService {
         return LibraryUtil.toList(buyerRepository.findAll());
     }
 
+
+    /*******************************************
+    *
+    *   WORKER METHODS
+    *
+    *******************************************/
+
+
     /**
      * This method creates a worker if the input is valid
      *
@@ -206,7 +223,6 @@ public class PersonService {
         worker.setResidentialAddress(residentialAddress);
         workerRepository.save(worker);
         return worker;
-
     }
 
     /**
@@ -311,7 +327,158 @@ public class PersonService {
         return LibraryUtil.toList(workerRepository.findAll());
     }
 
-    // HELPER METHODS
+
+    /*******************************************
+     *
+     *   ADMIN METHODS
+     *
+     *******************************************/
+
+    /**
+     * This method creates a admin if the input is valid
+     *
+     * @param firstName          First Name of the admin
+     * @param lastName           Last Name of the admin
+     * @param email              Admin Email
+     * @param username           Admin Username
+     * @param password           Admin Password
+     * @param residentialAddress Admin Residential Address
+     * @return admin
+     * @throws PersonException Prints out the error message if the user could not be created
+     */
+    @Transactional
+    public Admin createAdmin(String firstName, String lastName, String username, String password, String email, String residentialAddress) throws PersonException {
+        String error = validateAdmin(firstName, lastName, email, username, password, residentialAddress);
+
+        if (error.length() != 0) {
+            throw new PersonException(error);
+        }
+
+        String duplicate = checkDuplicateEmail(email);
+
+        if (!duplicate.equalsIgnoreCase("")) {
+            throw new PersonException(duplicate);
+        }
+
+        Admin admin = new Admin();
+
+        admin.setFirstName(firstName);
+        admin.setLastName(lastName);
+        admin.setEmail(email);
+        admin.setUsername(username);
+        admin.setPassword(password);
+        admin.setResidentialAddress(residentialAddress);
+        adminRepository.save(admin);
+        return admin;
+    }
+
+    /**
+     * This method logins the admin into an existing account
+     *
+     * @param email    Admin Email
+     * @param password Admin Password
+     * @return admin
+     * @throws PersonException Prints out the error message if the user could not be created
+     */
+    @Transactional
+    public Admin loginAdmin(String email, String password) throws PersonException {
+        Optional<Admin> adminOptional = Optional.ofNullable(adminRepository.findAdminByEmail(email));
+        if (!adminOptional.isPresent()) {
+            throw new PersonException("Admin does not exist");
+        }
+        Admin admin = adminOptional.get();
+        if (!admin.getPassword().equals(password)) {
+            throw new PersonException("Incorrect password");
+        }
+        return admin;
+    }
+
+    /**
+     * This method returns admin credentials corresponding to the specified email
+     *
+     * @param email Admin email
+     * @return admin
+     * @throws PersonException Prints out the error message if the user could not be created
+     */
+    @Transactional
+    public Admin getAdmin(String email) throws PersonException {
+        Optional<Admin> adminOptional = Optional.ofNullable(adminRepository.findAdminByEmail(email));
+        if (!adminOptional.isPresent()) {
+            throw new PersonException("Admin with this email does not exist");
+        }
+        return adminOptional.get();
+    }
+
+    /**
+     * This method updates the admin credentials in the user account
+     *
+     * @param email   Admin email
+     * @param adminDto Admin Data Transfer Object
+     * @return admin
+     * @throws PersonException Prints out the error message if the user could not be created
+     */
+    @Transactional
+    public Admin updateAdmin(String email, AdminDto adminDto) throws PersonException {
+        Optional<Admin> adminOptional = Optional.ofNullable(adminRepository.findAdminByEmail(email));
+        if (!adminOptional.isPresent()) {
+            throw new PersonException("The admin with this email does not exist");
+        }
+        Admin admin = adminOptional.get();
+
+        String error = validateAdmin(adminDto.firstName(), adminDto.lastName(), adminDto.email(), adminDto.userName(), adminDto.password(),
+                adminDto.residentialAddress());
+        if (!error.equals("")) {
+            throw new PersonException(error);
+        }
+        //check if email has not been taken
+        if (!checkDuplicateEmail(adminDto.email()).equals("")) {
+            throw new PersonException(checkDuplicateEmail(email));
+        }
+        admin.setFirstName(adminDto.firstName());
+        admin.setLastName(adminDto.lastName());
+        admin.setEmail(adminDto.email());
+        admin.setUsername(adminDto.userName());
+        admin.setPassword(adminDto.password());
+        admin.setResidentialAddress(adminDto.residentialAddress());
+        adminRepository.save(admin);
+        return admin;
+    }
+
+    /**
+     * This method deletes a admin account
+     *
+     * @param email Admin Email
+     * @return admin
+     * @throws PersonException Prints out the error message if the user could not be created
+     */
+    @Transactional
+    public Admin deleteAdmin(String email) throws PersonException {
+        Optional<Admin> adminOptional = Optional.ofNullable(adminRepository.findAdminByEmail(email));
+        if (!adminOptional.isPresent()) {
+            throw new PersonException("The admin with the given email does not exist");
+        }
+        Admin admin = adminOptional.get();
+        int id = admin.getId();
+        adminRepository.deleteById(id);
+        return admin;
+    }
+
+    /**
+     * This method gets all admins
+     *
+     * @return List of all admins
+     */
+    @Transactional
+    public List<Admin> getAllAdmins() {
+        return LibraryUtil.toList(adminRepository.findAll());
+    }
+
+
+    /*******************************************
+     *
+     *   HELPER METHODS
+     *
+     *******************************************/
 
     /**
      * Validates the buyer credentials added during the registration into the Peace of Minde system
@@ -367,6 +534,35 @@ public class PersonService {
         } else if (residentialAddress == null || residentialAddress.length() == 0) {
             return "Enter valid residential address";
         }
+        return "";
+    }
+
+    /**
+     * Validates the admin credentials added during the registration into the Peace of Minde system
+     *
+     * @param firstName          First Name of Admin
+     * @param lastName           Last Name of Admin
+     * @param email              Admin Email
+     * @param username           Admin Username
+     * @param password           Admin password
+     * @param residentialAddress Admin Residential Address
+     * @return String telling whether the admin credentials are valid
+     */
+    private String validateAdmin(String firstName, String lastName, String email, String username, String password, String residentialAddress) {
+        if (firstName == null || firstName.length() == 0) {
+            return "Enter valid first name";
+        } else if (lastName == null || lastName.length() == 0) {
+            return "Enter valid last name";
+        } else if (email == null || email.length() == 0) {
+            return "Enter valid email";
+        } else if (username == null || username.length() == 0) {
+            return "Enter valid username";
+        } else if (password == null || password.length() == 0) {
+            return "Enter valid password";
+        } else if (residentialAddress == null || residentialAddress.length() == 0) {
+            return "Enter valid residential address";
+        }
+
         return "";
     }
 

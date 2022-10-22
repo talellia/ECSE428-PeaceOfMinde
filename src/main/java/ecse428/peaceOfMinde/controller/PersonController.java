@@ -1,13 +1,16 @@
 package ecse428.peaceOfMinde.controller;
 
 import ecse428.peaceOfMinde.dao.BuyerRepository;
+import ecse428.peaceOfMinde.dto.AdminDto;
 import ecse428.peaceOfMinde.dto.WorkerDto;
 import ecse428.peaceOfMinde.dto.BuyerDto;
+import ecse428.peaceOfMinde.model.Admin;
 import ecse428.peaceOfMinde.model.Worker;
 import ecse428.peaceOfMinde.model.Buyer;
 import ecse428.peaceOfMinde.service.PersonService;
 import ecse428.peaceOfMinde.utility.LibraryUtil;
 import ecse428.peaceOfMinde.utility.PersonException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,13 +27,10 @@ import java.util.List;
  */
 @CrossOrigin(origins = "*")
 @RestController
+@RequiredArgsConstructor
 public class PersonController {
 
-	@Autowired
-	PersonService personService;
-
-	@Autowired
-	BuyerRepository buyerRepository;
+	private final PersonService personService;
 
 	// BUYER
 
@@ -202,6 +202,95 @@ public class PersonController {
 		try {
 			Worker worker = personService.deleteWorker(email);
 			return new ResponseEntity<>("Worker" + worker + "has been deleted", HttpStatus.OK);
+		} catch (PersonException e) {
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+	}
+
+
+	// ADMIN
+
+
+	/**
+	 * Create Admin method registers a new admin into the database
+	 *
+	 * @param adminDto Admin Data Transfer Object
+	 * @return Response Entity
+	 */
+	@PostMapping(value = { "/person/admin/register", "/person/admin/register/" })
+	public ResponseEntity<?> createAdmin(@RequestBody AdminDto adminDto) {
+		try {
+			Admin admin = personService.createAdmin(adminDto.firstName(), adminDto.lastName(), adminDto.userName(),
+					adminDto.password(), adminDto.email(), adminDto.residentialAddress());
+			return new ResponseEntity<>(LibraryUtil.convertToDto(admin), HttpStatus.OK);
+		} catch (PersonException e) {
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	/**
+	 * Login Admin method allows a admin to log into their account by accessing their
+	 * credentials from the database
+	 *
+	 * @param adminDto Admin Data Transfer Object
+	 * @return Response Entity
+	 */
+	@PostMapping(value = { "/person/admin/login", "/person/admin/login/" })
+	public ResponseEntity<?> loginAdmin(@RequestBody AdminDto adminDto) {
+		try {
+			Admin admin = personService.loginAdmin(adminDto.email(), adminDto.password());
+			return new ResponseEntity<>(LibraryUtil.convertToDto(admin), HttpStatus.OK);
+		} catch (PersonException e) {
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	/**
+	 * Get Admin method returns a admin with all their credentials using the given
+	 * email
+	 *
+	 * @param email Admin Email
+	 * @return Response Entity
+	 */
+	@GetMapping(value = { "/person/admin/{email}", "/person/admin/{email}/" })
+	public ResponseEntity<?> getAdmin(@PathVariable String email) {
+		try {
+			Admin admin = personService.getAdmin(email);
+			return new ResponseEntity<>(LibraryUtil.convertToDto(admin), HttpStatus.OK);
+		} catch (PersonException e) {
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	/**
+	 * Update Admin method updates the information of a specified admin in the
+	 * database
+	 *
+	 * @param email   Admin Email
+	 * @param adminDto Admin Data Transfer Object
+	 * @return Response Entity
+	 */
+	@PutMapping(value = { "/person/admin/{email}", "/person/admin/{email}/" })
+	public ResponseEntity<?> updateAdmin(@PathVariable String email, @RequestBody AdminDto adminDto) {
+		try {
+			Admin admin = personService.updateAdmin(email, adminDto);
+			return new ResponseEntity<>(LibraryUtil.convertToDto(admin), HttpStatus.OK);
+		} catch (PersonException e) {
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	/**
+	 * Delete Admin method deletes a admin from the database
+	 *
+	 * @param email Admin Email
+	 * @return Response Entity
+	 */
+	@DeleteMapping(value = { "/person/admin/{email}", "/person/admin/{email}/" })
+	public ResponseEntity<?> deleteAdmin(@PathVariable String email) {
+		try {
+			Admin admin = personService.deleteAdmin(email);
+			return new ResponseEntity<>("Admin" + admin + "has been deleted", HttpStatus.OK);
 		} catch (PersonException e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
