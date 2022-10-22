@@ -58,7 +58,7 @@ public class LibraryUtil {
         }
         WorkerDto workerDto = new WorkerDto(worker.getFirstName(), worker.getLastName(),
                 worker.getUsername(), worker.getPassword(), worker.getEmail(),
-                worker.getResidentialAddress());
+                worker.getResidentialAddress(), worker.getAboutme());
         workerDto.setId(worker.getId());
         return workerDto;
     }

@@ -132,7 +132,7 @@ public class PersonController {
 		try {
 			Worker worker = personService.createWorker(workerDto.getFirstName(), workerDto.getLastName(),
 					workerDto.getEmail(), workerDto.getUserName(), workerDto.getPassword(),
-					workerDto.getResidentialAddress());
+					workerDto.getResidentialAddress(), workerDto.getAbout());
 			return new ResponseEntity<>(LibraryUtil.convertToDto(worker), HttpStatus.OK);
 		} catch (PersonException e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);

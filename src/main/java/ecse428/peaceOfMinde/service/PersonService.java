@@ -183,7 +183,7 @@ public class PersonService {
      */
     @Transactional
     public Worker createWorker(String firstName, String lastName, String email, String username, String password,
-                                     String residentialAddress) throws PersonException {
+                                     String residentialAddress, String about_description) throws PersonException {
         String error = validateWorker(firstName, lastName, email, username, password, residentialAddress);
 
         if (error.length() != 0) {
@@ -204,6 +204,8 @@ public class PersonService {
         worker.setUsername(username);
         worker.setPassword(password);
         worker.setResidentialAddress(residentialAddress);
+        worker.setAbout(about_description);
+
         workerRepository.save(worker);
         return worker;
 
@@ -278,6 +280,7 @@ public class PersonService {
         worker.setUsername(workerDto.getUserName());
         worker.setPassword(workerDto.getPassword());
         worker.setResidentialAddress(workerDto.getResidentialAddress());
+        worker.setAbout(workerDto.getAbout());
         workerRepository.save(worker);
         return worker;
     }
