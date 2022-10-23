@@ -15,6 +15,7 @@ public class WorkerDto {
     private String password;
     private String email;
     private String residentialAddress;
+    private String about_description;
 
     /**
      * Constructor that creates the worker data transfer object
@@ -25,15 +26,17 @@ public class WorkerDto {
      * @param password           Worker Password
      * @param email              Worker Email
      * @param residentialAddress Worker Residential Address
+     * @param about              Worker About me description
      */
     public WorkerDto(String firstName, String lastName, String userName, String password,
-                        String email, String residentialAddress) {
+                        String email, String residentialAddress, String about) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
         this.password = password;
         this.email = email;
         this.residentialAddress = residentialAddress;
+        this.about_description = about;
     }
 
     public WorkerDto() {
@@ -164,6 +167,24 @@ public class WorkerDto {
      */
     public void setResidentialAddress(String residentialAddress) {
         this.residentialAddress = residentialAddress;
+    }
+
+    /**
+     * returns the residential address of the worker
+     *
+     * @return about_description
+     */
+    public String getAbout() {
+        return about_description;
+    }
+
+    /**
+     * sets the residential address of the worker
+     *
+     * @param about
+     */
+    public void setAbout(String about) {
+        this.about_description = about;
     }
 
 }

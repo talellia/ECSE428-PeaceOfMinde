@@ -6,4 +6,5 @@ import ecse428.peaceOfMinde.model.Buyer;
 public interface BuyerRepository extends PagingAndSortingRepository<Buyer, Integer> {
     Buyer findBuyerByEmail(String email);
     Buyer findBuyerById(Integer id);
+    Buyer findBuyer(Buyer buyer);
 }
