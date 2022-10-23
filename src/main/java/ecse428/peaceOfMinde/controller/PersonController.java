@@ -1,11 +1,11 @@
 package ecse428.peaceOfMinde.controller;
 
-import ecse428.peaceOfMinde.dao.BuyerRepository;
+import ecse428.peaceOfMinde.dao.*;
 import ecse428.peaceOfMinde.dto.WorkerDto;
 import ecse428.peaceOfMinde.dto.BuyerDto;
 import ecse428.peaceOfMinde.model.Worker;
 import ecse428.peaceOfMinde.model.Buyer;
-import ecse428.peaceOfMinde.service.PersonService;
+import ecse428.peaceOfMinde.service.*;
 import ecse428.peaceOfMinde.utility.LibraryUtil;
 import ecse428.peaceOfMinde.utility.PersonException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,10 @@ public class PersonController {
 
 	@Autowired
 	PersonService personService;
-
+	@Autowired
+	BuyerService buyerService;
+	@Autowired
+	WorkerRepository personRepository;
 	@Autowired
 	BuyerRepository buyerRepository;
 
@@ -44,7 +47,7 @@ public class PersonController {
 	public ResponseEntity<?> createBuyer(@RequestBody BuyerDto buyerDto) {
 		try {
 			Buyer buyer = personService.createBuyer(buyerDto.getFirstName(), buyerDto.getLastName(), buyerDto.getUserName(),
-					buyerDto.getPassword(), buyerDto.getEmail(), buyerDto.getResidentialAddress(), buyerDto.getAbout() );
+			buyerDto.getPassword(), buyerDto.getEmail(), buyerDto.getResidentialAddress(), buyerDto.getAbout() );
 			return new ResponseEntity<>(LibraryUtil.convertToDto(buyer), HttpStatus.OK);
 		} catch (PersonException e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
@@ -230,6 +233,20 @@ public class PersonController {
     public ResponseEntity<?> viewBuyerProfile(@PathVariable Integer id) {
         try {
             Buyer buyer = personService.getBuyerById(id);
+            return new ResponseEntity<>(LibraryUtil.convertToDto(buyer), HttpStatus.OK);
+        } catch (PersonException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+	 /** 
+     * @param id
+     * @return ResponseEntity<?>
+     */
+    @PostMapping(value = { "/buyer/", "/buyer" })
+    public ResponseEntity<?> createComment(@PathVariable Integer workerId,@PathVariable Integer buyerId,@RequestParam("comment") String comment) {
+        try {
+            Buyer buyer = buyerService.createComment(buyerId, workerId, comment);
             return new ResponseEntity<>(LibraryUtil.convertToDto(buyer), HttpStatus.OK);
         } catch (PersonException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
