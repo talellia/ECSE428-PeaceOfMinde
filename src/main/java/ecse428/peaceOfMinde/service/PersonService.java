@@ -303,6 +303,30 @@ public class PersonService {
         workerRepository.deleteById(id);
         return worker;
     }
+     /** 
+     * @param id
+     * @return Buyer
+     * @throws PersonException
+     */
+    @Transactional
+    public Buyer getBuyerById(Integer id)  throws PersonException {
+        Buyer buyer = buyerRepository.findBuyerById(id);
+        return buyer;
+    }
+
+    
+    /** 
+     * @param id
+     * @return Worker
+     * @throws PersonException
+     */
+    @Transactional
+    public Worker getWorkerById(Integer id)  throws PersonException {
+        Worker worker = workerRepository.findWorkerById(id);
+        return worker;
+
+    }
+
 
     /**
      * This method gets all workers.

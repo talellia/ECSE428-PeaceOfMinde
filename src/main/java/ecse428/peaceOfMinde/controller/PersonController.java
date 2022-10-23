@@ -206,4 +206,34 @@ public class PersonController {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
+
+	 /** 
+     * @param id
+     * @return ResponseEntity<?>
+     */
+    @GetMapping(value = { "/worker/{id}", "/worker/{id}/" })
+    public ResponseEntity<?> viewWorkerProfile(@PathVariable Integer id) {
+        try {
+            Worker worker = personService.getWorkerById(id);
+            return new ResponseEntity<>(LibraryUtil.convertToDto(worker), HttpStatus.OK);
+        } catch (PersonException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    
+    /** 
+     * @param id
+     * @return ResponseEntity<?>
+     */
+    @GetMapping(value = { "/buyer/{id}", "/buyer/{id}/" })
+    public ResponseEntity<?> viewBuyerrofile(@PathVariable Integer id) {
+        try {
+            Buyer buyer = personService.getBuyerById(id);
+            return new ResponseEntity<>(LibraryUtil.convertToDto(buyer), HttpStatus.OK);
+        } catch (PersonException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
 }
