@@ -42,7 +42,7 @@ public class PersonService {
      * @throws PersonException Prints out the error message if the user could not be created
      */
     @Transactional
-    public Buyer createBuyer(String firstName, String lastName, String username, String password, String email, String residentialAddress) throws PersonException {
+    public Buyer createBuyer(String firstName, String lastName, String username, String password, String email, String residentialAddress, String about) throws PersonException {
         String error = validateBuyer(firstName, lastName, email, username, password, residentialAddress);
 
         if (error.length() != 0) {
@@ -63,6 +63,7 @@ public class PersonService {
         buyer.setUsername(username);
         buyer.setPassword(password);
         buyer.setResidentialAddress(residentialAddress);
+        buyer.setAbout(about);
         buyerRepository.save(buyer);
         return buyer;
 
@@ -136,6 +137,7 @@ public class PersonService {
         buyer.setUsername(buyerDto.getUserName());
         buyer.setPassword(buyerDto.getPassword());
         buyer.setResidentialAddress(buyerDto.getResidentialAddress());
+        buyer.setAbout(buyerDto.getAbout());
         buyerRepository.save(buyer);
         return buyer;
     }

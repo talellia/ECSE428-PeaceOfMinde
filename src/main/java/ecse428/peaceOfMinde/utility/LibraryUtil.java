@@ -41,7 +41,7 @@ public class LibraryUtil {
             throw new IllegalArgumentException("There is no such Buyer!");
         }
         BuyerDto buyerDto = new BuyerDto(buyer.getFirstName(), buyer.getLastName(), buyer.getUsername(),
-                buyer.getPassword(), buyer.getEmail(), buyer.getResidentialAddress());
+                buyer.getPassword(), buyer.getEmail(), buyer.getResidentialAddress(), buyer.getAboutme());
         buyerDto.setId(buyer.getId());
         return buyerDto;
     }

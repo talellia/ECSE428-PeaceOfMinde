@@ -172,7 +172,7 @@ public class WorkerDto {
     /**
      * returns the residential address of the worker
      *
-     * @return residentialAddress
+     * @return about_description
      */
     public String getAbout() {
         return about_description;
@@ -181,7 +181,7 @@ public class WorkerDto {
     /**
      * sets the residential address of the worker
      *
-     * @param residentialAddress
+     * @param about
      */
     public void setAbout(String about) {
         this.about_description = about;

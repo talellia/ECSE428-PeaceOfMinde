@@ -44,7 +44,7 @@ public class PersonController {
 	public ResponseEntity<?> createBuyer(@RequestBody BuyerDto buyerDto) {
 		try {
 			Buyer buyer = personService.createBuyer(buyerDto.getFirstName(), buyerDto.getLastName(), buyerDto.getUserName(),
-					buyerDto.getPassword(), buyerDto.getEmail(), buyerDto.getResidentialAddress());
+					buyerDto.getPassword(), buyerDto.getEmail(), buyerDto.getResidentialAddress(), buyerDto.getAbout() );
 			return new ResponseEntity<>(LibraryUtil.convertToDto(buyer), HttpStatus.OK);
 		} catch (PersonException e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
@@ -227,7 +227,7 @@ public class PersonController {
      * @return ResponseEntity<?>
      */
     @GetMapping(value = { "/buyer/{id}", "/buyer/{id}/" })
-    public ResponseEntity<?> viewBuyerrofile(@PathVariable Integer id) {
+    public ResponseEntity<?> viewBuyerProfile(@PathVariable Integer id) {
         try {
             Buyer buyer = personService.getBuyerById(id);
             return new ResponseEntity<>(LibraryUtil.convertToDto(buyer), HttpStatus.OK);
