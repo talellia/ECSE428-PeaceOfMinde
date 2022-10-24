@@ -2,7 +2,7 @@ version: '2.1'
 
 orbs:
   heroku: circleci/heroku@2.0.0
-  maven: drift/maven@0.1.13
+  mavenn: drift/maven@0.1.13
   
 # workflows:
 #   sample_flow:
@@ -41,9 +41,9 @@ jobs:
       - run: heroku login
       - heroku/deploy-via-git
   build:
-    executor: maven/default
+    executor: mavenn/default
     steps:
-      - maven/build-jar
+      - mavenn/build-jar
 
 
 workflows:
