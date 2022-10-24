@@ -1,7 +1,6 @@
 version: '2.1'
 
 orbs:
-  heroku: circleci/heroku@2.0.0
   java-maven: whoop/java-maven@1.0.12
 
 jobs:
@@ -12,17 +11,8 @@ jobs:
       - checkout
       - java-maven/resolve-dependencies
       - java-maven/build-and-test
-  deploy:
-    executor: heroku/default
-    steps:
-      - checkout
-      - heroku/install
-      - heroku/deploy-via-git
-
-
 
 workflows:
   build:
     jobs: 
       - build
-      - deploy
