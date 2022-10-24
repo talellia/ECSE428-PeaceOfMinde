@@ -38,12 +38,8 @@ jobs:
       - checkout
       - heroku/install
       - run:
-          command: >
-            echo "The command above installs Heroku, the command below deploys.
-            What you do inbetween is up to you!"
-          command: > 
+            echo "The command above installs Heroku, the command below deploys. What you do inbetween is up to you!"
             mvn clean install
-          command: >
             mvn package
       - heroku/deploy-via-git
 workflows:
