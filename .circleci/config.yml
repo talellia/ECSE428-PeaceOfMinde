@@ -2,6 +2,7 @@ version: '2.1'
 
 orbs:
   heroku: circleci/heroku@2.0.0
+  maven-build: inclasstoday/maven-build@1.0.9
   
 # workflows:
 #   sample_flow:
@@ -38,11 +39,10 @@ jobs:
       - checkout
       - heroku/install
       - maven/install
-      - run:
-            echo "The command above installs Heroku, the command below deploys. What you do inbetween is up to you!"
-            mvn package
-            heroku login
+      - run: echo "The command above installs Heroku, the command below deploys. What you do inbetween is up to you!"
       - run: mvn clean install
+      - run: mvn package
+      - run: heroku login
       - heroku/deploy-via-git
 workflows:
   heroku_deploy:
