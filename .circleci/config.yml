@@ -5,25 +5,26 @@ orbs:
   java-maven: whoop/java-maven@1.0.12
 
 jobs:
+  build:
+    executor: java-maven/default
+    steps:
+      - checkout
+      - java-maven/resolve-dependencies
+      - java-maven/build-and-test
   deploy:
     executor: heroku/default
     steps:
       - heroku/install
       - run: heroku login
       - heroku/deploy-via-git
-  build:
-    steps:
-      - checkout
-      - java-maven/resolve-dependencies
-      - java-maven/build-and-test
+
 
 
 workflows:
   build:
-    executor: java-maven/whoop
     jobs:
       - build
 
-  deplopy:
-    jobs:
-      - deploy 
+  # deplopy:
+  #   jobs:
+  #     - deploy 
