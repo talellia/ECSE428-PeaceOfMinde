@@ -6,7 +6,7 @@ orbs:
 
 jobs:
   build:
-    # executor: java-maven/default
+    executor: java-maven/default
     steps:
       - checkout
       - java-maven/resolve-dependencies
