@@ -39,9 +39,9 @@ jobs:
       - heroku/install
       - run:
             echo "The command above installs Heroku, the command below deploys. What you do inbetween is up to you!"
-            mvn clean install
             mvn package
             heroku login
+      - run: mvn clean install
       - heroku/deploy-via-git
 workflows:
   heroku_deploy:
