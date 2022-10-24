@@ -1,0 +1,52 @@
+version: '2.1'
+
+orbs:
+  heroku: circleci/heroku@2.0.0
+  
+# workflows:
+#   sample_flow:
+#     jobs:
+#       - maven-deploy/code-checkout:
+#           executor-version: 14-buster
+#       - maven-deploy/resolve-dependency:
+#           executor-version: 14-buster
+#           requires:
+#             - maven-deploy/code-checkout
+#       - maven-deploy/build:
+#           executor-version: 14-buster
+#           requires:
+#             - maven-deploy/resolve-dependency
+#       - maven-deploy/test:
+#           executor-version: 14-buster
+#           requires:
+#             - maven-deploy/build
+#           result-path: target/surefire-reports
+#       - maven-deploy/deploy:
+#           deploy-command: >-
+#             mvn deploy --settings .circleci/settings.xml -DskipTests
+#             -Dcheckstyle.skip -B -Prelease
+#           executor-version: 14-buster
+#           filters:
+#             branches:
+#               only:
+#                 - main    
+
+jobs:
+  deploy:
+    executor: heroku/default
+    steps:
+      - checkout
+      - heroku/install
+      - run:
+          command: >
+            echo "The command above installs Heroku, the command below deploys.
+            What you do inbetween is up to you!"
+          command: > 
+            mvn clean install
+          command: >
+            mvn package
+      - heroku/deploy-via-git
+workflows:
+  heroku_deploy:
+    jobs:
+      - deploy
