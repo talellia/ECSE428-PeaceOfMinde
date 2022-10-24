@@ -13,8 +13,9 @@ jobs:
       - java-maven/resolve-dependencies
       - java-maven/build-and-test
   buildFrontEnd:
-    - node/run:
-        npm-run: build
+    steps:
+      - node/run:
+          npm-run: build
 
 
 
@@ -22,6 +23,6 @@ workflows:
   build: 
     jobs: 
       - buildBackEnd
-      - buildFrontEnd
+      - buildFrontEnd:
 
       
