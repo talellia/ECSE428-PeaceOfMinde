@@ -12,7 +12,7 @@ jobs:
       - run: heroku login
       - heroku/deploy-via-git
   build:
-    executor: java-maven/default
+    executor: java-maven/whoop
     steps:
       - checkout
       - java-maven/resolve-dependencies
@@ -23,7 +23,7 @@ workflows:
   build:
     jobs:
       - build
-      
+
   deplopy:
     jobs:
       - deploy 
