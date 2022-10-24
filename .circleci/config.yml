@@ -15,8 +15,15 @@ jobs:
     
   buildFrontEnd:
     executor: node/default
+      docker:
+        - image: 'cimg/base:stable'
       steps:
-        - node/run
+        - checkout
+        - node/install:
+            install-yarn: true
+            node-version: '16.13'
+        - run: node --version
+        - npm-run: build
 
 
 workflows:
