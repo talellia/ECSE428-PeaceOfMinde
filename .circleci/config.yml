@@ -22,8 +22,7 @@ jobs:
 
 workflows:
   build:
-    jobs:
-      - build
+    jobs: build
 
   # deplopy:
   #   jobs:
