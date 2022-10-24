@@ -3,34 +3,6 @@ version: '2.1'
 orbs:
   heroku: circleci/heroku@2.0.0
   java-maven: whoop/java-maven@1.0.12
-  
-# workflows:
-#   sample_flow:
-#     jobs:
-#       - maven-deploy/code-checkout:
-#           executor-version: 14-buster
-#       - maven-deploy/resolve-dependency:
-#           executor-version: 14-buster
-#           requires:
-#             - maven-deploy/code-checkout
-#       - maven-deploy/build:
-#           executor-version: 14-buster
-#           requires:
-#             - maven-deploy/resolve-dependency
-#       - maven-deploy/test:
-#           executor-version: 14-buster
-#           requires:
-#             - maven-deploy/build
-#           result-path: target/surefire-reports
-#       - maven-deploy/deploy:
-#           deploy-command: >-
-#             mvn deploy --settings .circleci/settings.xml -DskipTests
-#             -Dcheckstyle.skip -B -Prelease
-#           executor-version: 14-buster
-#           filters:
-#             branches:
-#               only:
-#                 - main    
 
 jobs:
   deploy:
@@ -48,7 +20,10 @@ jobs:
 
 
 workflows:
-  deploy:
+  build:
     jobs:
       - build
+      
+  deplopy:
+    jobs:
       - deploy 
