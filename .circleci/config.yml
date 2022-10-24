@@ -12,18 +12,14 @@ jobs:
       - checkout
       - java-maven/resolve-dependencies
       - java-maven/build-and-test
-    
-  buildFrontEnd:
-    executor: node/default
-      steps:
-        - checkout
-        - node/install
-        - node/build
 
 
 workflows:
   build: 
     jobs: 
       - buildBackEnd
-      - buildFrontEnd
+      - buildFrontEnd:
+          jobs:
+          - node/run:
+              npm-run: build
       
