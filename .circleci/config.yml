@@ -2,18 +2,27 @@ version: '2.1'
 
 orbs:
   java-maven: whoop/java-maven@1.0.12
+  node: circleci/node@5.0.3
 
 jobs:
-  build:
+  buildBackEnd:
     executor:
       name: java-maven/java11
     steps:
       - checkout
       - java-maven/resolve-dependencies
       - java-maven/build-and-test
+    
+  buildFrontEnd:
+    executor: node/default
+      jobs:
+        - node/run:
+            npm-run: build
+
 
 workflows:
-  build:
+  build: 
     jobs: 
-      - build
+      - buildBackEnd
+      - buildFrontEnd
       
