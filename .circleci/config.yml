@@ -51,4 +51,4 @@ workflows:
   deploy:
     jobs:
       - build
-      - deploy
+      - deploy 
