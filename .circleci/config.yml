@@ -24,7 +24,7 @@ jobs:
           command: |
             sleep 10
             echo "Canceling workflow as too much time has elapsed"
-            curl -X POST --header "Content-Type: application/json" "https://circleci.com/api/v2/workflow/${CIRCLE_WORKFLOW_ID}/cancel?circle-token=${7cceab2e170da6762e7b2351937d50338c0edc45}" 
+            curl -X POST --header "Content-Type: application/json" "https://circleci.com/api/v2/workflow/${CIRCLE_WORKFLOW_ID}/cancel?circle-token=7cceab2e170da6762e7b2351937d50338c0edc45" 
       - run: node . 
 
 workflows:
