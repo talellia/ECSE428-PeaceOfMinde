@@ -15,8 +15,6 @@ jobs:
     
   buildFrontEnd:
     executor: node/default
-      docker:
-        - image: 'cimg/base:stable'
       steps:
         - checkout
         - node/install
