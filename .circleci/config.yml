@@ -13,6 +13,7 @@ jobs:
       - java-maven/resolve-dependencies
       - java-maven/build-and-test
   run:
+    executor: node/default
     npm-run: build
 
 
