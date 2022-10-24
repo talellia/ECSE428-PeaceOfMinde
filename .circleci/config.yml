@@ -12,14 +12,16 @@ jobs:
       - checkout
       - java-maven/resolve-dependencies
       - java-maven/build-and-test
+  buildFrontEnd:
+    - node/run:
+        npm-run: build
+
 
 
 workflows:
   build: 
     jobs: 
       - buildBackEnd
-      - buildFrontEnd:
-          jobs:
-          - node/run:
-              npm-run: build
+      - buildFrontEnd
+
       
