@@ -2,7 +2,7 @@ version: '2.1'
 
 orbs:
   java-maven: whoop/java-maven@1.0.12
-  node: radar/node@1.2.0
+  node: circleci/node@5.0.3
 
 jobs:
   buildBackEnd:
@@ -13,6 +13,8 @@ jobs:
       - java-maven/resolve-dependencies
       - java-maven/build-and-test
   buildFrontEnd:
+    executor:
+      name: node
     steps:
       - node/run:
           npm-run: build
@@ -23,6 +25,6 @@ workflows:
   build: 
     jobs: 
       - buildBackEnd
-      - buildFrontEnd:
+      - buildFrontEnd
 
       
