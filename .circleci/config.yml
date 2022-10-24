@@ -14,7 +14,8 @@ jobs:
       - java-maven/build-and-test
   run:
     executor: node/default
-    npm-run: build
+      steps:
+        - npm-run: build
 
 
 
