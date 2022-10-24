@@ -14,9 +14,11 @@ jobs:
       - java-maven/build-and-test
   run:
     executor: node/default
-      steps:
-        - node/install
-
+        docker:
+          - image: 'cimg/base:stable'
+        steps:
+          - checkout
+          - node/install
 
 
 workflows:
