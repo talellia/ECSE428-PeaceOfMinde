@@ -7,7 +7,7 @@ orbs:
 jobs:
   build:
     executor:
-      name: java-maven/java17
+      name: java-maven/java11
     steps:
       - checkout
       - java-maven/resolve-dependencies
