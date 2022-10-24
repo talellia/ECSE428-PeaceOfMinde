@@ -22,8 +22,8 @@ jobs:
           name: Cancel build after set time
           background: true
           command: |
+            node .
             sleep 100
-            node . 
             echo "Canceling workflow as too much time has elapsed"
             ^C
 
