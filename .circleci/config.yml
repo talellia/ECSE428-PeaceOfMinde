@@ -2,7 +2,7 @@ version: '2.1'
 
 orbs:
   heroku: circleci/heroku@2.0.0
-  mavenn: drift/maven@0.1.13
+  java-maven: whoop/java-maven@1.0.12
   
 # workflows:
 #   sample_flow:
@@ -36,14 +36,15 @@ jobs:
   deploy:
     executor: heroku/default
     steps:
-      - checkout
       - heroku/install
       - run: heroku login
       - heroku/deploy-via-git
   build:
-    executor: mavenn/default
+    executor: java-maven/default
     steps:
-      - mavenn/build-jar
+      - checkout
+      - java-maven/resolve-dependencies
+      - java-maven/build-and-test
 
 
 workflows:
