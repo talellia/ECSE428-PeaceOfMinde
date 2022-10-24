@@ -1,0 +1,9 @@
+on:
+  issues:
+    Status:
+      - Done
+
+Set:
+  issues:
+    is: 
+      - closed
