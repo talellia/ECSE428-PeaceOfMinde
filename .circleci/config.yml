@@ -2,7 +2,7 @@ version: '2.1'
 
 orbs:
   java-maven: whoop/java-maven@1.0.12
-  node: circleci/node@5.0.3
+  node: radar/node@1.2.0
 
 jobs:
   buildBackEnd:
@@ -19,11 +19,8 @@ jobs:
         - image: 'cimg/base:stable'
       steps:
         - checkout
-        - node/install:
-            install-yarn: true
-            node-version: '16.13'
-        - run: node --version
-        - npm-run: build
+        - node/install
+        - node/build
 
 
 workflows:
