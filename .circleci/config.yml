@@ -13,12 +13,11 @@ jobs:
       - java-maven/resolve-dependencies
       - java-maven/build-and-test
   run:
-    executor: node/default
-        docker:
-          - image: 'cimg/base:stable'
-        steps:
-          - checkout
-          - node/install
+    docker:
+      - image: 'cimg/base:stable'
+    steps:
+      - checkout
+      - node/install
 
 
 workflows:
