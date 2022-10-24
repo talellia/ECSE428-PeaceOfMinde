@@ -16,8 +16,7 @@ jobs:
   buildFrontEnd:
     executor: node/default
       steps:
-        - node/run:
-            npm-run: build
+        - node/run
 
 
 workflows:
