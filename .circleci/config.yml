@@ -43,7 +43,6 @@ jobs:
   build:
     executor: mvn/default
     steps:
-      - mvn/install
       - mvn/build
 
 
