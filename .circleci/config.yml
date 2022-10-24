@@ -2,7 +2,7 @@ version: '2.1'
 
 orbs:
   heroku: circleci/heroku@2.0.0
-  mvn: scx/mvn@3.0.3
+  maven-build: inclasstoday/maven-build@1.0.9
   
 # workflows:
 #   sample_flow:
@@ -41,9 +41,9 @@ jobs:
       - run: heroku login
       - heroku/deploy-via-git
   build:
-    executor: mvn/default
+    executor: maven-build/default
     steps:
-      - mvn/build
+      - maven-build/docker_build
 
 
 workflows:
