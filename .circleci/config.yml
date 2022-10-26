@@ -12,25 +12,12 @@ jobs:
       - checkout
       - java-maven/resolve-dependencies
       - java-maven/build-and-test
-  run:
-    docker:
-      - image: 'cimg/base:stable'
-    steps:
-      - checkout
-      - node/install
-      - run:
-          name: Cancel build after set time
-          background: true
-          command: |
-            node .
-            sleep 100
-            echo "Canceling workflow as too much time has elapsed"
-            ^C
+      - store_test_results
+
 
 workflows:
   build: 
     jobs: 
       - buildBackEnd
-      - run
 
       
