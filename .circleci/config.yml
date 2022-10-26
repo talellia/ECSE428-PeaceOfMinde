@@ -12,7 +12,8 @@ jobs:
       - checkout
       - java-maven/resolve-dependencies
       - java-maven/build-and-test
-      - store_test_results
+      - store_test_results:
+          path: test-results
   run:
     docker:
       - image: 'cimg/base:stable'
