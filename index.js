@@ -25,5 +25,6 @@ app.get('/about', (req,res) =>{
 })
 
 
-//listen on port 5000
+//listen on port 8081
 app.listen(PORT, () => console.info(`listening on port ${PORT}`))
+
