@@ -2,18 +2,16 @@
 // SETUP
 // *******************************************************************
 
-
-
 // import express module and set up port
 const express = require('express')
 const app = express()
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 8081
 
 // Static files
 app.use(express.static('/frontend/public'))
-app.use('/css',express.static(__dirname + '/frontend/public/css'))
-app.use('/js',express.static(__dirname + '/frontend/public/js'))
-app.use('/img',express.static(__dirname + '/frontend/public/img'))
+app.use('/css', express.static(__dirname + '/frontend/public/css'))
+app.use('/js', express.static(__dirname + '/frontend/public/js'))
+app.use('/img', express.static(__dirname + '/frontend/public/img'))
 
 // Set views
 app.set('views', './frontend/views')
