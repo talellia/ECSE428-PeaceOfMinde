@@ -38,19 +38,24 @@
 	</properties>
 	<dependencies>
 		<dependency>
-			<groupId>
-				org.springframework.boot
-			</groupId>
-			<artifactId>
-				spring-boot-starter-data-jpa
-			</artifactId>
-		</dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+	    <dependency>
+       		<groupId>org.springframework.boot</groupId>
+        		<artifactId>spring-boot-starter-jdbc</artifactId>
+   		 </dependency>
+		<dependency>
+       		<groupId>org.postgresql</groupId>
+        	<artifactId>postgresql</artifactId>
+        	<scope>runtime</scope>
+   		 </dependency>
 		<dependency>
 			<groupId>
 				org.springframework.boot
 			</groupId>
 			<artifactId>
-				spring-boot-starter-security
+				spring-boot-starter-data-jpa
 			</artifactId>
 		</dependency>
 		<dependency>

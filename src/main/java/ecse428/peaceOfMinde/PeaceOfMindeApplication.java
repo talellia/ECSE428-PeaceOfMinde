@@ -9,8 +9,7 @@ import org.springframework.stereotype.*;
 public class PeaceOfMindeApplication {
 
 	@RequestMapping("/")
-    @ResponseBody
-    String home() {
+    public String home() {
       return "Hello World!";
     }
 

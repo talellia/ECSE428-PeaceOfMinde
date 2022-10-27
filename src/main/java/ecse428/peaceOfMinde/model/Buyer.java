@@ -10,6 +10,7 @@ public class Buyer extends Person {
     //------------------------
     // MEMBER VARIABLES
     //------------------------
+    @ElementCollection(targetClass=Integer.class)
     private List<String> listComments;
 
 
