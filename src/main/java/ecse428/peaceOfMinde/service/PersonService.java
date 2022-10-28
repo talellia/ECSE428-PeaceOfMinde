@@ -266,7 +266,8 @@ public class PersonService {
         }
         Worker worker = workerOptional.get();
 
-        String error = validateWorker(workerDto.getFirstName(), workerDto.getLastName(), workerDto.getEmail(), workerDto.getUserName(), workerDto.getPassword(),
+        String error = validateWorker(workerDto.getFirstName(), workerDto.getLastName(), workerDto.getEmail(),
+                workerDto.getUserName(), workerDto.getPassword(),
                 workerDto.getResidentialAddress());
         if (!error.equals("")) {
             throw new PersonException(error);
@@ -286,7 +287,42 @@ public class PersonService {
         workerRepository.save(worker);
         return worker;
     }
+    
+     /**
+     * Updates the old password for  Worker with the new requested password
+     *
+     * @param email           Worker email
+     * @param newpassword     New password for the Worker
+     * @param workerDto       Worker Data Transfer Object
+     * @return worker
+     * @throws PersonException Prints out the error message if the user could not be created
+     */
+    @Transactional
+    public Worker updateWorkerPassword(String email, String newPassword, WorkerDto workerDto) throws PersonException {
+        Optional<Worker> workerOptional = Optional.ofNullable(workerRepository.findWorkerByEmail(email));
+        if (!workerOptional.isPresent()) {
+            throw new PersonException("The worker with this email does not exist");
+        }
+        Worker worker = workerOptional.get();
 
+        String error = validateWorker(workerDto.getFirstName(), workerDto.getLastName(), workerDto.getEmail(),
+                workerDto.getUserName(), workerDto.getPassword(),
+                workerDto.getResidentialAddress());
+        if (!error.equals("")) {
+            throw new PersonException(error);
+        }
+        //check if the old password is the same as the old one
+        String oldPassword = worker.getPassword();
+        if (oldPassword.equals(newPassword)) {
+            throw new PersonException("Your new password cannot be same as your new password.");
+        }
+
+        worker.setPassword(newPassword);
+
+        workerRepository.save(worker);
+        return worker;
+    }
+    
     /**
      * This method deletes a worker account
      *
