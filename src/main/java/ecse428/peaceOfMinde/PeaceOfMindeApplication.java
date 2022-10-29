@@ -8,10 +8,10 @@ import org.springframework.stereotype.*;
 @SpringBootApplication
 public class PeaceOfMindeApplication {
 
-	@RequestMapping("/")
-    public String home() {
-      return "Hello World!";
-    }
+  @RequestMapping("/test")
+  public String root(){
+      return "Index Page";
+  }
 
     public static void main(String[] args) {
         SpringApplication.run(PeaceOfMindeApplication.class, args);
