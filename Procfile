@@ -1,1 +1,1 @@
-web:node index.js
+web:java -jar target/peaceOfMinde-0.0.1-SNAPSHOT.jar
