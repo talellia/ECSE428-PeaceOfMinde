@@ -52,7 +52,7 @@ public class PersonService {
      * @throws PersonException Prints out the error message if the user could not be created
      */
     @Transactional
-    public Buyer createBuyer(String firstName, String lastName, String username, String password, String email, String residentialAddress) throws PersonException {
+    public Buyer createBuyer(String firstName, String lastName, String username, String password, String email, String residentialAddress, String about) throws PersonException {
         String error = validateBuyer(firstName, lastName, email, username, password, residentialAddress);
 
         if (error.length() != 0) {
@@ -73,6 +73,7 @@ public class PersonService {
         buyer.setUsername(username);
         buyer.setPassword(password);
         buyer.setResidentialAddress(residentialAddress);
+        buyer.setAbout(about);
         buyerRepository.save(buyer);
         return  buyer;
     }
@@ -145,6 +146,7 @@ public class PersonService {
         buyer.setUsername(buyerDto.getUserName());
         buyer.setPassword(buyerDto.getPassword());
         buyer.setResidentialAddress(buyerDto.getResidentialAddress());
+        buyer.setAbout(buyerDto.getAbout());
         buyerRepository.save(buyer);
         return buyer;
     }
@@ -200,7 +202,7 @@ public class PersonService {
      */
     @Transactional
     public Worker createWorker(String firstName, String lastName, String email, String username, String password,
-                                     String residentialAddress) throws PersonException {
+                                     String residentialAddress, String about_description) throws PersonException {
         String error = validateWorker(firstName, lastName, email, username, password, residentialAddress);
 
         if (error.length() != 0) {
@@ -221,6 +223,8 @@ public class PersonService {
         worker.setUsername(username);
         worker.setPassword(password);
         worker.setResidentialAddress(residentialAddress);
+        worker.setAbout(about_description);
+
         workerRepository.save(worker);
         return worker;
     }
@@ -294,6 +298,7 @@ public class PersonService {
         worker.setUsername(workerDto.getUserName());
         worker.setPassword(workerDto.getPassword());
         worker.setResidentialAddress(workerDto.getResidentialAddress());
+        worker.setAbout(workerDto.getAbout());
         workerRepository.save(worker);
         return worker;
     }
@@ -316,6 +321,30 @@ public class PersonService {
         workerRepository.deleteById(id);
         return worker;
     }
+     /** 
+     * @param id
+     * @return Buyer
+     * @throws PersonException
+     */
+    @Transactional
+    public Buyer getBuyerById(Integer id)  throws PersonException {
+        Buyer buyer = buyerRepository.findBuyerById(id);
+        return buyer;
+    }
+
+    
+    /** 
+     * @param id
+     * @return Worker
+     * @throws PersonException
+     */
+    @Transactional
+    public Worker getWorkerById(Integer id)  throws PersonException {
+        Worker worker = workerRepository.findWorkerById(id);
+        return worker;
+
+    }
+
 
     /**
      * This method gets all workers.

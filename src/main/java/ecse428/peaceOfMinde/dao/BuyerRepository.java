@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface BuyerRepository extends PagingAndSortingRepository<Buyer, Integer> {
     Buyer findBuyerByEmail(String email);
     Buyer findBuyerById(Integer id);
+    Buyer findBuyer(Buyer buyer);
 }

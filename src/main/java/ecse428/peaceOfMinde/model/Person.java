@@ -35,6 +35,8 @@ public abstract class Person {
     private String email;
     @Column
     private String residentialAddress;
+    @Column
+    private String aboutme;
 
     //------------------------
     // CONSTRUCTOR
@@ -123,6 +125,13 @@ public abstract class Person {
         return wasSet;
     }
 
+    public boolean setAbout(String about_description) {
+        boolean wasSet = false;
+        aboutme = about_description;
+        wasSet = true;
+        return wasSet;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -159,6 +168,10 @@ public abstract class Person {
         return residentialAddress;
     }
 
+    public String getAboutme() {
+        return aboutme;
+    }
+
     public void delete() {
         personsById.remove(getId());
     }
@@ -171,6 +184,7 @@ public abstract class Person {
                 "username" + ":" + getUsername() + "," +
                 "password" + ":" + getPassword() + "," +
                 "email" + ":" + getEmail() + "," +
-                "residentialAddress" + ":" + getResidentialAddress() + "]";
+                "residentialAddress" + ":" + getResidentialAddress() +
+                "about" + getAboutme() + "]";
     }
 }

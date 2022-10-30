@@ -7,4 +7,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface WorkerRepository extends PagingAndSortingRepository<Worker, Integer> {
     Worker findWorkerByEmail(String email);
+    Worker findWorkerById(Integer id);
+    Worker findWorker(Worker worker);
+
 }

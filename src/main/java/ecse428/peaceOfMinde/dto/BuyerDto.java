@@ -16,6 +16,9 @@ public class BuyerDto {
     private String password;
     private String email;
     private String residentialAddress;
+    private String about_description;
+
+
 
     /**
      * Constructor that creates the buyer data transfer object
@@ -28,13 +31,14 @@ public class BuyerDto {
      * @param residentialAddress Buyer Residential Address
      */
     public BuyerDto(String firstName, String lastName, String userName, String password, String email,
-                   String residentialAddress) {
+                   String residentialAddress, String about) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
         this.password = password;
         this.email = email;
         this.residentialAddress = residentialAddress;
+        this.about_description = about;
     }
 
     public BuyerDto() {
@@ -165,6 +169,24 @@ public class BuyerDto {
      */
     public void setResidentialAddress(String residentialAddress) {
         this.residentialAddress = residentialAddress;
+    }
+
+    /**
+     * returns the residential address of the buyer
+     *
+     * @return about_description
+     */
+    public String getAbout() {
+        return about_description;
+    }
+
+    /**
+     * sets the residential address of the cuyer
+     *
+     * @param about
+     */
+    public void setAbout(String about) {
+        this.about_description = about;
     }
 
 }

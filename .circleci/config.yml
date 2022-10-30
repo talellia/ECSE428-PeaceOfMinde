@@ -1,0 +1,38 @@
+version: '2.1'
+
+orbs:
+  java-maven: whoop/java-maven@1.0.12
+  node: circleci/node@5.0.3
+
+jobs:
+  buildBackEnd:
+    executor:
+      name: java-maven/java11
+    steps:
+      - checkout
+      - java-maven/resolve-dependencies
+      - java-maven/build-and-test
+      - store_test_results:
+          path: ~/test-results
+  run:
+    docker:
+      - image: 'cimg/base:stable'
+    steps:
+      - checkout
+      - node/install
+      - run:
+          name: Cancel build after set time
+          background: true
+          command: |
+            node .
+            sleep 100
+            echo "Canceling workflow as too much time has elapsed"
+            ^C
+
+workflows:
+  build: 
+    jobs: 
+      - buildBackEnd
+      - run
+
+      
