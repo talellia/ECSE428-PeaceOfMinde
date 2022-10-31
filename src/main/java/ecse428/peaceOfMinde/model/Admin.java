@@ -1,5 +1,8 @@
 package ecse428.peaceOfMinde.model;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.Entity;
 
 @Entity
@@ -13,14 +16,13 @@ public class Admin extends Person{
     // CONSTRUCTOR
     //------------------------
 
-    public Admin(Integer aId, String aFirst_name, String aLast_name, String aResidential_address) {
-        super(aId, aFirst_name, aLast_name, aResidential_address);
+    public Admin(Integer aId, String aFirst_name, String aLast_name, String aResidential_address, String aAboutMe) {
+        super(aId, aFirst_name, aLast_name, aResidential_address, aAboutMe);
     }
 
     public Admin() {
 
     }
-
     //------------------------
     // INTERFACE
     //------------------------

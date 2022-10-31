@@ -77,7 +77,9 @@ public class LibraryUtil {
         }
         AdminDto adminDto = new AdminDto(admin.getFirstName(), admin.getLastName(),
                 admin.getUsername(), admin.getPassword(), admin.getEmail(),
-                admin.getResidentialAddress());
+                admin.getResidentialAddress(), admin.getAboutme());
+        adminDto.setId(admin.getId());
         return adminDto;
+
     }
 }

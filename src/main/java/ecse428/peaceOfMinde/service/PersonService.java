@@ -181,6 +181,18 @@ public class PersonService {
     }
 
 
+    /**
+     * @param id
+     * @return Buyer
+     * @throws PersonException
+     */
+    @Transactional
+    public Buyer getBuyerById(Integer id)  throws PersonException {
+        Buyer buyer = buyerRepository.findBuyerById(id);
+        return buyer;
+    }
+
+
     /*******************************************
     *
     *   WORKER METHODS
@@ -321,30 +333,6 @@ public class PersonService {
         workerRepository.deleteById(id);
         return worker;
     }
-     /** 
-     * @param id
-     * @return Buyer
-     * @throws PersonException
-     */
-    @Transactional
-    public Buyer getBuyerById(Integer id)  throws PersonException {
-        Buyer buyer = buyerRepository.findBuyerById(id);
-        return buyer;
-    }
-
-    
-    /** 
-     * @param id
-     * @return Worker
-     * @throws PersonException
-     */
-    @Transactional
-    public Worker getWorkerById(Integer id)  throws PersonException {
-        Worker worker = workerRepository.findWorkerById(id);
-        return worker;
-
-    }
-
 
     /**
      * This method gets all workers.
@@ -356,6 +344,17 @@ public class PersonService {
         return LibraryUtil.toList(workerRepository.findAll());
     }
 
+    /**
+     * @param id
+     * @return Worker
+     * @throws PersonException
+     */
+    @Transactional
+    public Worker getWorkerById(Integer id)  throws PersonException {
+        Worker worker = workerRepository.findWorkerById(id);
+        return worker;
+
+    }
 
     /*******************************************
      *
@@ -454,21 +453,21 @@ public class PersonService {
         }
         Admin admin = adminOptional.get();
 
-        String error = validateAdmin(adminDto.firstName(), adminDto.lastName(), adminDto.email(), adminDto.userName(), adminDto.password(),
-                adminDto.residentialAddress());
+        String error = validateAdmin(adminDto.getFirstName(), adminDto.getLastName(), adminDto.getEmail(), adminDto.getUserName(), adminDto.getPassword(),
+                adminDto.getResidentialAddress());
         if (!error.equals("")) {
             throw new PersonException(error);
         }
         //check if email has not been taken
-        if (!checkDuplicateEmail(adminDto.email()).equals("")) {
+        if (!checkDuplicateEmail(adminDto.getEmail()).equals("")) {
             throw new PersonException(checkDuplicateEmail(email));
         }
-        admin.setFirstName(adminDto.firstName());
-        admin.setLastName(adminDto.lastName());
-        admin.setEmail(adminDto.email());
-        admin.setUsername(adminDto.userName());
-        admin.setPassword(adminDto.password());
-        admin.setResidentialAddress(adminDto.residentialAddress());
+        admin.setFirstName(adminDto.getFirstName());
+        admin.setLastName(adminDto.getLastName());
+        admin.setEmail(adminDto.getEmail());
+        admin.setUsername(adminDto.getUserName());
+        admin.setPassword(adminDto.getPassword());
+        admin.setResidentialAddress(adminDto.getResidentialAddress());
         adminRepository.save(admin);
         return admin;
     }
@@ -502,6 +501,16 @@ public class PersonService {
         return LibraryUtil.toList(adminRepository.findAll());
     }
 
+
+    /**
+     * @param id
+     * @return Worker
+     * @throws PersonException
+     */
+    @Transactional
+    public Admin getAdminById(Integer id)  throws PersonException {
+        return adminRepository.findAdminById(id);
+    }
 
     /*******************************************
      *

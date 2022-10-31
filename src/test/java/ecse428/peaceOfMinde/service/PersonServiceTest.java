@@ -20,6 +20,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.nio.BufferOverflowException;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,9 +44,9 @@ class PersonServiceTest {
 
     private PersonService personService;
 
-    private final BuyerDto buyerDto= new BuyerDto("firstName", "lastName","username","password","email@email.com","address");
-    private final WorkerDto workerDto= new WorkerDto("firstName", "lastName","username","password","email@email.com","address");
-    private final AdminDto adminDto= new AdminDto("firstName", "lastName","username","password","email@email.com","address");
+    private final BuyerDto buyerDto= new BuyerDto("firstName", "lastName","username","password","email@email.com","address","about me");
+    private final WorkerDto workerDto= new WorkerDto("firstName", "lastName","username","password","email@email.com","address","about me");
+    private final AdminDto adminDto= new AdminDto("firstName", "lastName","username","password","email@email.com","address","about me");
 
 
     @BeforeEach
@@ -59,14 +60,14 @@ class PersonServiceTest {
 
     @Test
     void createBuyer() throws PersonException {
-        Buyer buyer = personService.createBuyer("firstName", "lastName","username","password","email@email.com","address");
+        Buyer buyer = personService.createBuyer("firstName", "lastName","username","password","email@email.com","address","about me");
         verify(buyerRepository).save(any());
         assertThat(buyer.getFirstName()).isEqualTo("firstName");
     }
 
     @Test
     void loginBuyer() throws PersonException {
-        Buyer savedBuyer = new Buyer(1,"firstName", "lastName","address");
+        Buyer savedBuyer = new Buyer(1,"firstName", "lastName","address", "about me", Collections.emptyList());
         savedBuyer.setPassword("password");
         when(buyerRepository.findBuyerByEmail("email")).thenReturn(savedBuyer);
         Buyer buyer = personService.loginBuyer("email", "password");
@@ -75,7 +76,7 @@ class PersonServiceTest {
 
     @Test
     void failLoginBuyer_UserDoesntExist(){
-        Buyer savedBuyer = new Buyer(1,"firstName", "lastName","address");
+        Buyer savedBuyer = new Buyer(1,"firstName", "lastName","address", "about me", Collections.emptyList());
         savedBuyer.setPassword("password");
         when(buyerRepository.findBuyerByEmail("email")).thenReturn(null);
         assertThrows(PersonException.class, () -> personService.loginBuyer("email", "password"));
@@ -83,7 +84,7 @@ class PersonServiceTest {
 
     @Test
     void failLoginBuyer_WrongPassword(){
-        Buyer savedBuyer = new Buyer(1,"firstName", "lastName","address");
+        Buyer savedBuyer = new Buyer(1,"firstName", "lastName","address", "about me", Collections.emptyList());
         savedBuyer.setPassword("password");
         when(buyerRepository.findBuyerByEmail("email")).thenReturn(savedBuyer);
         assertThrows(PersonException.class, () -> personService.loginBuyer("email", "WrongPassword"));
@@ -91,7 +92,7 @@ class PersonServiceTest {
 
     @Test
     void getBuyer() throws PersonException {
-        Buyer savedBuyer = new Buyer(1,"firstName", "lastName","address");
+        Buyer savedBuyer = new Buyer(1,"firstName", "lastName","address", "about me", Collections.emptyList());
         when(buyerRepository.findBuyerByEmail("email")).thenReturn(savedBuyer);
         Buyer buyer = personService.getBuyer("email");
         assertThat(buyer.getFirstName()).isEqualTo(savedBuyer.getFirstName());
@@ -99,7 +100,7 @@ class PersonServiceTest {
 
     @Test
     void updateBuyer() throws PersonException {
-        Buyer savedBuyer = new Buyer(1,"firstName", "lastName","address");
+        Buyer savedBuyer = new Buyer(1,"firstName", "lastName","address", "about me", Collections.emptyList());
         when(buyerRepository.findBuyerByEmail("email")).thenReturn(savedBuyer);
         Buyer buyer = personService.updateBuyer("email", buyerDto);
         verify(buyerRepository).save(any());
@@ -108,7 +109,7 @@ class PersonServiceTest {
 
     @Test
     void deleteBuyer() throws PersonException {
-        Buyer savedBuyer = new Buyer(1,"firstName", "lastName","address");
+        Buyer savedBuyer = new Buyer(1,"firstName", "lastName","address", "about me", Collections.emptyList());
         when(buyerRepository.findBuyerByEmail("email")).thenReturn(savedBuyer);
         Buyer buyer = personService.deleteBuyer("email");
         verify(buyerRepository).deleteById(any());
@@ -124,14 +125,14 @@ class PersonServiceTest {
 
     @Test
     void createWorker() throws PersonException {
-        Worker worker = personService.createWorker("firstName", "lastName","username","password","email@email.com","address");
+        Worker worker = personService.createWorker("firstName", "lastName","username","password","email@email.com","address","about me");
         verify(workerRepository).save(any());
         assertThat(worker.getFirstName()).isEqualTo("firstName");
     }
 
     @Test
     void loginWorker() throws PersonException {
-        Worker savedWorker = new Worker(1,"firstName", "lastName","address");
+        Worker savedWorker = new Worker(1,"firstName", "lastName","address","about me");
         savedWorker.setPassword("password");
         when(workerRepository.findWorkerByEmail("email")).thenReturn(savedWorker);
         Worker worker = personService.loginWorker("email", "password");
@@ -140,7 +141,7 @@ class PersonServiceTest {
 
     @Test
     void failLoginWorker_UserDoesntExist(){
-        Worker savedWorker = new Worker(1,"firstName", "lastName","address");
+        Worker savedWorker = new Worker(1,"firstName", "lastName","address","about me");
         savedWorker.setPassword("password");
         when(workerRepository.findWorkerByEmail("email")).thenReturn(null);
         assertThrows(PersonException.class, () -> personService.loginWorker("email", "password"));
@@ -148,7 +149,7 @@ class PersonServiceTest {
 
     @Test
     void failLoginWorker_WrongPassword(){
-        Worker savedWorker = new Worker(1,"firstName", "lastName","address");
+        Worker savedWorker = new Worker(1,"firstName", "lastName","address","about me");
         savedWorker.setPassword("password");
         when(workerRepository.findWorkerByEmail("email")).thenReturn(savedWorker);
         assertThrows(PersonException.class, () -> personService.loginWorker("email", "WrongPassword"));
@@ -156,7 +157,7 @@ class PersonServiceTest {
 
     @Test
     void getWorker() throws PersonException {
-        Worker savedWorker = new Worker(1,"firstName", "lastName","address");
+        Worker savedWorker = new Worker(1,"firstName", "lastName","address","about me");
         when(workerRepository.findWorkerByEmail("email")).thenReturn(savedWorker);
         Worker worker = personService.getWorker("email");
         assertThat(worker.getFirstName()).isEqualTo(savedWorker.getFirstName());
@@ -164,7 +165,7 @@ class PersonServiceTest {
 
     @Test
     void updateWorker() throws PersonException {
-        Worker savedWorker = new Worker(1,"firstName", "lastName","address");
+        Worker savedWorker = new Worker(1,"firstName", "lastName","address","about me");
         when(workerRepository.findWorkerByEmail("email")).thenReturn(savedWorker);
         Worker worker = personService.updateWorker("email", workerDto);
         verify(workerRepository).save(any());
@@ -173,7 +174,7 @@ class PersonServiceTest {
 
     @Test
     void deleteWorker() throws PersonException {
-        Worker savedWorker = new Worker(1,"firstName", "lastName","address");
+        Worker savedWorker = new Worker(1,"firstName", "lastName","address","about me");
         when(workerRepository.findWorkerByEmail("email")).thenReturn(savedWorker);
         Worker worker = personService.deleteWorker("email");
         verify(workerRepository).deleteById(any());
@@ -195,7 +196,7 @@ class PersonServiceTest {
 
     @Test
     void loginAdmin() throws PersonException {
-        Admin savedAdmin = new Admin(1,"firstName", "lastName","address");
+        Admin savedAdmin = new Admin(1,"firstName", "lastName","address","about me");
         savedAdmin.setPassword("password");
         when(adminRepository.findAdminByEmail("email")).thenReturn(savedAdmin);
         Admin admin = personService.loginAdmin("email", "password");
@@ -204,7 +205,7 @@ class PersonServiceTest {
 
     @Test
     void failLoginAdmin_UserDoesntExist(){
-        Admin savedAdmin = new Admin(1,"firstName", "lastName","address");
+        Admin savedAdmin = new Admin(1,"firstName", "lastName","address","about me");
         savedAdmin.setPassword("password");
         when(adminRepository.findAdminByEmail("email")).thenReturn(null);
         assertThrows(PersonException.class, () -> personService.loginAdmin("email", "password"));
@@ -212,7 +213,7 @@ class PersonServiceTest {
 
     @Test
     void failLoginAdmin_WrongPassword(){
-        Admin savedAdmin = new Admin(1,"firstName", "lastName","address");
+        Admin savedAdmin = new Admin(1,"firstName", "lastName","address","about me");
         savedAdmin.setPassword("password");
         when(adminRepository.findAdminByEmail("email")).thenReturn(savedAdmin);
         assertThrows(PersonException.class, () -> personService.loginAdmin("email", "WrongPassword"));
@@ -220,7 +221,7 @@ class PersonServiceTest {
 
     @Test
     void getAdmin() throws PersonException {
-        Admin savedAdmin = new Admin(1,"firstName", "lastName","address");
+        Admin savedAdmin = new Admin(1,"firstName", "lastName","address","about me");
         when(adminRepository.findAdminByEmail("email")).thenReturn(savedAdmin);
         Admin admin = personService.getAdmin("email");
         assertThat(admin.getFirstName()).isEqualTo(savedAdmin.getFirstName());
@@ -228,16 +229,16 @@ class PersonServiceTest {
 
     @Test
     void updateAdmin() throws PersonException {
-        Admin savedAdmin = new Admin(1,"firstName", "lastName","address");
+        Admin savedAdmin = new Admin(1,"firstName", "lastName","address","about me");
         when(adminRepository.findAdminByEmail("email")).thenReturn(savedAdmin);
         Admin admin = personService.updateAdmin("email", adminDto);
         verify(adminRepository).save(any());
-        assertThat(admin.getEmail()).isEqualTo(adminDto.email());
+        assertThat(admin.getEmail()).isEqualTo(adminDto.getEmail());
     }
 
     @Test
     void deleteAdmin() throws PersonException {
-        Admin savedAdmin = new Admin(1,"firstName", "lastName","address");
+        Admin savedAdmin = new Admin(1,"firstName", "lastName","address","about me");
         when(adminRepository.findAdminByEmail("email")).thenReturn(savedAdmin);
         Admin admin = personService.deleteAdmin("email");
         verify(adminRepository).deleteById(any());

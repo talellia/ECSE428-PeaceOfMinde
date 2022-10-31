@@ -121,6 +121,21 @@ public class PersonController {
 		}
 	}
 
+	/**
+	 * @param id
+	 * @return ResponseEntity<?>
+	 */
+	@GetMapping(value = { "/buyer/{id}", "/buyer/{id}/" })
+	public ResponseEntity<?> viewBuyerProfile(@PathVariable Integer id) {
+		try {
+			Buyer buyer = personService.getBuyerById(id);
+			return new ResponseEntity<>(LibraryUtil.convertToDto(buyer), HttpStatus.OK);
+		} catch (PersonException e) {
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+	}
+
+
 	// WORKER
 
 	/**
@@ -209,6 +224,21 @@ public class PersonController {
 		}
 	}
 
+	/**
+	 * @param id
+	 * @return ResponseEntity<?>
+	 */
+	@GetMapping(value = { "/worker/{id}", "/worker/{id}/" })
+	public ResponseEntity<?> viewWorkerProfile(@PathVariable Integer id) {
+		try {
+			Worker worker = personService.getWorkerById(id);
+			return new ResponseEntity<>(LibraryUtil.convertToDto(worker), HttpStatus.OK);
+		} catch (PersonException e) {
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+	}
+
+
 
 	// ADMIN
 
@@ -222,8 +252,8 @@ public class PersonController {
 	@PostMapping(value = { "/person/admin/register", "/person/admin/register/" })
 	public ResponseEntity<?> createAdmin(@RequestBody AdminDto adminDto) {
 		try {
-			Admin admin = personService.createAdmin(adminDto.firstName(), adminDto.lastName(), adminDto.userName(),
-					adminDto.password(), adminDto.email(), adminDto.residentialAddress());
+			Admin admin = personService.createAdmin(adminDto.getFirstName(), adminDto.getLastName(), adminDto.getUserName(),
+					adminDto.getPassword(), adminDto.getEmail(), adminDto.getResidentialAddress());
 			return new ResponseEntity<>(LibraryUtil.convertToDto(admin), HttpStatus.OK);
 		} catch (PersonException e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
@@ -240,7 +270,7 @@ public class PersonController {
 	@PostMapping(value = { "/person/admin/login", "/person/admin/login/" })
 	public ResponseEntity<?> loginAdmin(@RequestBody AdminDto adminDto) {
 		try {
-			Admin admin = personService.loginAdmin(adminDto.email(), adminDto.password());
+			Admin admin = personService.loginAdmin(adminDto.getEmail(), adminDto.getPassword());
 			return new ResponseEntity<>(LibraryUtil.convertToDto(admin), HttpStatus.OK);
 		} catch (PersonException e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
@@ -298,36 +328,19 @@ public class PersonController {
 		}
 	}
 
+	/**
+	 * @param id
+	 * @return ResponseEntity<?>
+	 */
+	@GetMapping(value = { "/admin/{id}", "/admin/{id}/" })
+	public ResponseEntity<?> viewAdminProfile(@PathVariable Integer id) {
+		try {
+			Admin admin = personService.getAdminById(id);
+			return new ResponseEntity<>(LibraryUtil.convertToDto(admin), HttpStatus.OK);
+		} catch (PersonException e) {
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+	}
 
-
-
-    /**
-     * @param id
-     * @return ResponseEntity<?>
-     */
-    @GetMapping(value = { "/worker/{id}", "/worker/{id}/" })
-    public ResponseEntity<?> viewWorkerProfile(@PathVariable Integer id) {
-        try {
-            Worker worker = personService.getWorkerById(id);
-            return new ResponseEntity<>(LibraryUtil.convertToDto(worker), HttpStatus.OK);
-        } catch (PersonException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-        }
-    }
-
-
-    /**
-     * @param id
-     * @return ResponseEntity<?>
-     */
-    @GetMapping(value = { "/buyer/{id}", "/buyer/{id}/" })
-    public ResponseEntity<?> viewBuyerProfile(@PathVariable Integer id) {
-        try {
-            Buyer buyer = personService.getBuyerById(id);
-            return new ResponseEntity<>(LibraryUtil.convertToDto(buyer), HttpStatus.OK);
-        } catch (PersonException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-        }
-    }
 
 }

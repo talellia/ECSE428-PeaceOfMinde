@@ -1,6 +1,5 @@
 package ecse428.peaceOfMinde.model;
 
-import java.sql.Date;
 import java.util.*;
 import javax.persistence.*;
 
@@ -10,6 +9,7 @@ public class Buyer extends Person {
     //------------------------
     // MEMBER VARIABLES
     //------------------------
+    @ElementCollection
     private List<String> listComments;
 
 
@@ -18,9 +18,9 @@ public class Buyer extends Person {
     // CONSTRUCTOR
     //------------------------
 
-    public Buyer(Integer aId, String aFirst_name, String aLast_name, String aResidential_address, List<String> aListComments) {
-        super(aId, aFirst_name, aLast_name, aResidential_address);
-        aListComments = null;
+    public Buyer(Integer aId, String aFirst_name, String aLast_name, String aResidential_address,String aAboutMe, List<String> aListComments) {
+        super(aId, aFirst_name, aLast_name, aResidential_address,aAboutMe);
+        listComments = aListComments;
     }
 
     public Buyer() {

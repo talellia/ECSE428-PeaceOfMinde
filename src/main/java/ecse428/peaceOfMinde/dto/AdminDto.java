@@ -1,80 +1,47 @@
 package ecse428.peaceOfMinde.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
-
-import java.util.Objects;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 @Builder
+@Getter
+@EqualsAndHashCode
+@ToString
+@AllArgsConstructor
 public final class AdminDto {
-
+    @Setter
+    private int id;
     private final String firstName;
     private final String lastName;
     private final String userName;
     private final String password;
     private final String email;
     private final String residentialAddress;
+    private final String about_description;
 
+
+    /**
+     * Constructor that creates the admin data transfer object
+     *
+     * @param firstName          First Name of Admin
+     * @param lastName           Last Name of Admin
+     * @param userName           Admin Username
+     * @param password           Admin Password
+     * @param email              Admin email
+     * @param residentialAddress Admin Residential Address
+     */
     public AdminDto(String firstName, String lastName, String userName, String password, String email,
-                    String residentialAddress) {
+                    String residentialAddress, String about) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
         this.password = password;
         this.email = email;
         this.residentialAddress = residentialAddress;
+        this.about_description = about;
     }
-
-    public String firstName() {
-        return firstName;
-    }
-
-    public String lastName() {
-        return lastName;
-    }
-
-    public String userName() {
-        return userName;
-    }
-
-    public String password() {
-        return password;
-    }
-
-    public String email() {
-        return email;
-    }
-
-    public String residentialAddress() {
-        return residentialAddress;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == this) return true;
-        if (obj == null || obj.getClass() != this.getClass()) return false;
-        AdminDto that = (AdminDto) obj;
-        return Objects.equals(this.firstName, that.firstName) &&
-                Objects.equals(this.lastName, that.lastName) &&
-                Objects.equals(this.userName, that.userName) &&
-                Objects.equals(this.password, that.password) &&
-                Objects.equals(this.email, that.email) &&
-                Objects.equals(this.residentialAddress, that.residentialAddress);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(firstName, lastName, userName, password, email, residentialAddress);
-    }
-
-    @Override
-    public String toString() {
-        return "AdminDto[" +
-                "firstName=" + firstName + ", " +
-                "lastName=" + lastName + ", " +
-                "userName=" + userName + ", " +
-                "password=" + password + ", " +
-                "email=" + email + ", " +
-                "residentialAddress=" + residentialAddress + ']';
-    }
-
 }
