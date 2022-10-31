@@ -4,7 +4,6 @@ import ecse428.peaceOfMinde.controller.PersonController;
 import ecse428.peaceOfMinde.dao.AdminRepository;
 import ecse428.peaceOfMinde.dto.AdminDto;
 import ecse428.peaceOfMinde.model.Admin;
-import ecse428.peaceOfMinde.utility.PersonException;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -23,6 +22,7 @@ public class LoginAdminStepDefs extends SpringIntegrationTest{
     private PersonController personController;
     @Autowired
     private AdminRepository adminRepository;
+
 
     private ResponseEntity<?> response;
    @Given("^the following Admins exist:$")
@@ -73,4 +73,5 @@ public class LoginAdminStepDefs extends SpringIntegrationTest{
         AdminDto dto = AdminDto.builder().userName(arg0).password(arg1).build();
         response = personController.loginAdminByUsername(dto);
     }
+
 }

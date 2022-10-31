@@ -9,4 +9,5 @@ import java.util.Optional;
 @Repository
 public interface WorkerRepository extends PagingAndSortingRepository<Worker, Integer> {
     Optional<Worker> findWorkerByEmail(String email);
+    Optional<Worker> findWorkerByUsername(String email);
 }

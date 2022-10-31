@@ -9,4 +9,5 @@ import java.util.Optional;
 @Repository
 public interface BuyerRepository extends PagingAndSortingRepository<Buyer, Integer> {
     Optional<Buyer> findBuyerByEmail(String email);
+    Optional<Buyer> findBuyerByUsername(String email);
 }
