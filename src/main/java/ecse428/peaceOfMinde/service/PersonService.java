@@ -88,7 +88,7 @@ public class PersonService {
      */
     @Transactional
     public Buyer loginBuyer(String email, String password) throws PersonException {
-        Optional<Buyer> buyerOptional = Optional.ofNullable(buyerRepository.findBuyerByEmail(email));
+        Optional<Buyer> buyerOptional = buyerRepository.findBuyerByEmail(email);
         if (!buyerOptional.isPresent()) {
             throw new PersonException("Buyer does not exist");
         }
@@ -108,7 +108,7 @@ public class PersonService {
      */
     @Transactional
     public Buyer getBuyer(String email) throws PersonException {
-        Optional<Buyer> buyerOptional = Optional.ofNullable(buyerRepository.findBuyerByEmail(email));
+        Optional<Buyer> buyerOptional = buyerRepository.findBuyerByEmail(email);
         if (!buyerOptional.isPresent()) {
             throw new PersonException("Buyer with this email does not exist");
         }
@@ -125,7 +125,7 @@ public class PersonService {
      */
     @Transactional
     public Buyer updateBuyer(String email, BuyerDto buyerDto) throws PersonException {
-        Optional<Buyer> buyerOptional = Optional.ofNullable(buyerRepository.findBuyerByEmail(email));
+        Optional<Buyer> buyerOptional = buyerRepository.findBuyerByEmail(email);
         if (!buyerOptional.isPresent()) {
             throw new PersonException("The buyer with this email does not exist");
         }
@@ -156,14 +156,14 @@ public class PersonService {
      * Updates the old password for  Buyer with the new requested password
      *
      * @param email           Buyer email
-     * @param newpassword     New password for the Buyer
+     * @param newPassword     New password for the Buyer
      * @param buyerDto       Buyer Data Transfer Object
      * @return buyer
      * @throws PersonException Prints out the error message if the user could not be created
      */
     @Transactional
     public Buyer updateBuyerPassword(String email, String newPassword, BuyerDto buyerDto) throws PersonException {
-        Optional<Buyer> buyerOptional = Optional.ofNullable(buyerRepository.findBuyerByEmail(email));
+        Optional<Buyer> buyerOptional = buyerRepository.findBuyerByEmail(email);
         if (!buyerOptional.isPresent()) {
             throw new PersonException("The buyer with this email does not exist");
         }
@@ -196,7 +196,7 @@ public class PersonService {
      */
     @Transactional
     public Buyer deleteBuyer(String email) throws PersonException {
-        Optional<Buyer> buyerOptional = Optional.ofNullable(buyerRepository.findBuyerByEmail(email));
+        Optional<Buyer> buyerOptional = buyerRepository.findBuyerByEmail(email);
         if (!buyerOptional.isPresent()) {
             throw new PersonException("The buyer with the given email does not exist");
         }
@@ -224,8 +224,9 @@ public class PersonService {
      */
     @Transactional
     public Buyer getBuyerById(Integer id)  throws PersonException {
-        Buyer buyer = buyerRepository.findBuyerById(id);
-        return buyer;
+        Optional<Buyer> buyer = buyerRepository.findById(id);
+        if(!buyer.isPresent()) {throw new PersonException("No buyer exists with this ID");}
+        return buyer.get();
     }
 
 
@@ -287,7 +288,7 @@ public class PersonService {
      */
     @Transactional
     public Worker loginWorker(String email, String password) throws PersonException {
-        Optional<Worker> workerOptional = Optional.ofNullable(workerRepository.findWorkerByEmail(email));
+        Optional<Worker> workerOptional = workerRepository.findWorkerByEmail(email);
         if (!workerOptional.isPresent()) {
             throw new PersonException("Worker does not exist");
         }
@@ -307,7 +308,7 @@ public class PersonService {
      */
     @Transactional
     public Worker getWorker(String email) throws PersonException {
-        Optional<Worker> workerOptional = Optional.ofNullable(workerRepository.findWorkerByEmail(email));
+        Optional<Worker> workerOptional = workerRepository.findWorkerByEmail(email);
         if (!workerOptional.isPresent()) {
             throw new PersonException("Worker with this email does not exist");
         }
@@ -324,7 +325,7 @@ public class PersonService {
      */
     @Transactional
     public Worker updateWorker(String email, WorkerDto workerDto) throws PersonException {
-        Optional<Worker> workerOptional = Optional.ofNullable(workerRepository.findWorkerByEmail(email));
+        Optional<Worker> workerOptional = workerRepository.findWorkerByEmail(email);
         if (!workerOptional.isPresent()) {
             throw new PersonException("The worker with this email does not exist");
         }
@@ -356,14 +357,14 @@ public class PersonService {
      * Updates the old password for  Worker with the new requested password
      *
      * @param email           Worker email
-     * @param newpassword     New password for the Worker
+     * @param newPassword     New password for the Worker
      * @param workerDto       Worker Data Transfer Object
      * @return worker
      * @throws PersonException Prints out the error message if the user could not be created
      */
     @Transactional
     public Worker updateWorkerPassword(String email, String newPassword, WorkerDto workerDto) throws PersonException {
-        Optional<Worker> workerOptional = Optional.ofNullable(workerRepository.findWorkerByEmail(email));
+        Optional<Worker> workerOptional = workerRepository.findWorkerByEmail(email);
         if (!workerOptional.isPresent()) {
             throw new PersonException("The worker with this email does not exist");
         }
@@ -396,7 +397,7 @@ public class PersonService {
      */
     @Transactional
     public Worker deleteWorker(String email) throws PersonException {
-        Optional<Worker> workerOptional = Optional.ofNullable(workerRepository.findWorkerByEmail(email));
+        Optional<Worker> workerOptional = workerRepository.findWorkerByEmail(email);
         if (!workerOptional.isPresent()) {
             throw new PersonException("The Worker with the given email does not exist");
         }
@@ -423,9 +424,11 @@ public class PersonService {
      */
     @Transactional
     public Worker getWorkerById(Integer id)  throws PersonException {
-        Worker worker = workerRepository.findWorkerById(id);
-        return worker;
-
+        Optional<Worker> workerOptional = workerRepository.findById(id);
+        if (!workerOptional.isPresent()) {
+            throw new PersonException("Worker with this id does not exist");
+        }
+        return workerOptional.get();
     }
 
     /*******************************************
@@ -482,7 +485,7 @@ public class PersonService {
      */
     @Transactional
     public Admin loginAdmin(String email, String password) throws PersonException {
-        Optional<Admin> adminOptional = Optional.ofNullable(adminRepository.findAdminByEmail(email));
+        Optional<Admin> adminOptional = adminRepository.findAdminByEmail(email);
         if (!adminOptional.isPresent()) {
             throw new PersonException("Admin does not exist");
         }
@@ -502,7 +505,7 @@ public class PersonService {
      */
     @Transactional
     public Admin getAdmin(String email) throws PersonException {
-        Optional<Admin> adminOptional = Optional.ofNullable(adminRepository.findAdminByEmail(email));
+        Optional<Admin> adminOptional = adminRepository.findAdminByEmail(email);
         if (!adminOptional.isPresent()) {
             throw new PersonException("Admin with this email does not exist");
         }
@@ -519,7 +522,7 @@ public class PersonService {
      */
     @Transactional
     public Admin updateAdmin(String email, AdminDto adminDto) throws PersonException {
-        Optional<Admin> adminOptional = Optional.ofNullable(adminRepository.findAdminByEmail(email));
+        Optional<Admin> adminOptional = adminRepository.findAdminByEmail(email);
         if (!adminOptional.isPresent()) {
             throw new PersonException("The admin with this email does not exist");
         }
@@ -553,7 +556,7 @@ public class PersonService {
      */
     @Transactional
     public Admin deleteAdmin(String email) throws PersonException {
-        Optional<Admin> adminOptional = Optional.ofNullable(adminRepository.findAdminByEmail(email));
+        Optional<Admin> adminOptional = adminRepository.findAdminByEmail(email);
         if (!adminOptional.isPresent()) {
             throw new PersonException("The admin with the given email does not exist");
         }
@@ -581,7 +584,11 @@ public class PersonService {
      */
     @Transactional
     public Admin getAdminById(Integer id)  throws PersonException {
-        return adminRepository.findAdminById(id);
+        Optional<Admin> adminOptional = adminRepository.findById(id);
+        if (!adminOptional.isPresent()) {
+            throw new PersonException("Worker with this id does not exist");
+        }
+        return adminOptional.get();
     }
 
     /*******************************************
@@ -683,8 +690,8 @@ public class PersonService {
      * @return String telling whether an existing user has the given email address in the database
      */
     private String checkDuplicateEmail(String email) {
-        if (buyerRepository.findBuyerByEmail(email) == null
-                || workerRepository.findWorkerByEmail(email) == null) {
+        if (!buyerRepository.findBuyerByEmail(email).isPresent()
+                || !workerRepository.findWorkerByEmail(email).isPresent()) {
             return "";
         }
         return "Email has already been taken";
