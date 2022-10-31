@@ -102,12 +102,32 @@ class PersonServiceTest {
 
     @Test
     void updateBuyer() throws PersonException {
-        Buyer savedBuyer = new Buyer(1,"firstName", "lastName","address", "about me", Collections.emptyList());
+        Buyer savedBuyer = new Buyer(1, "firstName", "lastName", "address", "about me", Collections.emptyList());
         when(buyerRepository.findBuyerByEmail("email")).thenReturn(Optional.of(savedBuyer));
         Buyer buyer = personService.updateBuyer("email", buyerDto);
         verify(buyerRepository).save(any());
         assertThat(buyer.getEmail()).isEqualTo(buyerDto.getEmail());
     }
+    
+    @Test
+    void updateBuyerPassword() throws PersonException {
+        Buyer savedBuyer = new Buyer(1, "firstName", "lastName", "address", "about me", Collections.emptyList());
+        savedBuyer.setPassword("password1");
+        when(buyerRepository.findBuyerByEmail("email")).thenReturn(Optional.of(savedBuyer));
+        Buyer buyer = personService.updateBuyerPassword("email", "password", buyerDto);
+        verify(buyerRepository).save(any());
+        assertThat(buyer.getPassword()).isEqualTo(buyerDto.getPassword());
+    }
+
+    @Test
+    void fail_updateBuyerPasswordWithSamePassword() throws PersonException {
+        Buyer savedBuyer = new Buyer(1, "firstName", "lastName", "address", "about me", Collections.emptyList());
+        savedBuyer.setPassword("password");
+        when(buyerRepository.findBuyerByEmail("email")).thenReturn(Optional.of(savedBuyer));
+        assertThrows(PersonException.class, () -> personService.updateBuyerPassword("email", "password", buyerDto));
+    }
+    
+
 
     @Test
     void deleteBuyer() throws PersonException {
