@@ -1,6 +1,7 @@
 package ecse428.peaceOfMinde.controller;
 
 import ecse428.peaceOfMinde.dao.BuyerRepository;
+import ecse428.peaceOfMinde.dao.WorkerRepository;
 import ecse428.peaceOfMinde.dto.AdminDto;
 import ecse428.peaceOfMinde.dto.WorkerDto;
 import ecse428.peaceOfMinde.dto.BuyerDto;
@@ -33,6 +34,8 @@ public class PersonController {
 	private final PersonService personService;
 
     private final BuyerRepository buyerRepository;
+
+	private final WorkerRepository workerRepository;
 
 	// BUYER
 
@@ -153,6 +156,22 @@ public class PersonController {
 		} catch (PersonException e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
+	}
+
+	@PutMapping(value = { "/person/buyer/approve/{email}", "/person/buyer/approve/{email}/" })
+	public ResponseEntity<?> approveBuyer(@PathVariable String email) throws PersonException {
+		Buyer buyer = personService.getBuyer(email);
+		buyer.setIsRegisteredOnline(true);
+		buyerRepository.save(buyer);
+		return buyer;
+	}
+
+	@PutMapping(value = { "/person/buyer/deny/{email}", "/person/buyer/deny/{email}/" })
+	public ResponseEntity<?> denyBuyer(@PathVariable String email) throws PersonException {
+		Buyer buyer = personService.getBuyer(email);
+		buyer.setIsRegisteredOnline(false);
+		buyerRepository.save(buyer);
+		return buyer;
 	}
 
 
@@ -277,6 +296,22 @@ public class PersonController {
 		} catch (PersonException e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
+	}
+
+	@PutMapping(value = { "/person/worker/approve/{email}", "/person/worker/approve/{email}/" })
+	public ResponseEntity<?> approveWorker(@PathVariable String email) throws PersonException {
+		Worker worker = personService.getWorker(email);
+		worker.setIsRegisteredOnline(true);
+		workerRepository.save(worker);
+		return worker;
+	}
+
+	@PutMapping(value = { "/person/worker/deny/{email}", "/person/worker/deny/{email}/" })
+	public ResponseEntity<?> denyWorker(@PathVariable String email) throws PersonException {
+		Worker worker = personService.getWorker(email);
+		worker.setIsRegisteredOnline(false);
+		workerRepository.save(worker);
+		return worker;
 	}
 
 

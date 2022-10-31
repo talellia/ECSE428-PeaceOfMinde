@@ -44,6 +44,7 @@ public class LibraryUtil {
         }
         BuyerDto buyerDto = new BuyerDto(buyer.getFirstName(), buyer.getLastName(), buyer.getUsername(),
                 buyer.getPassword(), buyer.getEmail(), buyer.getResidentialAddress(), buyer.getAboutme());
+        buyerDto.setIsRegisteredOnline(buyer.getIsRegisteredOnline());
         buyerDto.setId(buyer.getId());
         return buyerDto;
     }
@@ -61,6 +62,7 @@ public class LibraryUtil {
         WorkerDto workerDto = new WorkerDto(worker.getFirstName(), worker.getLastName(),
                 worker.getUsername(), worker.getPassword(), worker.getEmail(),
                 worker.getResidentialAddress(), worker.getAboutme());
+        workerDto.setIsRegisteredOnline(worker.getIsRegisteredOnline());
         workerDto.setId(worker.getId());
         return workerDto;
     }
