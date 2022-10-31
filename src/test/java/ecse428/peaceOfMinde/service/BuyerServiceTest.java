@@ -45,8 +45,8 @@ class BuyerServiceTest {
 
     @Test
     void createComment() throws PersonException {
-        Buyer savedBuyer = new Buyer(1,"firstName", "lastName","address", "about me", Collections.emptyList());
-        Worker savedWorker = new Worker(1,"firstName", "lastName","address","about me");
+        Buyer savedBuyer = new Buyer(1,"firstName", "lastName","address", "about me", Collections.emptyList(),false);
+        Worker savedWorker = new Worker(1,"firstName", "lastName","address","about me",false);
         savedBuyer.setListComments(new ArrayList<>());
         when(buyerRepository.findById(any())).thenReturn(Optional.of(savedBuyer));
         when(workerRepository.findById(any())).thenReturn(Optional.of(savedWorker));
@@ -58,8 +58,8 @@ class BuyerServiceTest {
 
     @Test
     void createComment_error_commentIsEmpty(){
-        Buyer savedBuyer = new Buyer(1,"firstName", "lastName","address", "about me", Collections.emptyList());
-        Worker savedWorker = new Worker(1,"firstName", "lastName","address","about me");
+        Buyer savedBuyer = new Buyer(1,"firstName", "lastName","address", "about me", Collections.emptyList(),false);
+        Worker savedWorker = new Worker(1,"firstName", "lastName","address","about me",false);
 
         when(buyerRepository.findById(any())).thenReturn(Optional.of(savedBuyer));
         when(workerRepository.findById(any())).thenReturn(Optional.of(savedWorker));
@@ -69,8 +69,8 @@ class BuyerServiceTest {
 
     @Test
     void createComment_error_buyerDoesntExist() throws PersonException {
-        Buyer savedBuyer = new Buyer(1,"firstName", "lastName","address", "about me", Collections.emptyList());
-        Worker savedWorker = new Worker(1,"firstName", "lastName","address","about me");
+        Buyer savedBuyer = new Buyer(1,"firstName", "lastName","address", "about me", Collections.emptyList(),false);
+        Worker savedWorker = new Worker(1,"firstName", "lastName","address","about me",false);
 
         when(buyerRepository.findById(savedBuyer.getId())).thenReturn(Optional.empty());
         when(workerRepository.findById(any())).thenReturn(Optional.of(savedWorker));
@@ -80,8 +80,8 @@ class BuyerServiceTest {
 
     @Test
     void createComment_error_workerDoesntExist() throws PersonException {
-        Buyer savedBuyer = new Buyer(1,"firstName", "lastName","address", "about me", Collections.emptyList());
-        Worker savedWorker = new Worker(1,"firstName", "lastName","address","about me");
+        Buyer savedBuyer = new Buyer(1,"firstName", "lastName","address", "about me", Collections.emptyList(),false);
+        Worker savedWorker = new Worker(1,"firstName", "lastName","address","about me",false);
 
         when(buyerRepository.findById(any())).thenReturn(Optional.of(savedBuyer));
         when(workerRepository.findById(savedWorker.getId())).thenReturn(Optional.empty());

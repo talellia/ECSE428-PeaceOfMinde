@@ -88,8 +88,29 @@ public class PersonService {
      * @throws PersonException Prints out the error message if the user could not be created
      */
     @Transactional
-    public Buyer loginBuyer(String email, String password) throws PersonException {
+    public Buyer loginBuyerByEmail(String email, String password) throws PersonException {
         Optional<Buyer> buyerOptional = buyerRepository.findBuyerByEmail(email);
+        if (!buyerOptional.isPresent()) {
+            throw new PersonException("Buyer does not exist");
+        }
+        Buyer buyer = buyerOptional.get();
+        if (!buyer.getPassword().equals(password)) {
+            throw new PersonException("Incorrect password");
+        }
+        return buyer;
+    }
+
+    /**
+     * This method logins the buyer into an existing account
+     *
+     * @param username    Buyer Username
+     * @param password Buyer Password
+     * @return buyer
+     * @throws PersonException Prints out the error message if the user could not be created
+     */
+    @Transactional
+    public Buyer loginBuyerByUsername(String username, String password) throws PersonException {
+        Optional<Buyer> buyerOptional = buyerRepository.findBuyerByUsername(username);
         if (!buyerOptional.isPresent()) {
             throw new PersonException("Buyer does not exist");
         }
@@ -290,8 +311,29 @@ public class PersonService {
      * @throws PersonException Prints out the error message if the user could not be created
      */
     @Transactional
-    public Worker loginWorker(String email, String password) throws PersonException {
+    public Worker loginWorkerByEmail(String email, String password) throws PersonException {
         Optional<Worker> workerOptional = workerRepository.findWorkerByEmail(email);
+        if (!workerOptional.isPresent()) {
+            throw new PersonException("Worker does not exist");
+        }
+        Worker worker = workerOptional.get();
+        if (!worker.getPassword().equals(password)) {
+            throw new PersonException("Incorrect password");
+        }
+        return worker;
+    }
+
+    /**
+     * This method logins the worker into an existing account
+     *
+     * @param username    Worker Username
+     * @param password Worker Password
+     * @return worker
+     * @throws PersonException Prints out the error message if the user could not be created
+     */
+    @Transactional
+    public Worker loginWorkerByUsername(String username, String password) throws PersonException {
+        Optional<Worker> workerOptional = workerRepository.findWorkerByUsername(username);
         if (!workerOptional.isPresent()) {
             throw new PersonException("Worker does not exist");
         }

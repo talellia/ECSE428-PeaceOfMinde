@@ -60,12 +60,29 @@ public class PersonController {
 	 * @return Response Entity
 	 */
 	@PostMapping(value = { "/person/buyer/login", "/person/buyer/login/" })
-	public ResponseEntity<?> loginBuyer(@RequestBody BuyerDto buyerDto) {
+	public ResponseEntity<?> loginBuyerByEmail(@RequestBody BuyerDto buyerDto) {
 		try {
-			Buyer buyer = personService.loginBuyer(buyerDto.getEmail(), buyerDto.getPassword());
+			Buyer buyer = personService.loginBuyerByEmail(buyerDto.getEmail(), buyerDto.getPassword());
 			return new ResponseEntity<>(LibraryUtil.convertToDto(buyer), HttpStatus.OK);
 		} catch (PersonException e) {
-			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>("Username or password is incorrect. Please try again", HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	/**
+	 * Login Buyer method allows a buyer to log into their account by accessing their
+	 * credentials from the database
+	 *
+	 * @param buyerDto Buyer Data Transfer Object
+	 * @return Response Entity
+	 */
+	@PostMapping(value = { "/person/buyer/login/username", "/person/buyer/login/username/" })
+	public ResponseEntity<?> loginBuyerByUsername(@RequestBody BuyerDto buyerDto) {
+		try {
+			Buyer buyer = personService.loginBuyerByUsername(buyerDto.getUserName(), buyerDto.getPassword());
+			return new ResponseEntity<>(LibraryUtil.convertToDto(buyer), HttpStatus.OK);
+		} catch (PersonException e) {
+			return new ResponseEntity<>("Username or password is incorrect. Please try again", HttpStatus.BAD_REQUEST);
 		}
 	}
 
@@ -155,7 +172,7 @@ public class PersonController {
 	}
 
 	@PutMapping(value = { "/person/buyer/approve/{email}", "/person/buyer/approve/{email}/" })
-	public ResponseEntity<?> approveBuyer(@PathVariable String email) throws PersonException {
+	public Buyer approveBuyer(@PathVariable String email) throws PersonException {
 		Buyer buyer = personService.getBuyer(email);
 		buyer.setIsRegisteredOnline(true);
 		buyerRepository.save(buyer);
@@ -163,7 +180,7 @@ public class PersonController {
 	}
 
 	@PutMapping(value = { "/person/buyer/deny/{email}", "/person/buyer/deny/{email}/" })
-	public ResponseEntity<?> denyBuyer(@PathVariable String email) throws PersonException {
+	public Buyer denyBuyer(@PathVariable String email) throws PersonException {
 		Buyer buyer = personService.getBuyer(email);
 		buyer.setIsRegisteredOnline(false);
 		buyerRepository.save(buyer);
@@ -199,12 +216,29 @@ public class PersonController {
 	 * @return Response Entity
 	 */
 	@PostMapping(value = { "/person/worker/login", "/person/worker/login/" })
-	public ResponseEntity<?> loginWorker(@RequestBody WorkerDto workerDto) {
+	public ResponseEntity<?> loginWorkerByEmail(@RequestBody WorkerDto workerDto) {
 		try {
-			Worker worker = personService.loginWorker(workerDto.getEmail(), workerDto.getPassword());
+			Worker worker = personService.loginWorkerByEmail(workerDto.getEmail(), workerDto.getPassword());
 			return new ResponseEntity<>(LibraryUtil.convertToDto(worker), HttpStatus.OK);
 		} catch (PersonException e) {
-			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>("Email or password is incorrect. Please try again", HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	/**
+	 * Login Worker method allows a worker to log into their account by
+	 * accessing their credentials from the database
+	 *
+	 * @param workerDto Worker Data Transfer Object
+	 * @return Response Entity
+	 */
+	@PostMapping(value = { "/person/worker/login/username", "/person/worker/login/username/" })
+	public ResponseEntity<?> loginWorkerByUsername(@RequestBody WorkerDto workerDto) {
+		try {
+			Worker worker = personService.loginWorkerByUsername(workerDto.getUserName(), workerDto.getPassword());
+			return new ResponseEntity<>(LibraryUtil.convertToDto(worker), HttpStatus.OK);
+		} catch (PersonException e) {
+			return new ResponseEntity<>("Username or password is incorrect. Please try again", HttpStatus.BAD_REQUEST);
 		}
 	}
 
@@ -295,7 +329,7 @@ public class PersonController {
 	}
 
 	@PutMapping(value = { "/person/worker/approve/{email}", "/person/worker/approve/{email}/" })
-	public ResponseEntity<?> approveWorker(@PathVariable String email) throws PersonException {
+	public Worker approveWorker(@PathVariable String email) throws PersonException {
 		Worker worker = personService.getWorker(email);
 		worker.setIsRegisteredOnline(true);
 		workerRepository.save(worker);
@@ -303,7 +337,7 @@ public class PersonController {
 	}
 
 	@PutMapping(value = { "/person/worker/deny/{email}", "/person/worker/deny/{email}/" })
-	public ResponseEntity<?> denyWorker(@PathVariable String email) throws PersonException {
+	public Worker denyWorker(@PathVariable String email) throws PersonException {
 		Worker worker = personService.getWorker(email);
 		worker.setIsRegisteredOnline(false);
 		workerRepository.save(worker);
@@ -356,7 +390,7 @@ public class PersonController {
 	 * @param adminDto Admin Data Transfer Object
 	 * @return Response Entity
 	 */
-	@PostMapping(value = { "/person/admin/login/username", "/person/admin/login/username" })
+	@PostMapping(value = { "/person/admin/login/username", "/person/admin/login/username/" })
 	public ResponseEntity<?> loginAdminByUsername(@RequestBody AdminDto adminDto) {
 		try {
 			Admin admin = personService.loginAdminByUsername(adminDto.getUserName(), adminDto.getPassword());
