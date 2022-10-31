@@ -73,6 +73,7 @@ public class PersonService {
         buyer.setUsername(username);
         buyer.setPassword(password);
         buyer.setResidentialAddress(residentialAddress);
+        buyer.setIsRegisteredOnline(buyer.getIsRegisteredOnline());
         buyer.setAbout(about);
         buyerRepository.save(buyer);
         return  buyer;
@@ -147,6 +148,7 @@ public class PersonService {
         buyer.setUsername(buyerDto.getUserName());
         buyer.setPassword(buyerDto.getPassword());
         buyer.setResidentialAddress(buyerDto.getResidentialAddress());
+        buyer.setIsRegisteredOnline(buyerDto.getIsRegisteredOnline());
         buyer.setAbout(buyerDto.getAbout());
         buyerRepository.save(buyer);
         return buyer;
@@ -272,6 +274,7 @@ public class PersonService {
         worker.setUsername(username);
         worker.setPassword(password);
         worker.setResidentialAddress(residentialAddress);
+        worker.setIsRegisteredOnline(worker.getIsRegisteredOnline());
         worker.setAbout(about_description);
 
         workerRepository.save(worker);
@@ -348,6 +351,7 @@ public class PersonService {
         worker.setUsername(workerDto.getUserName());
         worker.setPassword(workerDto.getPassword());
         worker.setResidentialAddress(workerDto.getResidentialAddress());
+        worker.setIsRegisteredOnline(workerDto.getIsRegisteredOnline());
         worker.setAbout(workerDto.getAbout());
         workerRepository.save(worker);
         return worker;
