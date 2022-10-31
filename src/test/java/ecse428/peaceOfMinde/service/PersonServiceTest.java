@@ -167,11 +167,30 @@ class PersonServiceTest {
 
     @Test
     void updateWorker() throws PersonException {
-        Worker savedWorker = new Worker(1,"firstName", "lastName","address","about me");
+        Worker savedWorker = new Worker(1, "firstName", "lastName", "address", "about me");
         when(workerRepository.findWorkerByEmail("email")).thenReturn(Optional.of(savedWorker));
         Worker worker = personService.updateWorker("email", workerDto);
         verify(workerRepository).save(any());
         assertThat(worker.getEmail()).isEqualTo(workerDto.getEmail());
+    }
+    
+
+    @Test
+    void updateWorkerPassword() throws PersonException {
+        Worker savedWorker = new Worker(1, "firstName", "lastName", "address", "about me");
+        savedWorker.setPassword("pass");
+        when(workerRepository.findWorkerByEmail("email")).thenReturn(Optional.of(savedWorker));
+        Worker worker = personService.updateWorkerPassword("email","password", workerDto);
+        verify(workerRepository).save(any());
+        assertThat(worker.getPassword()).isEqualTo(workerDto.getPassword());
+    }
+
+    @Test
+    void fail_updateWorkerPasswordWithSamePassword() throws PersonException {
+        Worker savedWorker = new Worker(1, "firstName", "lastName", "address", "about me");
+        savedWorker.setPassword("password");
+        when(workerRepository.findWorkerByEmail("email")).thenReturn(Optional.of(savedWorker));
+        assertThrows(PersonException.class, () -> personService.updateWorkerPassword("email", "password",workerDto));
     }
 
     @Test
