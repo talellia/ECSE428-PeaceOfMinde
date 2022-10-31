@@ -484,8 +484,29 @@ public class PersonService {
      * @throws PersonException Prints out the error message if the user could not be created
      */
     @Transactional
-    public Admin loginAdmin(String email, String password) throws PersonException {
+    public Admin loginAdminByEmail(String email, String password) throws PersonException {
         Optional<Admin> adminOptional = adminRepository.findAdminByEmail(email);
+        if (!adminOptional.isPresent()) {
+            throw new PersonException("Admin does not exist");
+        }
+        Admin admin = adminOptional.get();
+        if (!admin.getPassword().equals(password)) {
+            throw new PersonException("Incorrect password");
+        }
+        return admin;
+    }
+
+    /**
+     * This method logins the admin into an existing account
+     *
+     * @param username    Admin Username
+     * @param password Admin Password
+     * @return admin
+     * @throws PersonException Prints out the error message if the user could not be created
+     */
+    @Transactional
+    public Admin loginAdminByUsername(String username, String password) throws PersonException {
+        Optional<Admin> adminOptional = adminRepository.findAdminByUsername(username);
         if (!adminOptional.isPresent()) {
             throw new PersonException("Admin does not exist");
         }

@@ -14,12 +14,10 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.context.ActiveProfiles;
 
-import java.nio.BufferOverflowException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -201,7 +199,7 @@ class PersonServiceTest {
         Admin savedAdmin = new Admin(1,"firstName", "lastName","address","about me");
         savedAdmin.setPassword("password");
         when(adminRepository.findAdminByEmail("email")).thenReturn(Optional.of(savedAdmin));
-        Admin admin = personService.loginAdmin("email", "password");
+        Admin admin = personService.loginAdminByEmail("email", "password");
         assertThat(admin.getFirstName()).isEqualTo(savedAdmin.getFirstName());
     }
 
@@ -210,7 +208,7 @@ class PersonServiceTest {
         Admin savedAdmin = new Admin(1,"firstName", "lastName","address","about me");
         savedAdmin.setPassword("password");
         when(adminRepository.findAdminByEmail("email")).thenReturn(Optional.empty());
-        assertThrows(PersonException.class, () -> personService.loginAdmin("email", "password"));
+        assertThrows(PersonException.class, () -> personService.loginAdminByEmail("email", "password"));
     }
 
     @Test
@@ -218,7 +216,7 @@ class PersonServiceTest {
         Admin savedAdmin = new Admin(1,"firstName", "lastName","address","about me");
         savedAdmin.setPassword("password");
         when(adminRepository.findAdminByEmail("email")).thenReturn(Optional.of(savedAdmin));
-        assertThrows(PersonException.class, () -> personService.loginAdmin("email", "WrongPassword"));
+        assertThrows(PersonException.class, () -> personService.loginAdminByEmail("email", "WrongPassword"));
     }
 
     @Test
