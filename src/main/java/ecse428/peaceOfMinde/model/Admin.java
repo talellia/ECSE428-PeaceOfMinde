@@ -1,12 +1,12 @@
 package ecse428.peaceOfMinde.model;
 
-import javax.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
-import java.util.*;
-import java.sql.Date;
+import javax.persistence.Entity;
 
 @Entity
-public class Worker extends Person {
+public class Admin extends Person{
 
     //------------------------
     // MEMBER VARIABLES
@@ -16,11 +16,11 @@ public class Worker extends Person {
     // CONSTRUCTOR
     //------------------------
 
-    public Worker(Integer aId, String aFirst_name, String aLast_name, String aResidential_address, String aAboutMe) {
+    public Admin(Integer aId, String aFirst_name, String aLast_name, String aResidential_address, String aAboutMe) {
         super(aId, aFirst_name, aLast_name, aResidential_address, aAboutMe);
     }
 
-    public Worker() {
+    public Admin() {
 
     }
     //------------------------

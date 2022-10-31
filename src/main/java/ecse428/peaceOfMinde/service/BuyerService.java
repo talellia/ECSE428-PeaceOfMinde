@@ -1,51 +1,45 @@
 package ecse428.peaceOfMinde.service;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import ecse428.peaceOfMinde.utility.*;
 
 import java.util.List;
+import java.util.Optional;
+
 import ecse428.peaceOfMinde.dao.*;
 import ecse428.peaceOfMinde.model.Buyer;
 import ecse428.peaceOfMinde.model.*;
 
+@AllArgsConstructor
 public class BuyerService {
-	@Autowired
-	BuyerRepository buyerRepository;
-	WorkerRepository  workerRepository;
+	private final BuyerRepository buyerRepository;
+	private final WorkerRepository  workerRepository;
 
-	/** 
-	 * @param email
-	 * @return Buyer
-	 */
-	@Transactional
-	public Buyer get(String email) {
-		return buyerRepository.findBuyerByEmail(email);
-	}
-
-	/** 
-	 * @param buyer
-	 * @param worker
+	/**
+	 * Create a comment by a worker on a buyer
+	 * @param buyerId
+	 * @param workerId
 	 * @param comment
-	 * @return Buyer
-	 * Still need to do error checking to see if worker has done a job for the buyer
+	 * @return Updated Buyer
+	 * @throws PersonException
 	 */
 	@Transactional
 	public Buyer createComment(Integer buyerId, Integer workerId, String comment) throws PersonException {
-		Buyer buyer = buyerRepository.findBuyerById(buyerId);
-		Worker worker = workerRepository.findWorkerById(workerId);
+		Optional<Buyer> optionalBuyer = buyerRepository.findById(buyerId);
+		Optional<Worker> optionalWorker = workerRepository.findById(workerId);
 
-		if (workerId == null || buyerId == null){
+		if (!optionalBuyer.isPresent() || !optionalWorker.isPresent()){
             throw new PersonException("The buyer or the worker does not exist.");
 		}
 		if (comment.isEmpty()){
 			throw new PersonException("There is no comment to submit.");
 		}
-
+		Buyer buyer = optionalBuyer.get();
 		List<String> comments = buyer.getListComments();
 		comments.add(comment);
-		buyer.setListComments(comments);
-
+		buyerRepository.save(buyer);
 		return buyer;
 	}
 

@@ -1,13 +1,17 @@
 package ecse428.peaceOfMinde.service;
 
+import ecse428.peaceOfMinde.dao.AdminRepository;
 import ecse428.peaceOfMinde.dao.WorkerRepository;
 import ecse428.peaceOfMinde.dao.BuyerRepository;
+import ecse428.peaceOfMinde.dto.AdminDto;
 import ecse428.peaceOfMinde.dto.BuyerDto;
 import ecse428.peaceOfMinde.dto.WorkerDto;
+import ecse428.peaceOfMinde.model.Admin;
 import ecse428.peaceOfMinde.model.Worker;
 import ecse428.peaceOfMinde.model.Buyer;
 import ecse428.peaceOfMinde.utility.LibraryUtil;
 import ecse428.peaceOfMinde.utility.PersonException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,12 +26,18 @@ import java.util.Optional;
  * @author Gohar Saqib Fazal
  */
 @Service
+@RequiredArgsConstructor
 public class PersonService {
 
-    @Autowired
-    WorkerRepository workerRepository;
-    @Autowired
-    BuyerRepository buyerRepository;
+    private final WorkerRepository workerRepository;
+    private final BuyerRepository buyerRepository;
+    private final AdminRepository adminRepository;
+
+    /*******************************************
+     *
+     *   BUYER METHODS
+     *
+     *******************************************/
 
     /**
      * This method creates a buyer if the input is valid
@@ -65,8 +75,7 @@ public class PersonService {
         buyer.setResidentialAddress(residentialAddress);
         buyer.setAbout(about);
         buyerRepository.save(buyer);
-        return buyer;
-
+        return  buyer;
     }
 
     /**
@@ -79,7 +88,7 @@ public class PersonService {
      */
     @Transactional
     public Buyer loginBuyer(String email, String password) throws PersonException {
-        Optional<Buyer> buyerOptional = Optional.ofNullable(buyerRepository.findBuyerByEmail(email));
+        Optional<Buyer> buyerOptional = buyerRepository.findBuyerByEmail(email);
         if (!buyerOptional.isPresent()) {
             throw new PersonException("Buyer does not exist");
         }
@@ -99,7 +108,7 @@ public class PersonService {
      */
     @Transactional
     public Buyer getBuyer(String email) throws PersonException {
-        Optional<Buyer> buyerOptional = Optional.ofNullable(buyerRepository.findBuyerByEmail(email));
+        Optional<Buyer> buyerOptional = buyerRepository.findBuyerByEmail(email);
         if (!buyerOptional.isPresent()) {
             throw new PersonException("Buyer with this email does not exist");
         }
@@ -116,7 +125,7 @@ public class PersonService {
      */
     @Transactional
     public Buyer updateBuyer(String email, BuyerDto buyerDto) throws PersonException {
-        Optional<Buyer> buyerOptional = Optional.ofNullable(buyerRepository.findBuyerByEmail(email));
+        Optional<Buyer> buyerOptional = buyerRepository.findBuyerByEmail(email);
         if (!buyerOptional.isPresent()) {
             throw new PersonException("The buyer with this email does not exist");
         }
@@ -147,14 +156,14 @@ public class PersonService {
      * Updates the old password for  Buyer with the new requested password
      *
      * @param email           Buyer email
-     * @param newpassword     New password for the Buyer
+     * @param newPassword     New password for the Buyer
      * @param buyerDto       Buyer Data Transfer Object
      * @return buyer
      * @throws PersonException Prints out the error message if the user could not be created
      */
     @Transactional
     public Buyer updateBuyerPassword(String email, String newPassword, BuyerDto buyerDto) throws PersonException {
-        Optional<Buyer> buyerOptional = Optional.ofNullable(buyerRepository.findBuyerByEmail(email));
+        Optional<Buyer> buyerOptional = buyerRepository.findBuyerByEmail(email);
         if (!buyerOptional.isPresent()) {
             throw new PersonException("The buyer with this email does not exist");
         }
@@ -187,7 +196,7 @@ public class PersonService {
      */
     @Transactional
     public Buyer deleteBuyer(String email) throws PersonException {
-        Optional<Buyer> buyerOptional = Optional.ofNullable(buyerRepository.findBuyerByEmail(email));
+        Optional<Buyer> buyerOptional = buyerRepository.findBuyerByEmail(email);
         if (!buyerOptional.isPresent()) {
             throw new PersonException("The buyer with the given email does not exist");
         }
@@ -206,6 +215,27 @@ public class PersonService {
     public List<Buyer> getAllBuyers() {
         return LibraryUtil.toList(buyerRepository.findAll());
     }
+
+
+    /**
+     * @param id
+     * @return Buyer
+     * @throws PersonException
+     */
+    @Transactional
+    public Buyer getBuyerById(Integer id)  throws PersonException {
+        Optional<Buyer> buyer = buyerRepository.findById(id);
+        if(!buyer.isPresent()) {throw new PersonException("No buyer exists with this ID");}
+        return buyer.get();
+    }
+
+
+    /*******************************************
+    *
+    *   WORKER METHODS
+    *
+    *******************************************/
+
 
     /**
      * This method creates a worker if the input is valid
@@ -246,7 +276,6 @@ public class PersonService {
 
         workerRepository.save(worker);
         return worker;
-
     }
 
     /**
@@ -259,7 +288,7 @@ public class PersonService {
      */
     @Transactional
     public Worker loginWorker(String email, String password) throws PersonException {
-        Optional<Worker> workerOptional = Optional.ofNullable(workerRepository.findWorkerByEmail(email));
+        Optional<Worker> workerOptional = workerRepository.findWorkerByEmail(email);
         if (!workerOptional.isPresent()) {
             throw new PersonException("Worker does not exist");
         }
@@ -279,7 +308,7 @@ public class PersonService {
      */
     @Transactional
     public Worker getWorker(String email) throws PersonException {
-        Optional<Worker> workerOptional = Optional.ofNullable(workerRepository.findWorkerByEmail(email));
+        Optional<Worker> workerOptional = workerRepository.findWorkerByEmail(email);
         if (!workerOptional.isPresent()) {
             throw new PersonException("Worker with this email does not exist");
         }
@@ -296,7 +325,7 @@ public class PersonService {
      */
     @Transactional
     public Worker updateWorker(String email, WorkerDto workerDto) throws PersonException {
-        Optional<Worker> workerOptional = Optional.ofNullable(workerRepository.findWorkerByEmail(email));
+        Optional<Worker> workerOptional = workerRepository.findWorkerByEmail(email);
         if (!workerOptional.isPresent()) {
             throw new PersonException("The worker with this email does not exist");
         }
@@ -328,14 +357,14 @@ public class PersonService {
      * Updates the old password for  Worker with the new requested password
      *
      * @param email           Worker email
-     * @param newpassword     New password for the Worker
+     * @param newPassword     New password for the Worker
      * @param workerDto       Worker Data Transfer Object
      * @return worker
      * @throws PersonException Prints out the error message if the user could not be created
      */
     @Transactional
     public Worker updateWorkerPassword(String email, String newPassword, WorkerDto workerDto) throws PersonException {
-        Optional<Worker> workerOptional = Optional.ofNullable(workerRepository.findWorkerByEmail(email));
+        Optional<Worker> workerOptional = workerRepository.findWorkerByEmail(email);
         if (!workerOptional.isPresent()) {
             throw new PersonException("The worker with this email does not exist");
         }
@@ -368,7 +397,7 @@ public class PersonService {
      */
     @Transactional
     public Worker deleteWorker(String email) throws PersonException {
-        Optional<Worker> workerOptional = Optional.ofNullable(workerRepository.findWorkerByEmail(email));
+        Optional<Worker> workerOptional = workerRepository.findWorkerByEmail(email);
         if (!workerOptional.isPresent()) {
             throw new PersonException("The Worker with the given email does not exist");
         }
@@ -377,30 +406,6 @@ public class PersonService {
         workerRepository.deleteById(id);
         return worker;
     }
-     /** 
-     * @param id
-     * @return Buyer
-     * @throws PersonException
-     */
-    @Transactional
-    public Buyer getBuyerById(Integer id)  throws PersonException {
-        Buyer buyer = buyerRepository.findBuyerById(id);
-        return buyer;
-    }
-
-    
-    /** 
-     * @param id
-     * @return Worker
-     * @throws PersonException
-     */
-    @Transactional
-    public Worker getWorkerById(Integer id)  throws PersonException {
-        Worker worker = workerRepository.findWorkerById(id);
-        return worker;
-
-    }
-
 
     /**
      * This method gets all workers.
@@ -412,7 +417,185 @@ public class PersonService {
         return LibraryUtil.toList(workerRepository.findAll());
     }
 
-    // HELPER METHODS
+    /**
+     * @param id
+     * @return Worker
+     * @throws PersonException
+     */
+    @Transactional
+    public Worker getWorkerById(Integer id)  throws PersonException {
+        Optional<Worker> workerOptional = workerRepository.findById(id);
+        if (!workerOptional.isPresent()) {
+            throw new PersonException("Worker with this id does not exist");
+        }
+        return workerOptional.get();
+    }
+
+    /*******************************************
+     *
+     *   ADMIN METHODS
+     *
+     *******************************************/
+
+    /**
+     * This method creates a admin if the input is valid
+     *
+     * @param firstName          First Name of the admin
+     * @param lastName           Last Name of the admin
+     * @param email              Admin Email
+     * @param username           Admin Username
+     * @param password           Admin Password
+     * @param residentialAddress Admin Residential Address
+     * @return admin
+     * @throws PersonException Prints out the error message if the user could not be created
+     */
+    @Transactional
+    public Admin createAdmin(String firstName, String lastName, String username, String password, String email, String residentialAddress) throws PersonException {
+        String error = validateAdmin(firstName, lastName, email, username, password, residentialAddress);
+
+        if (error.length() != 0) {
+            throw new PersonException(error);
+        }
+
+        String duplicate = checkDuplicateEmail(email);
+
+        if (!duplicate.equalsIgnoreCase("")) {
+            throw new PersonException(duplicate);
+        }
+
+        Admin admin = new Admin();
+
+        admin.setFirstName(firstName);
+        admin.setLastName(lastName);
+        admin.setEmail(email);
+        admin.setUsername(username);
+        admin.setPassword(password);
+        admin.setResidentialAddress(residentialAddress);
+        adminRepository.save(admin);
+        return admin;
+    }
+
+    /**
+     * This method logins the admin into an existing account
+     *
+     * @param email    Admin Email
+     * @param password Admin Password
+     * @return admin
+     * @throws PersonException Prints out the error message if the user could not be created
+     */
+    @Transactional
+    public Admin loginAdmin(String email, String password) throws PersonException {
+        Optional<Admin> adminOptional = adminRepository.findAdminByEmail(email);
+        if (!adminOptional.isPresent()) {
+            throw new PersonException("Admin does not exist");
+        }
+        Admin admin = adminOptional.get();
+        if (!admin.getPassword().equals(password)) {
+            throw new PersonException("Incorrect password");
+        }
+        return admin;
+    }
+
+    /**
+     * This method returns admin credentials corresponding to the specified email
+     *
+     * @param email Admin email
+     * @return admin
+     * @throws PersonException Prints out the error message if the user could not be created
+     */
+    @Transactional
+    public Admin getAdmin(String email) throws PersonException {
+        Optional<Admin> adminOptional = adminRepository.findAdminByEmail(email);
+        if (!adminOptional.isPresent()) {
+            throw new PersonException("Admin with this email does not exist");
+        }
+        return adminOptional.get();
+    }
+
+    /**
+     * This method updates the admin credentials in the user account
+     *
+     * @param email   Admin email
+     * @param adminDto Admin Data Transfer Object
+     * @return admin
+     * @throws PersonException Prints out the error message if the user could not be created
+     */
+    @Transactional
+    public Admin updateAdmin(String email, AdminDto adminDto) throws PersonException {
+        Optional<Admin> adminOptional = adminRepository.findAdminByEmail(email);
+        if (!adminOptional.isPresent()) {
+            throw new PersonException("The admin with this email does not exist");
+        }
+        Admin admin = adminOptional.get();
+
+        String error = validateAdmin(adminDto.getFirstName(), adminDto.getLastName(), adminDto.getEmail(), adminDto.getUserName(), adminDto.getPassword(),
+                adminDto.getResidentialAddress());
+        if (!error.equals("")) {
+            throw new PersonException(error);
+        }
+        //check if email has not been taken
+        if (!checkDuplicateEmail(adminDto.getEmail()).equals("")) {
+            throw new PersonException(checkDuplicateEmail(email));
+        }
+        admin.setFirstName(adminDto.getFirstName());
+        admin.setLastName(adminDto.getLastName());
+        admin.setEmail(adminDto.getEmail());
+        admin.setUsername(adminDto.getUserName());
+        admin.setPassword(adminDto.getPassword());
+        admin.setResidentialAddress(adminDto.getResidentialAddress());
+        adminRepository.save(admin);
+        return admin;
+    }
+
+    /**
+     * This method deletes a admin account
+     *
+     * @param email Admin Email
+     * @return admin
+     * @throws PersonException Prints out the error message if the user could not be created
+     */
+    @Transactional
+    public Admin deleteAdmin(String email) throws PersonException {
+        Optional<Admin> adminOptional = adminRepository.findAdminByEmail(email);
+        if (!adminOptional.isPresent()) {
+            throw new PersonException("The admin with the given email does not exist");
+        }
+        Admin admin = adminOptional.get();
+        int id = admin.getId();
+        adminRepository.deleteById(id);
+        return admin;
+    }
+
+    /**
+     * This method gets all admins
+     *
+     * @return List of all admins
+     */
+    @Transactional
+    public List<Admin> getAllAdmins() {
+        return LibraryUtil.toList(adminRepository.findAll());
+    }
+
+
+    /**
+     * @param id
+     * @return Worker
+     * @throws PersonException
+     */
+    @Transactional
+    public Admin getAdminById(Integer id)  throws PersonException {
+        Optional<Admin> adminOptional = adminRepository.findById(id);
+        if (!adminOptional.isPresent()) {
+            throw new PersonException("Worker with this id does not exist");
+        }
+        return adminOptional.get();
+    }
+
+    /*******************************************
+     *
+     *   HELPER METHODS
+     *
+     *******************************************/
 
     /**
      * Validates the buyer credentials added during the registration into the Peace of Minde system
@@ -472,14 +655,43 @@ public class PersonService {
     }
 
     /**
+     * Validates the admin credentials added during the registration into the Peace of Minde system
+     *
+     * @param firstName          First Name of Admin
+     * @param lastName           Last Name of Admin
+     * @param email              Admin Email
+     * @param username           Admin Username
+     * @param password           Admin password
+     * @param residentialAddress Admin Residential Address
+     * @return String telling whether the admin credentials are valid
+     */
+    private String validateAdmin(String firstName, String lastName, String email, String username, String password, String residentialAddress) {
+        if (firstName == null || firstName.length() == 0) {
+            return "Enter valid first name";
+        } else if (lastName == null || lastName.length() == 0) {
+            return "Enter valid last name";
+        } else if (email == null || email.length() == 0) {
+            return "Enter valid email";
+        } else if (username == null || username.length() == 0) {
+            return "Enter valid username";
+        } else if (password == null || password.length() == 0) {
+            return "Enter valid password";
+        } else if (residentialAddress == null || residentialAddress.length() == 0) {
+            return "Enter valid residential address";
+        }
+
+        return "";
+    }
+
+    /**
      * Checks for duplicate emails
      *
      * @param email User Email
      * @return String telling whether an existing user has the given email address in the database
      */
     private String checkDuplicateEmail(String email) {
-        if (buyerRepository.findBuyerByEmail(email) == null
-                || workerRepository.findWorkerByEmail(email) == null) {
+        if (!buyerRepository.findBuyerByEmail(email).isPresent()
+                || !workerRepository.findWorkerByEmail(email).isPresent()) {
             return "";
         }
         return "Email has already been taken";

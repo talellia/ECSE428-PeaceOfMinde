@@ -42,13 +42,14 @@ public abstract class Person {
     // CONSTRUCTOR
     //------------------------
 
-    public Person(Integer aId, String aFirst_name, String aLast_name, String aResidential_address) {
+    public Person(Integer aId, String aFirst_name, String aLast_name, String aResidential_address,String aAboutMe) {
         firstName = aFirst_name;
         lastName = aLast_name;
         username = null;
         password = null;
         email = null;
         residentialAddress = aResidential_address;
+        aboutme =aAboutMe;
         if (!setId(aId)) {
             throw new RuntimeException("Cannot create due to duplicate id.");
         }
