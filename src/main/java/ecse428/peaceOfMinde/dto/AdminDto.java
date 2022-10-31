@@ -9,19 +9,19 @@ import lombok.ToString;
 
 @Builder
 @Getter
+@Setter
 @EqualsAndHashCode
 @ToString
 @AllArgsConstructor
-public final class AdminDto {
-    @Setter
+public class AdminDto {
     private int id;
-    private final String firstName;
-    private final String lastName;
-    private final String userName;
-    private final String password;
-    private final String email;
-    private final String residentialAddress;
-    private final String about_description;
+    private String firstName;
+    private String lastName;
+    private String userName;
+    private String password;
+    private String email;
+    private String residentialAddress;
+    private String about_description;
 
 
     /**
