@@ -104,6 +104,26 @@ public class PersonController {
 	}
 
 	/**
+	 * Updates the old password for  Buyer with the new requested password
+	 * in the database
+	 * 
+	 * @param email  		Buyer email
+	 * @param newpassword  	new password to update the old one
+	 * @param buyerDto 	Buyer Data Transfer Object
+	 * @return Response Entity
+	 */
+	@PostMapping(value = { "/person/buyer/{newpassword}", "/person/buyer/{newpassword}/" })
+	public ResponseEntity<?> updateBuyerPassword(@PathVariable String email,@PathVariable String newpassword, @RequestBody BuyerDto buyerDto) {
+		try {
+
+			Buyer buyer = personService.updateBuyerPassword(email,newpassword, buyerDto);
+			return new ResponseEntity<>(LibraryUtil.convertToDto(buyer), HttpStatus.OK);
+		} catch (PersonException e) {
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	/**
 	 * Delete Buyer method deletes a buyer from the database
 	 *
 	 * @param email Buyer Email
