@@ -131,7 +131,8 @@ public class PersonService {
         }
         Buyer buyer = buyerOptional.get();
 
-        String error = validateBuyer(buyerDto.getFirstName(), buyerDto.getLastName(), buyerDto.getEmail(), buyerDto.getUserName(), buyerDto.getPassword(),
+        String error = validateBuyer(buyerDto.getFirstName(), buyerDto.getLastName(), buyerDto.getEmail(),
+                buyerDto.getUserName(), buyerDto.getPassword(),
                 buyerDto.getResidentialAddress());
         if (!error.equals("")) {
             throw new PersonException(error);
@@ -147,6 +148,41 @@ public class PersonService {
         buyer.setPassword(buyerDto.getPassword());
         buyer.setResidentialAddress(buyerDto.getResidentialAddress());
         buyer.setAbout(buyerDto.getAbout());
+        buyerRepository.save(buyer);
+        return buyer;
+    }
+    
+    /**
+     * Updates the old password for  Buyer with the new requested password
+     *
+     * @param email           Buyer email
+     * @param newpassword     New password for the Buyer
+     * @param buyerDto       Buyer Data Transfer Object
+     * @return buyer
+     * @throws PersonException Prints out the error message if the user could not be created
+     */
+    @Transactional
+    public Buyer updateBuyerPassword(String email, String newPassword, BuyerDto buyerDto) throws PersonException {
+        Optional<Buyer> buyerOptional = Optional.ofNullable(buyerRepository.findBuyerByEmail(email));
+        if (!buyerOptional.isPresent()) {
+            throw new PersonException("The buyer with this email does not exist");
+        }
+        Buyer buyer = buyerOptional.get();
+
+        String error = validateBuyer(buyerDto.getFirstName(), buyerDto.getLastName(), buyerDto.getEmail(),
+                buyerDto.getUserName(), buyerDto.getPassword(),
+                buyerDto.getResidentialAddress());
+        if (!error.equals("")) {
+            throw new PersonException(error);
+        }
+        //check if the old password is the same as the old one
+        String oldPassword = buyer.getPassword();
+        if (oldPassword.equals(newPassword)) {
+            throw new PersonException("Your new password cannot be same as your new password.");
+        }
+
+        buyer.setPassword(newPassword);
+
         buyerRepository.save(buyer);
         return buyer;
     }
@@ -294,7 +330,8 @@ public class PersonService {
         }
         Worker worker = workerOptional.get();
 
-        String error = validateWorker(workerDto.getFirstName(), workerDto.getLastName(), workerDto.getEmail(), workerDto.getUserName(), workerDto.getPassword(),
+        String error = validateWorker(workerDto.getFirstName(), workerDto.getLastName(), workerDto.getEmail(),
+                workerDto.getUserName(), workerDto.getPassword(),
                 workerDto.getResidentialAddress());
         if (!error.equals("")) {
             throw new PersonException(error);
@@ -314,7 +351,42 @@ public class PersonService {
         workerRepository.save(worker);
         return worker;
     }
+    
+     /**
+     * Updates the old password for  Worker with the new requested password
+     *
+     * @param email           Worker email
+     * @param newpassword     New password for the Worker
+     * @param workerDto       Worker Data Transfer Object
+     * @return worker
+     * @throws PersonException Prints out the error message if the user could not be created
+     */
+    @Transactional
+    public Worker updateWorkerPassword(String email, String newPassword, WorkerDto workerDto) throws PersonException {
+        Optional<Worker> workerOptional = Optional.ofNullable(workerRepository.findWorkerByEmail(email));
+        if (!workerOptional.isPresent()) {
+            throw new PersonException("The worker with this email does not exist");
+        }
+        Worker worker = workerOptional.get();
 
+        String error = validateWorker(workerDto.getFirstName(), workerDto.getLastName(), workerDto.getEmail(),
+                workerDto.getUserName(), workerDto.getPassword(),
+                workerDto.getResidentialAddress());
+        if (!error.equals("")) {
+            throw new PersonException(error);
+        }
+        //check if the old password is the same as the old one
+        String oldPassword = worker.getPassword();
+        if (oldPassword.equals(newPassword)) {
+            throw new PersonException("Your new password cannot be same as your new password.");
+        }
+
+        worker.setPassword(newPassword);
+
+        workerRepository.save(worker);
+        return worker;
+    }
+    
     /**
      * This method deletes a worker account
      *

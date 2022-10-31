@@ -106,6 +106,26 @@ public class PersonController {
 	}
 
 	/**
+	 * Updates the old password for  Buyer with the new requested password
+	 * in the database
+	 * 
+	 * @param email  		Buyer email
+	 * @param newpassword  	new password to update the old one
+	 * @param buyerDto 	Buyer Data Transfer Object
+	 * @return Response Entity
+	 */
+	@PostMapping(value = { "/person/buyer/{newpassword}", "/person/buyer/{newpassword}/" })
+	public ResponseEntity<?> updateBuyerPassword(@PathVariable String email,@PathVariable String newpassword, @RequestBody BuyerDto buyerDto) {
+		try {
+
+			Buyer buyer = personService.updateBuyerPassword(email,newpassword, buyerDto);
+			return new ResponseEntity<>(LibraryUtil.convertToDto(buyer), HttpStatus.OK);
+		} catch (PersonException e) {
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	/**
 	 * Delete Buyer method deletes a buyer from the database
 	 *
 	 * @param email Buyer Email
@@ -207,6 +227,27 @@ public class PersonController {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
+
+	/**
+	 * Updates the old password for  Worker with the new requested password
+	 * in the database
+	 * 
+	 * @param email  		Worker email
+	 * @param newpassword  	new password to update the old one
+	 * @param workerDto 	Worker Data Transfer Object
+	 * @return Response Entity
+	 */
+	@PostMapping(value = { "/person/worker/{newpassword}", "/person/worker/{newpassword}/" })
+	public ResponseEntity<?> updateWorkerPassword(@PathVariable String email,@PathVariable String newpassword, @RequestBody WorkerDto workerDto) {
+		try {
+
+			Worker worker = personService.updateWorkerPassword(email,newpassword, workerDto);
+			return new ResponseEntity<>(LibraryUtil.convertToDto(worker), HttpStatus.OK);
+		} catch (PersonException e) {
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+	}
+	
 
 	/**
 	 * Delete Worker method deletes a worker from the database
