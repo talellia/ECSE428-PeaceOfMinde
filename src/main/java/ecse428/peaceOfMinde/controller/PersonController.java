@@ -12,13 +12,9 @@ import ecse428.peaceOfMinde.service.PersonService;
 import ecse428.peaceOfMinde.utility.LibraryUtil;
 import ecse428.peaceOfMinde.utility.PersonException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * This is the person controller class. It handles the creation, login and
@@ -344,12 +340,29 @@ public class PersonController {
 	 * @return Response Entity
 	 */
 	@PostMapping(value = { "/person/admin/login", "/person/admin/login/" })
-	public ResponseEntity<?> loginAdmin(@RequestBody AdminDto adminDto) {
+	public ResponseEntity<?> loginAdminByEmail(@RequestBody AdminDto adminDto) {
 		try {
-			Admin admin = personService.loginAdmin(adminDto.getEmail(), adminDto.getPassword());
+			Admin admin = personService.loginAdminByEmail(adminDto.getEmail(), adminDto.getPassword());
 			return new ResponseEntity<>(LibraryUtil.convertToDto(admin), HttpStatus.OK);
 		} catch (PersonException e) {
-			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>("Email or password is incorrect. Please try again", HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	/**
+	 * Login Admin method allows a admin to log into their account by accessing their
+	 * credentials from the database
+	 *
+	 * @param adminDto Admin Data Transfer Object
+	 * @return Response Entity
+	 */
+	@PostMapping(value = { "/person/admin/login/username", "/person/admin/login/username" })
+	public ResponseEntity<?> loginAdminByUsername(@RequestBody AdminDto adminDto) {
+		try {
+			Admin admin = personService.loginAdminByUsername(adminDto.getUserName(), adminDto.getPassword());
+			return new ResponseEntity<>(LibraryUtil.convertToDto(admin), HttpStatus.OK);
+		} catch (PersonException e) {
+			return new ResponseEntity<>("Username or password is incorrect. Please try again", HttpStatus.BAD_REQUEST);
 		}
 	}
 

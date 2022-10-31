@@ -9,4 +9,5 @@ import java.util.Optional;
 @Repository
 public interface AdminRepository extends PagingAndSortingRepository<Admin, Integer> {
     Optional<Admin> findAdminByEmail(String email);
-}
+    Optional<Admin> findAdminByUsername(String username);
+ }
