@@ -70,7 +70,7 @@ public class EditProfileWorkerStepDefs extends SpringIntegrationTest {
     }
 
 
-    @And("there exists a worker with username {string} and email {string}")
+    @And("there exists a worker with username {string} and email {string} in the PeaceOfMinde Management System")
     public void thereExistsAWorkerWithUsernameAndEmail(String arg0, String arg1) {
         WorkerDto dto = new WorkerDto();
         dto.setUserName(arg0);

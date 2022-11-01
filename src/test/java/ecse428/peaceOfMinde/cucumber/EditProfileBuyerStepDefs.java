@@ -99,7 +99,7 @@ public class EditProfileBuyerStepDefs extends SpringIntegrationTest {
         assertThat(exception).isEqualTo(arg0);
     }
 
-    @And("there exists a buyer with username {string} and email {string}")
+    @And("there exists a buyer with username {string} and email {string} in the PeaceOfMinde Management System")
     public void thereExistsABuyerWithUsernameUser_nameAndEmailUser_email(String arg0, String arg1) {
         BuyerDto dto = new BuyerDto();
         dto.setUserName(arg0);
