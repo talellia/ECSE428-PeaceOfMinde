@@ -24,71 +24,56 @@ public class ChangePasswordBuyerStepDefs {
   
   private ResponseEntity<?> response;
   
-  @Given("the following buyers exist:")
+  @Given("the following buyers exist in the system:")
   public void theFollowingBuyersExist(DataTable table) {
-    List<Map<String, String>> data = table.asMaps();
+    List<List<String>> rows = table.asLists(String.class);
+    rows.stream().skip(1).forEach(columns->{
+      Buyer temp = new Buyer();
+      temp.setUsername(columns.get(0));
+      temp.setEmail(columns.get(1));
+      temp.setPassword(columns.get(2));
+      temp.setId(Integer.parseInt(columns.get(4)));
+      buyerRepository.save(temp);
+    } );
+  }
 
-    // For each row
-    for (Map<String, String> row : data) {
-      String userName = row.get("user_name");
-      String email = row.get("user_email");
-      String password = row.get("user_password");
-      
-      Buyer buyer = new Buyer();
-      buyer.setUsername(userName);
-      buyer.setEmail(email);
-      buyer.setPassword(password);
-      
-      buyerRepository.save(buyer);
-    }
-  }
   
-  @When("a request to change password is sent by buyer with unique email {string} and a new password {string")
+  @When("a request to change password is sent by buyer with unique email {string} and a new password {string}")
   public void aRequestToChangePasswordIsIssuedWithEmailAndNewPassword(String email, String newPassword) {
-    BuyerDto dto = new BuyerDto();
-    dto.setEmail(email);
-    dto.setPassword(newPassword);
-    response = personController.updateBuyerPassword(email, newPassword, dto);
+    BuyerDto buyerDto = new BuyerDto();
+    buyerDto.setFirstName("firstName");
+    buyerDto.setLastName("lastName");
+    buyerDto.setResidentialAddress("address");
+    buyerDto.setUserName("username");
+    buyerDto.setEmail(email);
+    buyerDto.setPassword("password");
+    response = personController.updateBuyerPassword(email, newPassword, buyerDto);
   }
   
-  @Then("the buyer with user ID {string} has a new password in the database")
+  @Then("the buyer with user ID {string} has a new password in the database.")
   public void buyerWithIdIsLoggedIn(String id) {
     assertThat(response.getBody()).isInstanceOf(BuyerDto.class);
   }
-  
-  @Given("the following users exist:")
-  public void theFollowingBuyersExistInSystem(DataTable table) {
-    List<Map<String, String>> data = table.asMaps();
 
-    // For each row
-    for (Map<String, String> row : data) {
-      String userName = row.get("user_name");
-      String email = row.get("user_email");
-      String password = row.get("user_password");
-      
-      Buyer buyer = new Buyer();
-      buyer.setUsername(userName);
-      buyer.setEmail(email);
-      buyer.setPassword(password);
-      
-      buyerRepository.save(buyer);
-    }
-  }
   
-  @When("a request to change password is sent by buyer with unique email {string} and the same password {string")
+  @When("a request to change password is sent by buyer with unique email {string} and the same password {string}")
   public void aRequestToChangePasswordIsIssuedWithEmailAndSamePassword(String email, String password) {
-    BuyerDto dto = new BuyerDto();
-    dto.setEmail(email);
-    dto.setPassword(password);
-    response = personController.updateBuyerPassword(email, password, dto);
+      BuyerDto buyerDto = new BuyerDto();
+      buyerDto.setFirstName("firstName");
+      buyerDto.setLastName("lastName");
+      buyerDto.setResidentialAddress("address");
+      buyerDto.setUserName("username");
+      buyerDto.setEmail(email);
+      buyerDto.setPassword("password");
+    response = personController.updateBuyerPassword(email, password, buyerDto);
   }
   
-  @Then("the password is not updated")
+  @Then("the password is not updated for buyer")
   public void updatePasswordFails() {
       assertThat(response.getBody()).isInstanceOf(String.class);
   }
   
-  @And("the error message {string} is issued to buyer")
+  @And("the password error message {string} is issued to buyer")
   public void theErrorMessageIsIssuedToBuyer(String message) {
     String exception = (String) response.getBody();
     assertThat(exception).isEqualTo(message);
