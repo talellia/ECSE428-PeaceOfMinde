@@ -34,7 +34,7 @@ So that I can provide accurate information on my person and services.
     Scenario Outline: Edit profile as a worker with an existing email and username (Error Flow)
 
         Given an existing worker who inputs a username "Cooper_B", email "hello@gmail.com", and password "hello123"
-        And there exists a worker with username "Cooper_B" and email "hello@gmail.com"
+        And there exists a worker with username "Cooper_B" and email "hello@gmail.com" in the PeaceOfMinde Management System
         When the existing worker requests to update their profile
         Then a worker message "The worker with this email does not exist" is issued
         And the Worker account is not updated

@@ -33,7 +33,7 @@ So that I can provide accurate information on my person and services.
     Scenario Outline: Edit profile as a buyer with an existing email and username (Error Flow)
 
         Given an existing buyer who inputs a username "Cooper_B", email "hello@gmail.com", and password "hello123"
-        And there exists a buyer with username "Cooper_B" and email "hello@gmail.com"
+        And there exists a buyer with username "Cooper_B" and email "hello@gmail.com" in the PeaceOfMinde Management System
         When the existing buyer requests to update their profile
         Then a message "The buyer with this email does not exist" is issued
         And the buyer account is not updated
