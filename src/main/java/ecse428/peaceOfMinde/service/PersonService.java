@@ -12,12 +12,12 @@ import ecse428.peaceOfMinde.model.Buyer;
 import ecse428.peaceOfMinde.utility.LibraryUtil;
 import ecse428.peaceOfMinde.utility.PersonException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Pattern;
 
 /**
  * Service to handle the registration and login of buyers and workers
@@ -59,10 +59,10 @@ public class PersonService {
             throw new PersonException(error);
         }
 
-        String duplicate = checkDuplicateEmail(email);
-
-        if (!duplicate.equalsIgnoreCase("")) {
-            throw new PersonException(duplicate);
+        String duplicateEmail = checkDuplicateEmail(email);
+        String duplicateUsername = checkDuplicateUsername(username);
+        if (!duplicateEmail.equalsIgnoreCase("")||!duplicateUsername.equalsIgnoreCase("")) {
+            throw new PersonException(duplicateEmail+duplicateUsername);
         }
 
         Buyer buyer = new Buyer();
@@ -281,10 +281,10 @@ public class PersonService {
             throw new PersonException(error);
         }
 
-        String duplicate = checkDuplicateEmail(email);
-
-        if (!duplicate.equalsIgnoreCase("")) {
-            throw new PersonException(duplicate);
+        String duplicateEmail = checkDuplicateEmail(email);
+        String duplicateUsername = checkDuplicateUsername(username);
+        if (!duplicateEmail.equalsIgnoreCase("")||!duplicateUsername.equalsIgnoreCase("")) {
+            throw new PersonException(duplicateEmail+duplicateUsername);
         }
 
         Worker worker = new Worker();
@@ -503,10 +503,10 @@ public class PersonService {
             throw new PersonException(error);
         }
 
-        String duplicate = checkDuplicateEmail(email);
-
-        if (!duplicate.equalsIgnoreCase("")) {
-            throw new PersonException(duplicate);
+        String duplicateEmail = checkDuplicateEmail(email);
+        String duplicateUsername = checkDuplicateUsername(username);
+        if (!duplicateEmail.equalsIgnoreCase("")||!duplicateUsername.equalsIgnoreCase("")) {
+            throw new PersonException(duplicateEmail+duplicateUsername);
         }
 
         Admin admin = new Admin();
@@ -680,11 +680,11 @@ public class PersonService {
             return "Enter valid first name";
         } else if (lastName == null || lastName.length() == 0) {
             return "Enter valid last name";
-        } else if (email == null || email.length() == 0) {
+        } else if (email == null || email.length() == 0|| !Pattern.compile("^(.+)@(\\S+)$").matcher(email).matches()) {
             return "Enter valid email";
         } else if (username == null || username.length() == 0) {
             return "Enter valid username";
-        } else if (password == null || password.length() == 0) {
+        } else if (password == null || password.length() < 5) {
             return "Enter valid password";
         } else if (residentialAddress == null || residentialAddress.length() == 0) {
             return "Enter valid residential address";
@@ -709,11 +709,11 @@ public class PersonService {
             return "Enter valid first name";
         } else if (lastName == null || lastName.length() == 0) {
             return "Enter valid last name";
-        } else if (email == null || email.length() == 0) {
+        } else if (email == null || email.length() == 0|| !Pattern.compile("^(.+)@(\\S+)$").matcher(email).matches()) {
             return "Enter valid email";
         } else if (username == null || username.length() == 0) {
             return "Enter valid username";
-        } else if (password == null || password.length() == 0) {
+        } else if (password == null || password.length() < 5) {
             return "Enter valid password";
         } else if (residentialAddress == null || residentialAddress.length() == 0) {
             return "Enter valid residential address";
@@ -737,11 +737,11 @@ public class PersonService {
             return "Enter valid first name";
         } else if (lastName == null || lastName.length() == 0) {
             return "Enter valid last name";
-        } else if (email == null || email.length() == 0) {
+        } else if (email == null || email.length() == 0|| !Pattern.compile("^(.+)@(\\S+)$").matcher(email).matches()) {
             return "Enter valid email";
         } else if (username == null || username.length() == 0) {
             return "Enter valid username";
-        } else if (password == null || password.length() == 0) {
+        } else if (password == null || password.length() < 5) {
             return "Enter valid password";
         } else if (residentialAddress == null || residentialAddress.length() == 0) {
             return "Enter valid residential address";
@@ -758,9 +758,25 @@ public class PersonService {
      */
     private String checkDuplicateEmail(String email) {
         if (!buyerRepository.findBuyerByEmail(email).isPresent()
-                || !workerRepository.findWorkerByEmail(email).isPresent()) {
+                && !workerRepository.findWorkerByEmail(email).isPresent()) {
             return "";
         }
         return "Email has already been taken";
     }
+
+
+    /**
+     * Checks for duplicate usernames
+     *
+     * @param username
+     * @return String telling whether an existing user has the given username in the database
+     */
+    private String checkDuplicateUsername(String username) {
+        if (!buyerRepository.findBuyerByUsername(username).isPresent()
+                && !workerRepository.findWorkerByUsername(username).isPresent()) {
+            return "";
+        }
+        return "Username has already been taken";
+    }
+
 }

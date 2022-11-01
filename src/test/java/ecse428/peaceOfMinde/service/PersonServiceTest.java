@@ -161,7 +161,7 @@ class PersonServiceTest {
 
     @Test
     void createWorker() throws PersonException {
-        Worker worker = personService.createWorker("firstName", "lastName","username","password","email@email.com","address","about me");
+        Worker worker = personService.createWorker("firstName", "lastName","email@email.com","username","password","address","about me");
         verify(workerRepository).save(any());
         assertThat(worker.getFirstName()).isEqualTo("firstName");
     }
