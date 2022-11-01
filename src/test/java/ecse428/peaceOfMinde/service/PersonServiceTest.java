@@ -116,11 +116,11 @@ class PersonServiceTest {
     }
     @Test
     void updateBuyer() throws PersonException {
-        Buyer savedBuyer = new Buyer(1,"firstName", "lastName","address", "about me", Collections.emptyList(),false);
+        Buyer savedBuyer = new Buyer(1,"WRONG_FIRSTNAME", "lastName","address", "about me", Collections.emptyList(),false);
         when(buyerRepository.findBuyerByEmail("email")).thenReturn(Optional.of(savedBuyer));
         Buyer buyer = personService.updateBuyer("email", buyerDto);
         verify(buyerRepository).save(any());
-        assertThat(buyer.getEmail()).isEqualTo(buyerDto.getEmail());
+        assertThat(buyer.getFirstName()).isEqualTo(buyerDto.getFirstName());
     }
     
     @Test
@@ -161,7 +161,7 @@ class PersonServiceTest {
 
     @Test
     void createWorker() throws PersonException {
-        Worker worker = personService.createWorker("firstName", "lastName","username","password","email@email.com","address","about me");
+        Worker worker = personService.createWorker("firstName", "lastName","email@email.com","username","password","address","about me");
         verify(workerRepository).save(any());
         assertThat(worker.getFirstName()).isEqualTo("firstName");
     }
@@ -218,11 +218,11 @@ class PersonServiceTest {
 
     @Test
     void updateWorker() throws PersonException {
-        Worker savedWorker = new Worker(1,"firstName", "lastName","address","about me",false);
+        Worker savedWorker = new Worker(1,"WRONG_FIRSTNAME", "lastName","address","about me",false);
         when(workerRepository.findWorkerByEmail("email")).thenReturn(Optional.of(savedWorker));
         Worker worker = personService.updateWorker("email", workerDto);
         verify(workerRepository).save(any());
-        assertThat(worker.getEmail()).isEqualTo(workerDto.getEmail());
+        assertThat(worker.getFirstName()).isEqualTo(workerDto.getFirstName());
     }
     
 
