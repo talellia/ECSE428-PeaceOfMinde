@@ -44,7 +44,7 @@ public class ChangePasswordWorkerStepDefs {
     }
   }
   
-  @When("a request to change password is sent by worker with unique email {string} and a new password {string")
+  @When("a request to change password is sent by worker with unique email {string} and a new password {string}")
   public void aRequestToChangePasswordIsIssuedWithEmailAndNewPassword(String email, String newPassword) {
     WorkerDto dto = new WorkerDto();
     dto.setEmail(email);
@@ -52,7 +52,7 @@ public class ChangePasswordWorkerStepDefs {
     response = personController.updateWorkerPassword(email, newPassword, dto);
   }
   
-  @Then("the Worker with user ID {string} has a new password in the database")
+  @Then("the Worker with user ID {string} has a new password in the database.")
   public void workerWithIdIsLoggedIn(String id) {
     assertThat(response.getBody()).isInstanceOf(WorkerDto.class);
   }
@@ -76,7 +76,7 @@ public class ChangePasswordWorkerStepDefs {
     }
   }
   
-  @When("a request to change password is sent by worker with unique email {string} and the same password {string")
+  @When("a request to change password is sent by worker with unique email {string} and the same password {string}")
   public void aRequestToChangePasswordIsIssuedWithEmailAndSamePassword(String email, String password) {
     WorkerDto dto = new WorkerDto();
     dto.setEmail(email);
@@ -94,5 +94,4 @@ public class ChangePasswordWorkerStepDefs {
     String exception = (String) response.getBody();
     assertThat(exception).isEqualTo(message);
   }
-  
 }
