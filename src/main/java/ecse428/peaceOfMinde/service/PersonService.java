@@ -139,6 +139,7 @@ public class PersonService {
 
     /**
      * This method updates the buyer credentials in the user account
+     * Note that the username and email cant be updated
      *
      * @param email   Buyer email
      * @param buyerDto Buyer Data Transfer Object
@@ -159,14 +160,8 @@ public class PersonService {
         if (!error.equals("")) {
             throw new PersonException(error);
         }
-        //check if email has not been taken
-        if (!checkDuplicateEmail(buyerDto.getEmail()).equals("")) {
-            throw new PersonException(checkDuplicateEmail(email));
-        }
         buyer.setFirstName(buyerDto.getFirstName());
         buyer.setLastName(buyerDto.getLastName());
-        buyer.setEmail(buyerDto.getEmail());
-        buyer.setUsername(buyerDto.getUserName());
         buyer.setPassword(buyerDto.getPassword());
         buyer.setResidentialAddress(buyerDto.getResidentialAddress());
         buyer.setIsRegisteredOnline(buyerDto.getIsRegisteredOnline());
@@ -362,6 +357,7 @@ public class PersonService {
 
     /**
      * This method updates the worker credentials in the worker account
+     * Note that the username and email cant be updated
      *
      * @param email        Worker Email
      * @param workerDto    Worker Data Transfer Object
@@ -382,15 +378,8 @@ public class PersonService {
         if (!error.equals("")) {
             throw new PersonException(error);
         }
-        //check if email has not been taken
-        if (!checkDuplicateEmail(workerDto.getEmail()).equals("")) {
-            throw new PersonException(checkDuplicateEmail(email));
-        }
-
         worker.setFirstName(workerDto.getFirstName());
         worker.setLastName(workerDto.getLastName());
-        worker.setEmail(workerDto.getEmail());
-        worker.setUsername(workerDto.getUserName());
         worker.setPassword(workerDto.getPassword());
         worker.setResidentialAddress(workerDto.getResidentialAddress());
         worker.setIsRegisteredOnline(workerDto.getIsRegisteredOnline());
