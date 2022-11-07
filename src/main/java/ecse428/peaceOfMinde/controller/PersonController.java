@@ -26,11 +26,6 @@ import java.util.List;
 @RestController
 public class PersonController {
 
-	@RequestMapping("/")
-	public String root(){
-		return "Index Page";
-	}
-
 	@Autowired
 	PersonService personService;
 
