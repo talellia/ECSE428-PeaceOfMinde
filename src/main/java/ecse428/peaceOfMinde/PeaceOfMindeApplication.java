@@ -8,11 +8,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @SpringBootApplication
 public class PeaceOfMindeApplication {
 
-	@RequestMapping("/")
-    @ResponseBody
-    String home() {
-      return "Hello World!";
-    }
+  @RequestMapping("/test")
+  public String root(){
+      return "Index Page";
+  }
 
     public static void main(String[] args) {
         SpringApplication.run(PeaceOfMindeApplication.class, args);

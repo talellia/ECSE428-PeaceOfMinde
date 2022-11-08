@@ -1,10 +1,18 @@
-const express = require('express')
-const path = require('path')
-const PORT = process.env.PORT || 8081
-
-express()
-  .use(express.static(path.join(__dirname, 'public')))
-  .set('views', path.join(__dirname, 'views'))
-  .set('view engine', 'ejs')
-  .get('/', (req, res) => res.render('pages/index'))
-  .listen(PORT, () => console.log(`Listening on ${ PORT }`))
+module.exports = {
+  build: {
+    env: require('./prod.env'),
+    host: 'eventregistration-frontend-123.herokuapp.com',
+    port: 443,
+    backendHost: 'eventregistration-backend-123.herokuapp.com',
+    backendPort: 443,
+    //...
+  },
+  dev: {
+    env: require('./dev.env'),
+    host: '127.0.0.1',
+    port: 8087,
+    backendHost: '127.0.0.1',
+    backendPort: 8080,
+    //...
+  }
+}

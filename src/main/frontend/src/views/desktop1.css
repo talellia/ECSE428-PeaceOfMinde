@@ -1,0 +1,177 @@
+.desktop1-container {
+  min-height: 100vh;
+}
+.desktop1-desktop1 {
+  width: 100%;
+  height: 1080px;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+  background-color: rgba(255, 255, 255, 1);
+}
+.desktop1-rectangle1 {
+  top: 0px;
+  left: 33px;
+  width: 1858px;
+  height: 112px;
+  position: absolute;
+  border-color: rgba(140, 183, 255, 1);
+  border-style: solid;
+  border-width: 1px;
+  border-top-width: 0px;
+  border-left-width: 0px;
+  border-right-width: 0px;
+  border-bottom-width: 1px;
+}
+.desktop1-logonobackground1 {
+  top: 15px;
+  left: 45px;
+  width: 274px;
+  height: 76px;
+  position: absolute;
+  border-color: transparent;
+}
+.desktop1-component3 {
+  top: 24px;
+  left: 1742px;
+  width: 127px;
+  height: 64px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.desktop1-rectangle3 {
+  top: 3.346405267715454px;
+  left: 0px;
+  width: 127px;
+  height: 61px;
+  position: absolute;
+  border-color: rgba(41, 121, 255, 1);
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 100px;
+}
+.desktop1-frameiconperson {
+  top: 0px;
+  left: 61.828948974609375px;
+  width: 60.66114807128906px;
+  height: 60.739200592041016px;
+  display: flex;
+  padding: 0;
+  position: absolute;
+  align-self: auto;
+  box-sizing: border-box;
+  align-items: flex-start;
+  flex-shrink: 1;
+  border-color: transparent;
+  border-style: none;
+  border-width: 0;
+  margin-right: 0;
+  border-radius: 0px 0px 0px 0px;
+  margin-bottom: 0;
+  flex-direction: row;
+  justify-content: flex-start;
+  background-color: transparent;
+}
+.desktop1-group {
+  top: 7.592400074005127px;
+  left: 12.637741088867188px;
+  width: 35.38567352294922px;
+  height: 45.554405212402344px;
+  display: flex;
+  padding: 0;
+  position: absolute;
+  align-self: auto;
+  box-sizing: border-box;
+  align-items: flex-start;
+  flex-shrink: 1;
+  border-color: transparent;
+  border-style: none;
+  border-width: 0;
+  border-radius: 0px 0px 0px 0px;
+  flex-direction: row;
+  justify-content: flex-start;
+  background-color: transparent;
+}
+.desktop1-vector {
+  top: 0.000003337860107421875px;
+  left: 7.5826416015625px;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+}
+.desktop1-vector1 {
+  top: 25.308002471923828px;
+  left: -0.00000762939453125px;
+  width: 35px;
+  height: 20px;
+  position: absolute;
+}
+.desktop1-frameiconmenu {
+  top: 3.346405267715454px;
+  left: 9.190789222717285px;
+  width: 58.90460968017578px;
+  height: 58.98039245605469px;
+  display: flex;
+  padding: 0;
+  position: absolute;
+  align-self: auto;
+  box-sizing: border-box;
+  align-items: flex-start;
+  flex-shrink: 1;
+  border-color: transparent;
+  border-style: none;
+  border-width: 0;
+  margin-right: 0;
+  border-radius: 0px 0px 0px 0px;
+  margin-bottom: 0;
+  flex-direction: row;
+  justify-content: flex-start;
+  background-color: transparent;
+}
+.desktop1-group1 {
+  top: 14.74510383605957px;
+  left: 7.363093376159668px;
+  width: 44.17845916748047px;
+  height: 29.490198135375977px;
+  display: flex;
+  padding: 0;
+  position: absolute;
+  align-self: auto;
+  box-sizing: border-box;
+  align-items: flex-start;
+  flex-shrink: 1;
+  border-color: transparent;
+  border-style: none;
+  border-width: 0;
+  border-radius: 0px 0px 0px 0px;
+  flex-direction: row;
+  justify-content: flex-start;
+  background-color: transparent;
+}
+.desktop1-vector2 {
+  top: 12.287588119506836px;
+  left: 0.000019073486328125px;
+  width: 44px;
+  height: 5px;
+  position: absolute;
+}
+.desktop1-vector3 {
+  top: 24.575170516967773px;
+  left: 0.000019073486328125px;
+  width: 44px;
+  height: 5px;
+  position: absolute;
+}
+.desktop1-vector4 {
+  top: 0px;
+  left: 0px;
+  width: 44px;
+  height: 5px;
+  position: absolute;
+}
