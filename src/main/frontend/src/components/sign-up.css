@@ -1,0 +1,411 @@
+.sign-up-container {
+  width: 866px;
+  height: 983px;
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.sign-up-sign-up {
+  width: 100%;
+  height: 990px;
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.sign-up-rectangle6 {
+  top: 0px;
+  left: 0px;
+  width: 860px;
+  height: 990px;
+  position: absolute;
+  border-color: transparent;
+  border-radius: 20px;
+}
+.sign-up-rectangle5 {
+  top: 0px;
+  left: 0px;
+  width: 860px;
+  height: 81px;
+  position: absolute;
+  border-color: rgba(140, 183, 255, 1);
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 20px 20px 0 0;
+}
+.sign-up-vector1 {
+  top: 26px;
+  left: 29px;
+  width: 25px;
+  height: 29px;
+  position: absolute;
+}
+.sign-up-text {
+  top: 26px;
+  left: 177px;
+  color: rgba(0, 0, 0, 1);
+  width: 577px;
+  height: auto;
+  position: absolute;
+  font-size: 25px;
+  align-self: auto;
+  font-style: Regular;
+  text-align: center;
+  font-family: Inter;
+  font-weight: 400;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.sign-up-text02 {
+  top: 94px;
+  left: 42px;
+  color: rgba(0, 0, 0, 1);
+  width: 774px;
+  height: auto;
+  position: absolute;
+  font-size: 35px;
+  align-self: auto;
+  font-style: Regular;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 400;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.sign-up-component7 {
+  top: 159px;
+  left: 42px;
+  width: 774px;
+  height: 72px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.sign-up-rectangle7 {
+  top: 0px;
+  left: 0px;
+  width: 774px;
+  height: 72px;
+  position: absolute;
+  border-color: rgba(140, 183, 255, 1);
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 20px;
+}
+.sign-up-text04 {
+  top: 4px;
+  left: 12px;
+  color: rgba(0, 0, 0, 0.5799999833106995);
+  width: 750px;
+  height: auto;
+  position: absolute;
+  font-size: 15px;
+  align-self: auto;
+  font-style: Regular;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 400;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.sign-up-component10 {
+  top: 329px;
+  left: 42px;
+  width: 774px;
+  height: 72px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.sign-up-rectangle71 {
+  top: 0px;
+  left: 0px;
+  width: 774px;
+  height: 72px;
+  position: absolute;
+  border-color: rgba(140, 183, 255, 1);
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 20px;
+}
+.sign-up-text06 {
+  top: 4px;
+  left: 12px;
+  color: rgba(0, 0, 0, 0.5799999833106995);
+  width: 750px;
+  height: auto;
+  position: absolute;
+  font-size: 15px;
+  align-self: auto;
+  font-style: Regular;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 400;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.sign-up-component9 {
+  top: 414px;
+  left: 42px;
+  width: 774px;
+  height: 72px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.sign-up-rectangle72 {
+  top: 0px;
+  left: 0px;
+  width: 774px;
+  height: 72px;
+  position: absolute;
+  border-color: rgba(140, 183, 255, 1);
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 20px;
+}
+.sign-up-text08 {
+  top: 4px;
+  left: 12px;
+  color: rgba(0, 0, 0, 0.5799999833106995);
+  width: 750px;
+  height: auto;
+  position: absolute;
+  font-size: 15px;
+  align-self: auto;
+  font-style: Regular;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 400;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.sign-up-component13 {
+  top: 669px;
+  left: 43px;
+  width: 774px;
+  height: 194px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.sign-up-rectangle73 {
+  top: 0px;
+  left: 0px;
+  width: 774px;
+  height: 194px;
+  position: absolute;
+  border-color: rgba(140, 183, 255, 1);
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 20px;
+}
+.sign-up-text10 {
+  top: 4px;
+  left: 12px;
+  color: rgba(0, 0, 0, 0.5799999833106995);
+  width: 750px;
+  height: auto;
+  position: absolute;
+  font-size: 15px;
+  align-self: auto;
+  font-style: Regular;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 400;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.sign-up-component12 {
+  top: 584px;
+  left: 42px;
+  width: 774px;
+  height: 72px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.sign-up-rectangle74 {
+  top: 0px;
+  left: 0px;
+  width: 774px;
+  height: 72px;
+  position: absolute;
+  border-color: rgba(140, 183, 255, 1);
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 20px;
+}
+.sign-up-text12 {
+  top: 4px;
+  left: 12px;
+  color: rgba(0, 0, 0, 0.5799999833106995);
+  width: 750px;
+  height: auto;
+  position: absolute;
+  font-size: 15px;
+  align-self: auto;
+  font-style: Regular;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 400;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.sign-up-component11 {
+  top: 499px;
+  left: 43px;
+  width: 774px;
+  height: 72px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.sign-up-rectangle75 {
+  top: 0px;
+  left: 0px;
+  width: 774px;
+  height: 72px;
+  position: absolute;
+  border-color: rgba(140, 183, 255, 1);
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 20px;
+}
+.sign-up-text14 {
+  top: 4px;
+  left: 12px;
+  color: rgba(0, 0, 0, 0.5799999833106995);
+  width: 750px;
+  height: auto;
+  position: absolute;
+  font-size: 15px;
+  align-self: auto;
+  font-style: Regular;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 400;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.sign-up-component8 {
+  top: 244px;
+  left: 42px;
+  width: 774px;
+  height: 72px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.sign-up-rectangle76 {
+  top: 0px;
+  left: 0px;
+  width: 774px;
+  height: 72px;
+  position: absolute;
+  border-color: rgba(140, 183, 255, 1);
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 20px;
+}
+.sign-up-text16 {
+  top: 4px;
+  left: 12px;
+  color: rgba(0, 0, 0, 0.5799999833106995);
+  width: 750px;
+  height: auto;
+  position: absolute;
+  font-size: 15px;
+  align-self: auto;
+  font-style: Regular;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 400;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.sign-up-button {
+  top: 876px;
+  left: 43px;
+  width: 774px;
+  height: 72px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+  background-color: rgba(255, 255, 255, 1);
+}
+.sign-up-rectangle9 {
+  top: 0px;
+  left: 0px;
+  width: 774px;
+  height: 72px;
+  position: absolute;
+  border-color: rgba(41, 121, 255, 1);
+  border-style: solid;
+  border-width: 3px;
+  border-radius: 20px;
+}
+.sign-up-text18 {
+  top: 20px;
+  left: 0px;
+  color: rgba(0, 0, 0, 1);
+  width: 774px;
+  height: auto;
+  position: absolute;
+  font-size: 30px;
+  align-self: auto;
+  font-style: Extra Bold;
+  text-align: center;
+  font-family: Inter;
+  font-weight: 700;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
