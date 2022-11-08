@@ -1,36 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>
-		4.0.0
-	</modelVersion>
+	<modelVersion>4.0.0</modelVersion>
+
 	<parent>
-		<groupId>
-			org.springframework.boot
-		</groupId>
-		<artifactId>
-			spring-boot-starter-parent
-		</artifactId>
-		<version>
-			2.7.4
-		</version>
-		<relativePath />
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.7.4</version>
+		<relativePath/>
 		<!-- lookup parent from repository -->
 	</parent>
-	<groupId>
-		ecse428
-	</groupId>
-	<artifactId>
-		peaceOfMinde
-	</artifactId>
-	<version>
-		0.0.1-SNAPSHOT
-	</version>
-	<name>
-		peaceOfMinde
-	</name>
-	<description>
-		ECSE 428 project: a e-commerce website for babysitting jobs
-	</description>
+
+	<groupId>ecse428</groupId>
+	<artifactId>peaceOfMinde</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>peaceOfMinde</name>
+	<description>ECSE 428 project: a e-commerce website for babysitting jobs</description>
+
 	<properties>
 		<java.version>
 			1.8
@@ -59,11 +44,6 @@
         		<artifactId>spring-boot-starter-jdbc</artifactId>
    		 </dependency>
 		<dependency>
-       		<groupId>org.postgresql</groupId>
-        	<artifactId>postgresql</artifactId>
-        	<scope>runtime</scope>
-   		 </dependency>
-		<dependency>
 			<groupId>
 				org.springframework.boot
 			</groupId>
@@ -76,96 +56,56 @@
 				org.springframework.boot
 			</groupId>
 			<artifactId>
-				spring-boot-starter-web
+				spring-boot-starter-security
 			</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>
-				org.springframework.boot
-			</groupId>
-			<artifactId>
-				spring-boot-starter-actuator
-			</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>
-				org.projectlombok
-			</groupId>
-			<artifactId>
-				lombok
-			</artifactId>
-			<optional>
-				true
-			</optional>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>
-				org.springframework.boot
-			</groupId>
-			<artifactId>
-				spring-boot-starter-test
-			</artifactId>
-			<scope>
-				test
-			</scope>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>
-				org.springframework.security
-			</groupId>
-			<artifactId>
-				spring-security-test
-			</artifactId>
-			<scope>
-				test
-			</scope>
+            <groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
+
 	<build>
 		<plugins>
-		    <plugin>
-                <artifactId>maven-resources-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>position-react-build</id>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <phase>prepare-package</phase>
-                        <configuration>
-                            <outputDirectory>${project.build.outputDirectory}/static</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>${frontend-src-dir}/build</directory>
-                                    <filtering>false</filtering>
-                                </resource>
-                            </resources>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-          	<plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <exclude>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                        </exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
 			<plugin>
 				<groupId>
-					org.apache.maven.plugins
+					org.springframework.boot
 				</groupId>
 				<artifactId>
-					maven-surefire-plugin
+					spring-boot-maven-plugin
 				</artifactId>
-				<version>
-					2.19.1
-				</version>
+				<configuration>
+					<excludes>
+						<exclude>
+							<groupId>
+								org.projectlombok
+							</groupId>
+							<artifactId>
+								lombok
+							</artifactId>
+						</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.19.1</version>
 			</plugin>
 			<plugin>
       			<groupId>com.heroku.sdk</groupId>

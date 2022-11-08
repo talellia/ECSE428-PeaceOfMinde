@@ -1,6 +1,5 @@
 package ecse428.peaceOfMinde.model;
 
-import java.sql.Date;
 import java.util.*;
 import javax.persistence.*;
 
@@ -10,8 +9,10 @@ public class Buyer extends Person {
     //------------------------
     // MEMBER VARIABLES
     //------------------------
-    @ElementCollection(targetClass=Integer.class)
+    @ElementCollection
     private List<String> listComments;
+    @Column
+    private boolean isRegisteredOnline;
 
 
 
@@ -19,9 +20,10 @@ public class Buyer extends Person {
     // CONSTRUCTOR
     //------------------------
 
-    public Buyer(Integer aId, String aFirst_name, String aLast_name, String aResidential_address, List<String> aListComments) {
-        super(aId, aFirst_name, aLast_name, aResidential_address);
-        aListComments = null;
+    public Buyer(Integer aId, String aFirst_name, String aLast_name, String aResidential_address,String aAboutMe, List<String> aListComments, boolean aIsRegisteredOnline) {
+        super(aId, aFirst_name, aLast_name, aResidential_address,aAboutMe);
+        listComments = aListComments;
+        isRegisteredOnline = aIsRegisteredOnline;
     }
 
     public Buyer() {
@@ -49,11 +51,20 @@ public class Buyer extends Person {
         return true;
     }
 
+    public boolean getIsRegisteredOnline() {
+        return isRegisteredOnline;
+    }
+
+    public boolean setIsRegisteredOnline(boolean aIsRegisteredOnline) {
+        isRegisteredOnline = aIsRegisteredOnline;
+        return true;
+    }
     
     /** 
      * @return String
      */
     public String toString() {
-        return super.toString();
+        return super.toString() + "[" +
+                "isRegisteredOnline" + ":" + getIsRegisteredOnline() + "]";
     }
 }

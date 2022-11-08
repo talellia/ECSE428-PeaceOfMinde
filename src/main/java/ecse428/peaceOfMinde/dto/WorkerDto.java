@@ -16,6 +16,7 @@ public class WorkerDto {
     private String email;
     private String residentialAddress;
     private String about_description;
+    private boolean isRegisteredOnline;
 
     /**
      * Constructor that creates the worker data transfer object
@@ -185,6 +186,24 @@ public class WorkerDto {
      */
     public void setAbout(String about) {
         this.about_description = about;
+    }
+
+    /**
+     * returns whether worker is registered in the online database
+     *
+     * @return isRegisteredOnline
+     */
+    public boolean getIsRegisteredOnline() {
+        return isRegisteredOnline;
+    }
+
+    /**
+     * sets whether worker is registered in the online database
+     *
+     * @param registeredOnline
+     */
+    public void setIsRegisteredOnline(boolean registeredOnline) {
+        isRegisteredOnline = registeredOnline;
     }
 
 }
