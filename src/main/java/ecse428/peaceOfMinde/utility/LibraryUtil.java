@@ -1,7 +1,9 @@
 package ecse428.peaceOfMinde.utility;
 
+import ecse428.peaceOfMinde.dto.AdminDto;
 import ecse428.peaceOfMinde.dto.WorkerDto;
 import ecse428.peaceOfMinde.dto.BuyerDto;
+import ecse428.peaceOfMinde.model.Admin;
 import ecse428.peaceOfMinde.model.Worker;
 import ecse428.peaceOfMinde.model.Buyer;
 
@@ -42,6 +44,7 @@ public class LibraryUtil {
         }
         BuyerDto buyerDto = new BuyerDto(buyer.getFirstName(), buyer.getLastName(), buyer.getUsername(),
                 buyer.getPassword(), buyer.getEmail(), buyer.getResidentialAddress(), buyer.getAboutme());
+        buyerDto.setIsRegisteredOnline(buyer.getIsRegisteredOnline());
         buyerDto.setId(buyer.getId());
         return buyerDto;
     }
@@ -59,7 +62,26 @@ public class LibraryUtil {
         WorkerDto workerDto = new WorkerDto(worker.getFirstName(), worker.getLastName(),
                 worker.getUsername(), worker.getPassword(), worker.getEmail(),
                 worker.getResidentialAddress(), worker.getAboutme());
+        workerDto.setIsRegisteredOnline(worker.getIsRegisteredOnline());
         workerDto.setId(worker.getId());
         return workerDto;
+    }
+
+    /**
+     * This method converts the admin into a data transfer object
+     *
+     * @param admin Admin
+     * @return AdminDto Worker Data Transfer Object
+     */
+    public static AdminDto convertToDto(Admin admin) {
+        if (admin == null) {
+            throw new IllegalArgumentException("There is no such worker!");
+        }
+        AdminDto adminDto = new AdminDto(admin.getFirstName(), admin.getLastName(),
+                admin.getUsername(), admin.getPassword(), admin.getEmail(),
+                admin.getResidentialAddress(), admin.getAboutme());
+        adminDto.setId(admin.getId());
+        return adminDto;
+
     }
 }
