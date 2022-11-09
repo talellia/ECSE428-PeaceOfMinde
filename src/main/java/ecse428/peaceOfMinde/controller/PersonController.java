@@ -27,6 +27,11 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class PersonController {
 
+	@RequestMapping("/")
+    public String root(){
+        return "Hello World Page";
+    }
+
 	private final PersonService personService;
 
     private final BuyerRepository buyerRepository;
