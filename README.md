@@ -2,6 +2,7 @@
 ## To run the app:
 1. ```mvn spring-boot:run ``` 
 2. Navigate to [http://localhost:8080](http://localhost:8080)
+## or for only front end work: 
 3. Navigate to src/main/frontend/
 4. ```npm start ```
 5. Navigate to [http://localhost:8087](http://localhost:8087)
