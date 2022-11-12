@@ -67,7 +67,7 @@ const Desktop1 = (props) => {
         </button>
         <HoverAccount id="button1Hover" rootClassName="hover-account-root-class-name"></HoverAccount>
       </div>
-      <BuyerWorker onClick={props.onClose} rootClassName="buyer-worker-root-class-name"></BuyerWorker>
+      <BuyerWorker rootClassName="buyer-worker-root-class-name"></BuyerWorker>
     </div>
   )
 }
