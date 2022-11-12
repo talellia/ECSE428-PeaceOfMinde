@@ -10,6 +10,7 @@
   align-items: flex-start;
   flex-shrink: 0;
   border-color: transparent;
+  justify-content: flex-end;
   background-color: rgba(255, 255, 255, 1);
 }
 .desktop1-rectangle1 {
@@ -41,10 +42,12 @@
   height: 64px;
   display: flex;
   position: absolute;
+  transition: 0.3s;
   align-items: flex-start;
   flex-shrink: 0;
   border-color: transparent;
 }
+
 .desktop1-rectangle3 {
   top: 3.346405267715454px;
   left: 0px;

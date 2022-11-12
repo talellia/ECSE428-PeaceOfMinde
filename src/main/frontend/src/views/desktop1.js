@@ -2,6 +2,9 @@ import React from 'react'
 
 import { Helmet } from 'react-helmet'
 
+import HoverAccount from '../components/hover-account'
+import BuyerWorker from '../components/buyer-worker'
+import { useDetectClickOutside } from 'react-detect-click-outside';
 import './desktop1.css'
 
 const Desktop1 = (props) => {
@@ -21,7 +24,8 @@ const Desktop1 = (props) => {
           src="/playground_assets/logonobackground124-zy7l-200h.png"
           className="desktop1-logonobackground1"
         />
-        <div className="desktop1-component3 button">
+        <button id="button1"
+        onMouseDown={changecssHover} className="desktop1-component3 button">
           <img
             alt="Rectangle3I252"
             src="/playground_assets/rectangle3i252-737m-200h.png"
@@ -60,10 +64,19 @@ const Desktop1 = (props) => {
               />
             </div>
           </div>
-        </div>
+        </button>
+        <HoverAccount id="button1Hover" rootClassName="hover-account-root-class-name"></HoverAccount>
       </div>
+      <BuyerWorker onClick={props.onClose} rootClassName="buyer-worker-root-class-name"></BuyerWorker>
     </div>
   )
 }
+
+function changecssHover(){
+document.getElementById("button1").style.visibility = "hidden";
+document.getElementById("button1Hover").style.visibility = "visible";
+document.getElementById("select1").style.visibility = "visible";
+}
+
 
 export default Desktop1

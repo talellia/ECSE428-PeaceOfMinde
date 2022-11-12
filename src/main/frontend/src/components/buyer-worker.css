@@ -3,7 +3,6 @@
   height: 167px;
   display: flex;
   position: relative;
-  box-shadow: 5px 5px 10px 0px #d4d4d4;
   align-items: flex-start;
   flex-direction: column;
 }
@@ -106,4 +105,13 @@
   margin-bottom: 0;
   text-transform: capitalize;
   text-decoration:  none;
+}
+
+.buyer-worker-root-class-name {
+  top: 110px;
+  left: 1500px;
+  right: 0px;
+  bottom: 0px;
+  position: absolute;
+  visibility: hidden;
 }

@@ -1,10 +1,13 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+import { useDetectClickOutside } from 'react-detect-click-outside';
+
 
 import './buyer-worker.css'
 
-const BuyerWorker = (props) => {
+const BuyerWorker = (props,) => {
   return (
-    <div className="buyer-worker-container">
+    <div id="select1" className={`buyer-worker-container ${props.rootClassName} `}>
       <div className="buyer-worker-component22">
         <img
           alt="Rectangle10I551"
@@ -32,6 +35,14 @@ const BuyerWorker = (props) => {
       </div>
     </div>
   )
+}
+
+BuyerWorker.defaultProps = {
+  rootClassName: '',
+}
+
+BuyerWorker.propTypes = {
+  rootClassName: PropTypes.string,
 }
 
 export default BuyerWorker
