@@ -24,12 +24,13 @@ import org.springframework.web.bind.annotation.*;
  */
 @CrossOrigin(origins = "*")
 @RestController
+@RequestMapping("")
 @RequiredArgsConstructor
 public class PersonController {
 
-	@RequestMapping("/")
+	@GetMapping("/hello")
     public String root(){
-        return "Hello World Page";
+        return "HelloWorld";
     }
 
 	private final PersonService personService;
