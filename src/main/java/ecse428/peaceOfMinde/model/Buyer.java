@@ -13,8 +13,8 @@ public class Buyer extends Person {
     private List<String> listComments;
     @Column
     private boolean isRegisteredOnline;
-    @Column
-    private boolean serviceOfferingIds;
+    @ElementCollection
+    private List<Integer> serviceOfferingIds;
 
 
     //------------------------
@@ -70,6 +70,6 @@ public class Buyer extends Person {
     }
 
     public List<Integer> getServiceOfferingIds() {
-        return null;
+        return serviceOfferingIds;
     }
 }
