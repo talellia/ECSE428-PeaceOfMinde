@@ -46,7 +46,9 @@ function Buyerclick(){
   document.getElementById("sitterClicktxt1").style.color = "black";
   document.getElementById("select2").style.visibility = "visible";
   document.getElementById("signinbox1").style.visibility = "hidden";
+  document.getElementById("signupbox1").style.visibility = "hidden";
 }
+
 function Sitterclick(){
   document.getElementById("sitterClickRectangel1").style.backgroundColor = "#2977ff";
   document.getElementById("sitterClicktxt1").style.color = "white";
@@ -54,6 +56,7 @@ function Sitterclick(){
   document.getElementById("buyerClicktxt1").style.color = "black";
   document.getElementById("select2").style.visibility = "visible";
   document.getElementById("signinbox1").style.visibility = "hidden";
+  document.getElementById("signupbox1").style.visibility = "hidden";
 }
 
 BuyerWorker.defaultProps = {

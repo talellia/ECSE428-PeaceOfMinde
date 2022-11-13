@@ -43,10 +43,8 @@ function signInclick(){
 
 }
 function signUpclick(){
-  document.getElementById("signUpClickRectangel1").style.backgroundColor = "#2977ff";
-  document.getElementById("signUpClicktxt1").style.color = "white";
-  document.getElementById("signInClickRectangel1").style.backgroundColor = "";
-  document.getElementById("signInClicktxt1").style.color = "black";
+  document.getElementById("select2").style.visibility = "hidden";
+  document.getElementById("signupbox1").style.visibility = "visible";
 }
 
 SignInUp.defaultProps = {

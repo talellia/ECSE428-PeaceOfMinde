@@ -26,8 +26,8 @@
 }
 .sign-up-rectangle5 {
   top: 0px;
-  left: 0px;
-  width: 860px;
+  left: 3px;
+  width: 854px;
   height: 81px;
   position: absolute;
   border-color: rgba(140, 183, 255, 1);
@@ -408,4 +408,10 @@
   margin-right: 0;
   margin-bottom: 0;
   text-decoration: none;
+}
+.sign-up-root-class-name{
+  position: absolute;
+  top: 120px;
+  left:calc(50% - 453px);
+  visibility: hidden;
 }

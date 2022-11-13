@@ -6,6 +6,8 @@ import HoverAccount from '../components/hover-account'
 import BuyerWorker from '../components/buyer-worker'
 import SignInUp from '../components/signInUp'
 import SignIn from '../components/sign-in'
+import SignUp from '../components/sign-up'
+
 import './desktop1.css'
 
 const Desktop1 = (props) => {
@@ -73,6 +75,7 @@ const Desktop1 = (props) => {
       <BuyerWorker rootClassName="buyer-worker-root-class-name"></BuyerWorker>
       <SignInUp rootClassName="signIn-signUp-root-class-name"></SignInUp>
       <SignIn rootClassName="sign-in-root-class-name"></SignIn>
+      <SignUp rootClassName="sign-up-root-class-name"></SignUp>
     </div>
   )
 }
@@ -90,6 +93,8 @@ function closemenue(){
   document.getElementById("select2").style.visibility = "hidden";
   document.getElementById("buyerClickRectangel1").style.backgroundColor = "";
   document.getElementById("buyerClicktxt1").style.color = "black";
+  document.getElementById("sitterClickRectangel1").style.backgroundColor = "";
+  document.getElementById("sitterClicktxt1").style.color = "black";
   document.getElementById("signUpClickRectangel1").style.backgroundColor = "";
   document.getElementById("signUpClicktxt1").style.color = "black";
   document.getElementById("signUpClickRectangel1").style.backgroundColor = "";
@@ -97,8 +102,7 @@ function closemenue(){
   document.getElementById("signInClickRectangel1").style.backgroundColor = "";
   document.getElementById("signInClicktxt1").style.color = "black";
   document.getElementById("signinbox1").style.visibility = "hidden";
-
-
+  document.getElementById("signupbox1").style.visibility = "hidden";
 }
 
 

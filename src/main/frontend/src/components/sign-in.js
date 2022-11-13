@@ -5,12 +5,15 @@ import { useState } from 'react';
 import './sign-in.css'
 
 const SignIn = (props) => {
-  const [username, setUsername, password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   //ToDo: Example of input handeling
   const handleSubmit = (event) => {
     event.preventDefault();
-    alert(`The name you entered was: ${username}`);
+    alert(`Values are:\n 
+      UserName: ${username}\n
+      Password: ${password}`);
   }
   return (
     <div id="signinbox1" className={`sign-in-container ${props.rootClassName} `}>
@@ -91,6 +94,8 @@ function closeall(){
     document.getElementById("select2").style.visibility = "hidden";
     document.getElementById("buyerClickRectangel1").style.backgroundColor = "";
     document.getElementById("buyerClicktxt1").style.color = "black";
+    document.getElementById("sitterClickRectangel1").style.backgroundColor = "";
+    document.getElementById("sitterClicktxt1").style.color = "black";
     document.getElementById("signUpClickRectangel1").style.backgroundColor = "";
     document.getElementById("signUpClicktxt1").style.color = "black";
     document.getElementById("signUpClickRectangel1").style.backgroundColor = "";
