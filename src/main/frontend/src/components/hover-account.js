@@ -1,10 +1,12 @@
 import React from 'react'
 
+import PropTypes from 'prop-types'
+
 import './hover-account.css'
 
 const HoverAccount = (props) => {
   return (
-    <div className="hover-account-container">
+    <button type="button" id="button1Hover" className={`hover-account-container ${props.rootClassName} `}>
       <div className="hover-account-component4">
         <img
           alt="Rectangle3I274"
@@ -45,8 +47,16 @@ const HoverAccount = (props) => {
           </div>
         </div>
       </div>
-    </div>
+    </button>
   )
+}
+
+HoverAccount.defaultProps = {
+  rootClassName: '',
+}
+
+HoverAccount.propTypes = {
+  rootClassName: PropTypes.string,
 }
 
 export default HoverAccount
