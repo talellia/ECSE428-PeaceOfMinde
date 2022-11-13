@@ -149,8 +149,17 @@
 .hover-account-root-class-name {
   top: 24px;
   left: 1742px;
-  right: 0px;
-  bottom: 0px;
+  width: 127px;
+  height: 64px;
   position: absolute;
   visibility: hidden;
+}
+
+.hover-account2-root-class-name {
+  top: 24px;
+  left: 1742px;
+  width: 127px;
+  height: 64px;
+  position: absolute;
+  visibility: visible;
 }

@@ -6,7 +6,7 @@ import './hover-account.css'
 
 const HoverAccount = (props) => {
   return (
-    <div id="button1Hover" className={`hover-account-container ${props.rootClassName} `}>
+    <button type="button" id="button1Hover" className={`hover-account-container ${props.rootClassName} `}>
       <div className="hover-account-component4">
         <img
           alt="Rectangle3I274"
@@ -47,7 +47,7 @@ const HoverAccount = (props) => {
           </div>
         </div>
       </div>
-    </div>
+    </button>
   )
 }
 

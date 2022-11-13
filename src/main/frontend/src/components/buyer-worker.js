@@ -42,11 +42,18 @@ const BuyerWorker = (props,) => {
 function Buyerclick(){
   document.getElementById("buyerClickRectangel1").style.backgroundColor = "#2977ff";
   document.getElementById("buyerClicktxt1").style.color = "white";
-  docu
+  document.getElementById("sitterClickRectangel1").style.backgroundColor = "";
+  document.getElementById("sitterClicktxt1").style.color = "black";
+  document.getElementById("select2").style.visibility = "visible";
+  document.getElementById("signinbox1").style.visibility = "hidden";
 }
 function Sitterclick(){
   document.getElementById("sitterClickRectangel1").style.backgroundColor = "#2977ff";
   document.getElementById("sitterClicktxt1").style.color = "white";
+  document.getElementById("buyerClickRectangel1").style.backgroundColor = "";
+  document.getElementById("buyerClicktxt1").style.color = "black";
+  document.getElementById("select2").style.visibility = "visible";
+  document.getElementById("signinbox1").style.visibility = "hidden";
 }
 
 BuyerWorker.defaultProps = {

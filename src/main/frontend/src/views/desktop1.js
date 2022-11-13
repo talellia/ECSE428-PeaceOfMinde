@@ -4,7 +4,8 @@ import { Helmet } from 'react-helmet'
 
 import HoverAccount from '../components/hover-account'
 import BuyerWorker from '../components/buyer-worker'
-import { useDetectClickOutside } from 'react-detect-click-outside';
+import SignInUp from '../components/signInUp'
+import SignIn from '../components/sign-in'
 import './desktop1.css'
 
 const Desktop1 = (props) => {
@@ -65,17 +66,39 @@ const Desktop1 = (props) => {
             </div>
           </div>
         </button>
-        <HoverAccount id="button1Hover" rootClassName="hover-account-root-class-name"></HoverAccount>
+        <div onClick={closemenue}>
+          <HoverAccount  id="button1Hover" rootClassName="hover-account-root-class-name"></HoverAccount>
+        </div>
       </div>
       <BuyerWorker rootClassName="buyer-worker-root-class-name"></BuyerWorker>
+      <SignInUp rootClassName="signIn-signUp-root-class-name"></SignInUp>
+      <SignIn rootClassName="sign-in-root-class-name"></SignIn>
     </div>
   )
 }
 
 function changecssHover(){
-document.getElementById("button1").style.visibility = "hidden";
-document.getElementById("button1Hover").style.visibility = "visible";
-document.getElementById("select1").style.visibility = "visible";
+  document.getElementById("button1").style.visibility = "hidden";
+  document.getElementById("button1Hover").style.visibility = "visible";
+  document.getElementById("select1").style.visibility = "visible";
+}
+
+function closemenue(){
+  document.getElementById("button1").style.visibility = "visible";
+  document.getElementById("button1Hover").style.visibility = "hidden";
+  document.getElementById("select1").style.visibility = "hidden";
+  document.getElementById("select2").style.visibility = "hidden";
+  document.getElementById("buyerClickRectangel1").style.backgroundColor = "";
+  document.getElementById("buyerClicktxt1").style.color = "black";
+  document.getElementById("signUpClickRectangel1").style.backgroundColor = "";
+  document.getElementById("signUpClicktxt1").style.color = "black";
+  document.getElementById("signUpClickRectangel1").style.backgroundColor = "";
+  document.getElementById("signUpClicktxt1").style.color = "black";
+  document.getElementById("signInClickRectangel1").style.backgroundColor = "";
+  document.getElementById("signInClicktxt1").style.color = "black";
+  document.getElementById("signinbox1").style.visibility = "hidden";
+
+
 }
 
 
