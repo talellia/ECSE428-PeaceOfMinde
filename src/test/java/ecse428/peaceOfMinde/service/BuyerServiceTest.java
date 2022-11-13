@@ -2,6 +2,7 @@ package ecse428.peaceOfMinde.service;
 
 import ecse428.peaceOfMinde.dao.BuyerRepository;
 import ecse428.peaceOfMinde.dao.WorkerRepository;
+import ecse428.peaceOfMinde.dao.ServiceOfferingRepository;
 import ecse428.peaceOfMinde.model.Buyer;
 import ecse428.peaceOfMinde.model.Worker;
 import ecse428.peaceOfMinde.utility.PersonException;
@@ -33,10 +34,13 @@ class BuyerServiceTest {
     @Mock
     private BuyerRepository buyerRepository;
 
+    @Mock
+    private ServiceOfferingRepository serviceOffering;
+
     private BuyerService buyerService;
     @BeforeEach
     void setUp() {
-        buyerService = new BuyerService(buyerRepository,workerRepository);
+        buyerService = new BuyerService(buyerRepository, workerRepository, serviceOffering);
     }
 
     @AfterEach

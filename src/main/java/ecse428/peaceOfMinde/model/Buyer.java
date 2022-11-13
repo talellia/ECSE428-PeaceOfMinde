@@ -13,7 +13,8 @@ public class Buyer extends Person {
     private List<String> listComments;
     @Column
     private boolean isRegisteredOnline;
-
+    @Column
+    private boolean serviceOfferingIds;
 
 
     //------------------------
@@ -66,5 +67,9 @@ public class Buyer extends Person {
     public String toString() {
         return super.toString() + "[" +
                 "isRegisteredOnline" + ":" + getIsRegisteredOnline() + "]";
+    }
+
+    public List<Integer> getServiceOfferingIds() {
+        return null;
     }
 }

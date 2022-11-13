@@ -1,11 +1,7 @@
 package ecse428.peaceOfMinde.utility;
 
-import ecse428.peaceOfMinde.dto.AdminDto;
-import ecse428.peaceOfMinde.dto.WorkerDto;
-import ecse428.peaceOfMinde.dto.BuyerDto;
-import ecse428.peaceOfMinde.model.Admin;
-import ecse428.peaceOfMinde.model.Worker;
-import ecse428.peaceOfMinde.model.Buyer;
+import ecse428.peaceOfMinde.dto.*;
+import ecse428.peaceOfMinde.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,6 +78,27 @@ public class LibraryUtil {
                 admin.getResidentialAddress(), admin.getAboutme());
         adminDto.setId(admin.getId());
         return adminDto;
+
+    }
+
+        /**
+     * This method converts the admin into a data transfer object
+     *
+     * @param admin Admin
+     * @return AdminDto Worker Data Transfer Object
+     */
+    public static ServiceOfferingDto convertToDto(ServiceOffering serviceOffering) {
+        if (serviceOffering == null) {
+            throw new IllegalArgumentException("There is no such serviceOffering!");
+        }
+
+        ServiceOfferingDto serviceOfferingDto = new ServiceOfferingDto(serviceOffering.getWorkerId(), 
+                                                    serviceOffering.getId(), serviceOffering.getTitle(), 
+                                                    serviceOffering.getDescription(), serviceOffering.getHourlySalary(), 
+                                                    serviceOffering.getDateCreated()); 
+        serviceOfferingDto.setId(serviceOffering.getId());
+        
+        return serviceOfferingDto;
 
     }
 }
