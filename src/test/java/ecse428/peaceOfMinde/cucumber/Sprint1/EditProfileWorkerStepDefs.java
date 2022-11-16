@@ -1,6 +1,7 @@
-package ecse428.peaceOfMinde.cucumber;
+package ecse428.peaceOfMinde.cucumber.Sprint1;
 
 import ecse428.peaceOfMinde.controller.PersonController;
+import ecse428.peaceOfMinde.cucumber.SpringIntegrationTest;
 import ecse428.peaceOfMinde.dto.WorkerDto;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;

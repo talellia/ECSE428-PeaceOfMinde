@@ -1,6 +1,7 @@
-package ecse428.peaceOfMinde.cucumber;
+package ecse428.peaceOfMinde.cucumber.Sprint1;
 
 import ecse428.peaceOfMinde.controller.PersonController;
+import ecse428.peaceOfMinde.cucumber.SpringIntegrationTest;
 import ecse428.peaceOfMinde.dao.BuyerRepository;
 import ecse428.peaceOfMinde.dto.BuyerDto;
 import ecse428.peaceOfMinde.dto.WorkerDto;
@@ -16,7 +17,7 @@ import java.util.stream.StreamSupport;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class SignUpBuyerStepDefs extends SpringIntegrationTest{
+public class SignUpBuyerStepDefs extends SpringIntegrationTest {
     @Autowired
     private PersonController personController;
     @Autowired

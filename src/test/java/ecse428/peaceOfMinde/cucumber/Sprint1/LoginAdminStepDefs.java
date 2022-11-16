@@ -1,6 +1,7 @@
-package ecse428.peaceOfMinde.cucumber;
+package ecse428.peaceOfMinde.cucumber.Sprint1;
 
 import ecse428.peaceOfMinde.controller.PersonController;
+import ecse428.peaceOfMinde.cucumber.SpringIntegrationTest;
 import ecse428.peaceOfMinde.dao.AdminRepository;
 import ecse428.peaceOfMinde.dto.AdminDto;
 import ecse428.peaceOfMinde.model.Admin;
@@ -16,7 +17,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LoginAdminStepDefs extends SpringIntegrationTest{
+public class LoginAdminStepDefs extends SpringIntegrationTest {
 
     @Autowired
     private PersonController personController;
