@@ -63,4 +63,29 @@ public class WorkerController {
             return new ResponseEntity<>(serviceOfferingException.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
+
+    /**
+     * TODO: Implement
+     * Apply to a service offering
+     * from Worker to Buyer
+     * @param serviceOffering
+     * @throws
+     */
+
+    /**
+    PutMapping(value = { "/person/worker/apply", "/person/worker/apply" })
+    public ResponseEntity<?> applyToServiceOffering(@RequestBody ServiceOffering serviceOffering) throws PersonException {
+        try {
+            // Send message to Buyer
+            // Apply to the serviceOffering
+
+     
+            return new ResponseEntity<>(applicationStatus, HttpStatus.OK);
+        } catch (ServiceOfferingException serviceOfferingException) {
+            return new ResponseEntity<>(serviceOfferingException.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+     **/
+
 }
