@@ -1,4 +1,4 @@
-package ecse428.peaceOfMinde.cucumber;
+package ecse428.peaceOfMinde.cucumber.Sprint1;
 
 import ecse428.peaceOfMinde.controller.PersonController;
 import ecse428.peaceOfMinde.dao.WorkerRepository;
@@ -80,4 +80,5 @@ public class ChangePasswordWorkerStepDefs {
     String exception = (String) response.getBody();
     assertThat(exception).isEqualTo(message);
   }
+
 }

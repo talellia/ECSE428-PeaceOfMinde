@@ -1,4 +1,4 @@
-package ecse428.peaceOfMinde.cucumber;
+package ecse428.peaceOfMinde.cucumber.Sprint1;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import java.util.List;
