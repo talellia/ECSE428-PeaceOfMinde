@@ -6,6 +6,7 @@ import ecse428.peaceOfMinde.utility.*;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -74,6 +75,35 @@ public class BuyerService {
 		buyerRepository.save(buyer);
 		serviceOfferingRepository.save(serviceOffering);
 		return serviceOffering;
+	}
+
+	@Transactional
+	public List<ServiceOffering> getAllServiceOfferings(Integer buyerId) throws ServiceOfferingException{
+		Optional<Buyer> optionalBuyer = buyerRepository.findById(buyerId);
+
+		if (!optionalBuyer.isPresent()){
+			throw new ServiceOfferingException("The Buyer does not exist.");
+		}
+
+		Buyer buyer = optionalBuyer.get();
+
+		List<Integer> serviceOfferingIds = buyer.getServiceOfferingIds();
+
+		List<ServiceOffering> serviceOfferings = new ArrayList<>();
+
+		for (int i =0; i < serviceOfferings.size(); i++) {
+			Integer currId = serviceOfferingIds.get(i);
+			Optional<ServiceOffering> optionalServiceOffering = serviceOfferingRepository.findById(currId);
+
+			if (!optionalServiceOffering.isPresent()){
+				continue;
+			}
+
+			ServiceOffering serviceOffering = optionalServiceOffering.get();
+			serviceOfferings.add(serviceOffering);
+		}
+
+		return serviceOfferings;
 	}
 
 }

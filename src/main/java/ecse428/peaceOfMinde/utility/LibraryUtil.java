@@ -84,7 +84,7 @@ public class LibraryUtil {
         /**
      * This method converts the admin into a data transfer object
      *
-     * @param admin Admin
+     * @param serviceOffering
      * @return AdminDto Worker Data Transfer Object
      */
     public static ServiceOfferingDto convertToDto(ServiceOffering serviceOffering) {
@@ -92,13 +92,13 @@ public class LibraryUtil {
             throw new IllegalArgumentException("There is no such serviceOffering!");
         }
 
-        ServiceOfferingDto serviceOfferingDto = new ServiceOfferingDto(serviceOffering.getWorkerId(), 
+        ServiceOfferingDto serviceOfferingDto = new ServiceOfferingDto(serviceOffering.getBuyerId(),
                                                     serviceOffering.getId(), serviceOffering.getTitle(), 
                                                     serviceOffering.getDescription(), serviceOffering.getHourlySalary(), 
                                                     serviceOffering.getDateCreated()); 
         serviceOfferingDto.setId(serviceOffering.getId());
         
         return serviceOfferingDto;
-
     }
+
 }

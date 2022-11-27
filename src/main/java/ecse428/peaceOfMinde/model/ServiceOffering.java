@@ -12,7 +12,7 @@ public class ServiceOffering {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column
-    private Integer workerId;
+    private Integer buyerId;
     @Column
     private String title;
     @Column
@@ -22,16 +22,16 @@ public class ServiceOffering {
     @Column
     private LocalDateTime dateCreated;
     /**
-     * @param workerId
+     * @param buyerId
      * @param id    
      * @param title
      * @param description
      * @param hourlySalary
      * @param dateCreated
      */
-    public ServiceOffering(int workerId, int id, String title, String description, 
+    public ServiceOffering(int buyerId, int id, String title, String description,
                                 double hourlySalary, LocalDateTime dateCreated) {
-        this.workerId = workerId;
+        this.buyerId = buyerId;
         this.id = id;
         this.title = title;
         this.description = description;
@@ -39,12 +39,12 @@ public class ServiceOffering {
         this.dateCreated = dateCreated;
     }
 
-    public int getWorkerId() {
-        return this.workerId;
+    public int getBuyerId() {
+        return this.buyerId;
     }
 
-    public void setWorkerId(int workerId) {
-        this.workerId = workerId;
+    public void setBuyerId(int buyerId) {
+        this.buyerId = buyerId;
     }
 
     public int getId() {
