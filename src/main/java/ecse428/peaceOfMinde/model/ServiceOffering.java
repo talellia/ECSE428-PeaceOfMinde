@@ -38,6 +38,13 @@ public class ServiceOffering {
         this.hourlySalary = hourlySalary;
         this.dateCreated = dateCreated;
     }
+    
+    public ServiceOffering() {
+      
+    }
+    //------------------------
+    // INTERFACE
+    //------------------------
 
     public int getWorkerId() {
         return this.workerId;

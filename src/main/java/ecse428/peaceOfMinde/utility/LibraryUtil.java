@@ -82,10 +82,10 @@ public class LibraryUtil {
     }
 
         /**
-     * This method converts the admin into a data transfer object
+     * This method converts the serviceOffering into a data transfer object
      *
-     * @param admin Admin
-     * @return AdminDto Worker Data Transfer Object
+     * @param ServiceOffering serviceOffering
+     * @return serviceOfferingDto Data Transfer Object
      */
     public static ServiceOfferingDto convertToDto(ServiceOffering serviceOffering) {
         if (serviceOffering == null) {
