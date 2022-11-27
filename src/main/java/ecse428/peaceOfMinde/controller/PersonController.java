@@ -4,14 +4,20 @@ import ecse428.peaceOfMinde.dao.BuyerRepository;
 import ecse428.peaceOfMinde.dao.WorkerRepository;
 import ecse428.peaceOfMinde.dto.AdminDto;
 import ecse428.peaceOfMinde.dto.BuyerDto;
+import ecse428.peaceOfMinde.dto.ServiceOfferingDto;
 import ecse428.peaceOfMinde.dto.WorkerDto;
 import ecse428.peaceOfMinde.model.Admin;
 import ecse428.peaceOfMinde.model.Worker;
 import ecse428.peaceOfMinde.model.Buyer;
+import ecse428.peaceOfMinde.model.ServiceOffering;
 import ecse428.peaceOfMinde.service.PersonService;
 import ecse428.peaceOfMinde.utility.LibraryUtil;
 import ecse428.peaceOfMinde.utility.PersonException;
 import lombok.RequiredArgsConstructor;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -350,7 +356,78 @@ public class PersonController {
 		return worker;
 	}
 
+	  /**
+	 * This method finds all the service requests available for any worker
+	 * 
+	 * @param id
+	 * @return ResponseEntity<?>
+	 * @throws PersonException
+	 */
+	@GetMapping(value = { "/person/worker/viewServiceOfferings", "/person/worker/viewServiceOfferings/" })
+    public ResponseEntity<?> viewServiceOfferingsWorker(@RequestBody ServiceOfferingDto serviceDto){
+        
+	  try {
+	    Iterable<ServiceOffering> tempList = personService.getServiceOfferings();
+	    List<ServiceOffering> result = new ArrayList<ServiceOffering>();
+	    tempList.forEach(result::add);
+	    return new ResponseEntity<>(result.stream().map(this::convertToDto).collect(Collectors.toList()), HttpStatus.OK);
+	       
+	  }catch(PersonException e){
+	    return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+	  }
+    }
+	
+	/**
+     * This method finds all the service requests available by hourly rate for any worker
+     * 
+     * @param hourly_rate
+     * @return ResponseEntity<?>
+     * @throws PersonException
+     */
+    @GetMapping(value = { "/person/worker/viewServiceOfferings/{hourlyRate}", "/person/worker/viewServiceOfferings/{hourlyRate}/" })
+    public ResponseEntity<?> viewServiceOfferingsByHourlyRate(@RequestBody ServiceOfferingDto serviceDto, @PathVariable int hourlyRate){
+        
+      try {
+        Iterable<ServiceOffering> tempList = personService.getServiceOfferingsByHourlyRate(hourlyRate);
+        List<ServiceOffering> result = new ArrayList();
+        tempList.forEach(result::add);
+        return new ResponseEntity<>(result.stream().map(this::convertToDto).collect(Collectors.toList()), HttpStatus.OK);
+           
+      }catch(PersonException e){
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+      }
+    }
+    
+    @GetMapping(value = { "/worker/getServiceOffering/{id}", "/worker/getServiceOffering/{id}/" })
+    public ResponseEntity<?> getWorkerServiceOffering(@PathVariable Integer id) {
+        try {
+            ServiceOffering serviceOffering = personService.getServiceOfferingByID(id);
+            return new ResponseEntity<>(LibraryUtil.convertToDto(serviceOffering), HttpStatus.OK);
+        } catch (PersonException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+	
+	   /**
+     * This method converts the serviceOffering into a data transfer object
+     *
+     * @param ServiceOffering serviceOffering
+     * @return serviceOfferingDto Data Transfer Object
+     */
+    private ServiceOfferingDto convertToDto(ServiceOffering serviceOffering) {
+        if (serviceOffering == null) {
+            throw new IllegalArgumentException("There is no such serviceOffering!");
+        }
 
+        ServiceOfferingDto serviceOfferingDto = new ServiceOfferingDto(serviceOffering.getWorkerId(), 
+                                                    serviceOffering.getId(), serviceOffering.getTitle(), 
+                                                    serviceOffering.getDescription(), serviceOffering.getHourlySalary(), 
+                                                    serviceOffering.getDateCreated()); 
+        serviceOfferingDto.setId(serviceOffering.getId());
+        
+        return serviceOfferingDto;
+
+    }
 
 	// ADMIN
 

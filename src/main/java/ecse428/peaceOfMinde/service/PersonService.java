@@ -3,18 +3,20 @@ package ecse428.peaceOfMinde.service;
 import ecse428.peaceOfMinde.dao.AdminRepository;
 import ecse428.peaceOfMinde.dao.WorkerRepository;
 import ecse428.peaceOfMinde.dao.BuyerRepository;
+import ecse428.peaceOfMinde.dao.ServiceOfferingRepository;
 import ecse428.peaceOfMinde.dto.AdminDto;
 import ecse428.peaceOfMinde.dto.BuyerDto;
 import ecse428.peaceOfMinde.dto.WorkerDto;
 import ecse428.peaceOfMinde.model.Admin;
 import ecse428.peaceOfMinde.model.Worker;
 import ecse428.peaceOfMinde.model.Buyer;
+import ecse428.peaceOfMinde.model.ServiceOffering;
 import ecse428.peaceOfMinde.utility.LibraryUtil;
 import ecse428.peaceOfMinde.utility.PersonException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;
@@ -32,6 +34,7 @@ public class PersonService {
     private final WorkerRepository workerRepository;
     private final BuyerRepository buyerRepository;
     private final AdminRepository adminRepository;
+    private final ServiceOfferingRepository serviceOfferingRepository;
 
     /*******************************************
      *
@@ -464,6 +467,45 @@ public class PersonService {
             throw new PersonException("Worker with this id does not exist");
         }
         return workerOptional.get();
+    }
+    
+    /**
+     * 
+     * @param 
+     * @return Iterable list of service offerings
+     * @throws PersonException
+     */
+    @Transactional 
+    public Iterable<ServiceOffering> getServiceOfferings() throws PersonException {
+        Iterable<ServiceOffering> serviceOffering = serviceOfferingRepository.findAll();
+        if (serviceOffering == null) throw new PersonException("Orders not found");
+        return serviceOffering;
+    }
+
+    /**
+     * 
+     * @param 
+     * @return Iterable list of service offerings based on hourly rate input
+     * @throws PersonException
+     */
+    @Transactional 
+    public Iterable<ServiceOffering> getServiceOfferingsByHourlyRate(int hourlyRate) throws PersonException {
+        Iterable<ServiceOffering> serviceOffering = serviceOfferingRepository.findAll();
+        ArrayList<ServiceOffering> serviceOffersFiltered = new ArrayList<ServiceOffering>();
+        for(ServiceOffering x : serviceOffering) {
+          if(x.getHourlySalary() == hourlyRate) {
+            serviceOffersFiltered.add(x);
+          }
+        }
+        if (serviceOffersFiltered.isEmpty()) throw new PersonException("Orders not found");
+        return serviceOffersFiltered;
+    }
+    
+    @Transactional 
+    public ServiceOffering getServiceOfferingByID(int id) throws PersonException {
+        ServiceOffering serviceOffering = serviceOfferingRepository.findServiceOfferingByID(id);
+        if (serviceOffering == null) throw new PersonException("Service Request doesn't exist!");
+        return serviceOffering;
     }
 
     /*******************************************

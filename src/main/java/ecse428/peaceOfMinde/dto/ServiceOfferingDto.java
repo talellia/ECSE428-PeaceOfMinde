@@ -29,6 +29,10 @@ public class ServiceOfferingDto {
         this.dateCreated = dateCreated;
     }
 
+    public ServiceOfferingDto() {
+      
+    }
+
     public int getWorkerId() {
         return this.workerId;
     }
