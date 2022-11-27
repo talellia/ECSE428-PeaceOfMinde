@@ -26,8 +26,9 @@ const SignUp = (props) => {
   const [rePassword,setrePassword] = useState("");
   const [lastName, setlastName] = useState("");
 
+  // for buyer
  async function fetchQuotes(){
-    var x = (`/person/buyer/register/` + $.param({firstName:"firstName", lastName:"lastName",userName:"userName", password: "password", email: "email", residentialAddress:"residentialAddress", about:"about"}));
+    var x = (`/person/buyer/register/` + $.param({firstName:'firstName', lastName:'lastName',userName:'userName', password: 'password', email: 'email', residentialAddress:'address', about:'aboutMe'}));
     var y = `http://localhost:8080` +  x;
     const res = await axios.post(y)
     .catch(e => {
@@ -38,7 +39,7 @@ const SignUp = (props) => {
     return res.data;
   };
 
-  //ToDo: Example of input handeling
+  //ToDo: is statement checking if it's buyer or sitter
   const handleSubmit = (event) => {
     event.preventDefault();
     alert(`Values are: \n 
