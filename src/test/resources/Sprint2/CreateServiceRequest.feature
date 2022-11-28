@@ -3,20 +3,19 @@ Feature: Create Service Request
   to create a new service request.
 
   Scenario Outline: Valid service request creation
-    Given An existing buyer inputs a service request with "<title>", "<description>", <hourlySalary>.
+    Given An existing buyer inputs a valid service request with "<title>", "<description>", <hourlySalary>.
     When A service request creation is generated
     Then The service request should be added to the database
 
     Examples:
       | title                                 | description                                                          | hourlySalary  |
-      | Looking for nanny for a 3yr. old :) | I'm looking for a nanny on some weeknights so I can have some time off | 20            |
-      | Take care of my plants              | Going away for two weeks and I need someone to water my plants.        | 0              |
+      | Looking for nanny for a 3yr. old :)   | I'm looking for a nanny on some weeknights so I can have some time off | 20            |
+      | Take care of my plants                | Going away for two weeks and I need someone to water my plants.        | 0              |
 
   Scenario Outline: Invalid service request creation
-    Given An existing buyer inputs a service request with "<title>", "<description>", <hourlySalary>.
+    Given An existing buyer inputs an invalid service request with "<title>", "<description>", <hourlySalary>.
     When A service request creation is generated
     Then The service request should not be added to the database
-    And An error message is displayed with each invalid field
 
     Examples:
       | title                         | description                         | hourlySalary  |

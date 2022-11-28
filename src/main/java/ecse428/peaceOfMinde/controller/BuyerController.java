@@ -18,7 +18,7 @@ public class BuyerController {
 
     private final BuyerService buyerService;
     
-    @PutMapping(value = { "/person/worker/createServiceOffering", "/person/worker/createServiceOffering" })
+    @PutMapping(value = { "/person/worker/createServiceOffering/", "/person/worker/createServiceOffering" })
 	public ResponseEntity<?> createServiceOffering(@RequestBody BuyerDto buyerDto, @RequestBody ServiceOfferingDto serviceOfferingDto) throws PersonException {
 		try {
 			ServiceOffering serviceOffering = buyerService.createServiceOffering(buyerDto.getId(), serviceOfferingDto.getId(), 

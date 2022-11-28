@@ -29,7 +29,7 @@ public class WorkerController {
      * @return
      * @throws PersonException
      */
-    @GetMapping(value = { "/person/worker/getServiceOffering", "/person/worker/getServiceOffering" })
+    @GetMapping(value = { "/person/worker/getServiceOffering/", "/person/worker/getServiceOffering" })
     public ResponseEntity<?> getServiceOffering(@RequestBody Integer serviceOfferingId) throws PersonException {
         try {
             ServiceOffering serviceOffering = workerService.getServiceOffering(serviceOfferingId);
@@ -45,7 +45,7 @@ public class WorkerController {
      * @return
      * @throws PersonException
      */
-    @GetMapping(value = { "/person/worker/getServiceOffering", "/person/worker/getServiceOffering" })
+    @GetMapping(value = { "/person/worker/getAllServiceOfferings/", "/person/worker/getAllServiceOfferings" })
     public ResponseEntity<?> getAllServiceOfferings(@RequestBody Integer buyerId) throws PersonException {
         try {
             List<ServiceOffering> serviceOfferings = buyerService.getAllServiceOfferings(buyerId);
