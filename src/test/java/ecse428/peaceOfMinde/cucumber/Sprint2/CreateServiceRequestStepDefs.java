@@ -2,22 +2,18 @@ package ecse428.peaceOfMinde.cucumber.Sprint2;
 
 import ecse428.peaceOfMinde.controller.BuyerController;
 import ecse428.peaceOfMinde.cucumber.SpringIntegrationTest;
-import ecse428.peaceOfMinde.dao.BuyerRepository;
 import ecse428.peaceOfMinde.dao.ServiceOfferingRepository;
 import ecse428.peaceOfMinde.dto.*;
 import ecse428.peaceOfMinde.model.*;
 import ecse428.peaceOfMinde.utility.PersonException;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 
-import java.util.List;
 import java.util.Optional;
 
-import javax.security.auth.PrivateCredentialPermission;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -25,8 +21,6 @@ public class CreateServiceRequestStepDefs extends SpringIntegrationTest {
 
     @Autowired
     private BuyerController buyerController;
-    @Autowired
-    private BuyerRepository buyerRepository;
     @Autowired
     private ServiceOfferingRepository serviceRepository;
 
