@@ -16,6 +16,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 /**
  * This is the person controller class. It handles the creation, login and
  * validation of the buyer and worker
@@ -29,8 +31,10 @@ import org.springframework.web.bind.annotation.*;
 public class PersonController {
 
 	@GetMapping("/hello")
-    public String root(){
-        return "HelloWorld";
+    public ResponseEntity<BuyerDto> root(){
+		BuyerDto buyerDto = new BuyerDto();
+		buyerDto.setEmail("email");
+        return  new ResponseEntity<BuyerDto>(buyerDto, HttpStatus.OK);
     }
 
 	private final PersonService personService;
@@ -54,7 +58,7 @@ public class PersonController {
 					buyerDto.getPassword(), buyerDto.getEmail(), buyerDto.getResidentialAddress(), buyerDto.getAbout() );
 			return new ResponseEntity<>(LibraryUtil.convertToDto(buyer), HttpStatus.OK);
 		} catch (PersonException e) {
-			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
 		}
 	}
 

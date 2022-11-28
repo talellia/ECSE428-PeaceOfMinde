@@ -1,39 +1,44 @@
 import React, {useState} from 'react'
 import PropTypes from 'prop-types'
 import SignUpService from "../services/SignUpService";
-import BuyerDto from "../services/SignUpService";
+import {BuyerDto} from "../services/SignUpService";
 import './sign-up.css'
+import {AjaxResponse} from "rxjs/ajax";
 
 const SignUp = (props) => {
     const [firstName, setfirstName] = useState("");
     const [userName, setuserName] = useState("");
     const [aboutMe, setaboutMe] = useState("");
+    const [email, setemail] = useState("");
     const [password, setpassword] = useState("");
     const [address, setaddress] = useState("");
     const [rePassword, setrePassword] = useState("");
     const [lastName, setlastName] = useState("");
 
 
-    //ToDo: Example of input handeling
+    //TODO add email field
     const handleSubmit = (event) => {
+        event.preventDefault();
         console.log("Buyer Signup Requested")
         event.preventDefault();
-        const buyerDto = {
-            firstName: props.firstName,
-            lastName: props.lastName,
-            userName: props.userName,
-            password: props.password,
-            email: props.email,
-            residentialAddress: props.residentialAddress,
-            about_description: props.about_description,
-            isRegisteredOnline: props.isRegisteredOnline,
+        const buyerDto: BuyerDto = {
+            firstName: firstName,
+            lastName: lastName,
+            userName: userName,
+            password: password,
+            email: "email@email2.com",
+            residentialAddress: address,
+            about_description: aboutMe,
+            isRegisteredOnline: true,
         }
         SignUpService.signUpBuyer(buyerDto).subscribe({
-            next: (response) => {
-                alert(`Buyer Created: ${buyerDto}`);
+            next: (success:AjaxResponse<BuyerDto>) => {
+                console.log(success.response);
+                alert(`Buyer Created: ${success.response}`);
             },
             error: (err) => {
-                alert(`Failed to create Buyer: ${err}`)
+                console.log(err.response.message);
+                alert(`Failed to create Buyer: ${err.response.message}`)
             }
         });
     }
@@ -155,7 +160,7 @@ const SignUp = (props) => {
             <span>Last Name</span>
           </span>
                 </div>
-                <button onClick={handleSubmit} onMouseDown={signUpclick} className="sign-up-button button">
+                <button onClick={handleSubmit} className="sign-up-button button">
                     <img
                         id="submitsignrectange2"
                         alt="Rectangle9I106"
@@ -171,10 +176,6 @@ const SignUp = (props) => {
     )
 }
 
-function signUpclick() {
-    document.getElementById("submitsignrectange2").style.backgroundColor = "#2977ff";
-    document.getElementById("submitsignText2").style.color = "white";
-}
 
 function closeall() {
     document.getElementById("button1").style.visibility = "visible";
