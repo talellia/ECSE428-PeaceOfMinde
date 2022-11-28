@@ -39,6 +39,10 @@ public class ServiceOffering {
         this.dateCreated = dateCreated;
     }
 
+    public ServiceOffering(){
+        
+    }
+
     public int getBuyerId() {
         return this.buyerId;
     }
