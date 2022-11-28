@@ -30,12 +30,12 @@ const SignUp = (props) => {
  async function fetchQuotes(){
     var x = (`/person/buyer/register/` + $.param({firstName:'firstName', lastName:'lastName',userName:'userName', password: 'password', email: 'email', residentialAddress:'address', about:'aboutMe'}));
     var y = `http://localhost:8080` +  x;
-    const res = await axios.post(y)
+    const res = await axios.post(`http://localhost:8080/person/buyer/register/`,null)
     .catch(e => {
       var errorMsg = e.message
-      console.log(errorMsg)
+      console.log(e)
     });
-    console.log(y)
+    console.log(res)
     return res.data;
   };
 
