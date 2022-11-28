@@ -17,6 +17,8 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 import java.util.Optional;
 
+import javax.security.auth.PrivateCredentialPermission;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CreateServiceRequestStepDefs extends SpringIntegrationTest {
@@ -32,6 +34,7 @@ public class CreateServiceRequestStepDefs extends SpringIntegrationTest {
 
     private BuyerDto buyerDto;
     private ServiceOfferingDto serviceOfferDto;
+    private int id; 
 
     @Given("An existing buyer inputs a valid service request with {string}, {string}, {int}.")
     public void anExistingBuyerInputsAValidServiceRequestWithHourlySalary(String title, String description, int hourlysalary) {
@@ -39,9 +42,10 @@ public class CreateServiceRequestStepDefs extends SpringIntegrationTest {
         serviceOffering.setTitle("title");
         serviceOffering.setDescription("description");
         serviceOffering.setHourlySalary(hourlysalary);
+        serviceOffering.setId(1);
         serviceRepository.save(serviceOffering);
 
-        //int id = serviceOffering.getId();
+        id = serviceOffering.getId();
        
         serviceOfferDto = new ServiceOfferingDto();
         serviceOfferDto.setTitle("title");
@@ -51,33 +55,36 @@ public class CreateServiceRequestStepDefs extends SpringIntegrationTest {
 
     @Given("An existing buyer inputs an invalid service request with {string}, {string}, {int}.")
     public void anExistingBuyerInputsAnInvalidServiceRequestWithHourlySalary(String title, String description, int hourlysalary) {
-        /*ServiceOffering serviceOffering = new ServiceOffering(); 
+        ServiceOffering serviceOffering = new ServiceOffering(); 
         serviceOffering.setTitle("title");
         serviceOffering.setDescription("description");
         serviceOffering.setHourlySalary(hourlysalary);
+        serviceOffering.setId(2);
         serviceRepository.save(serviceOffering);
+
+        id = serviceOffering.getId();
        
         serviceOfferDto = new ServiceOfferingDto();
         serviceOfferDto.setTitle("title");
         serviceOfferDto.setDescription("description");
-        serviceOfferDto.setHourlySalary(hourlysalary);*/
+        serviceOfferDto.setHourlySalary(hourlysalary);
     }
 
     @When("A service request creation is generated")
     public void aServiceRequestCreationIsGenerated() throws PersonException {
-        /*buyerDto = new BuyerDto();
-        response = buyerController.createServiceOffering(buyerDto, serviceOfferDto);*/
+        buyerDto = new BuyerDto();
+        response = buyerController.createServiceOffering(buyerDto, serviceOfferDto);
     }
 
     @Then("The service request should be added to the database")
     public void theServiceRequestShouldBeAddedToTheDatabase() {
-        /*long serviceOfferings = serviceRepository.count(); 
-        assertThat(serviceOfferings == 0).isFalse();*/
+        Optional<ServiceOffering> serviceOffering = serviceRepository.findById(id);
+        assertThat(serviceOffering.isPresent()).isTrue();
     }
 
     @Then("The service request should not be added to the database")
     public void theServiceRequestShouldNotBeAddedToTheDatabase() {
-        /*Optional<ServiceOffering> service = serviceRepository.findServiceOfferingById(id);
-        assertThat(service.isPresent()).isFalse();*/
+        Optional<ServiceOffering> serviceOffering = serviceRepository.findById(id);
+        assertThat(serviceOffering.isPresent()).isFalse();
     }
 }
