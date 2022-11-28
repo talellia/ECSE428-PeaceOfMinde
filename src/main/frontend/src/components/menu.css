@@ -1,0 +1,233 @@
+.menu-container {
+  width: 426px;
+  height: 400px;
+  display: flex;
+  position: relative;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+.component-component37 {
+  width: 395px;
+  height: 387px;
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.component-rectangle10 {
+  top: 0px;
+  left: 0px;
+  width: 406px;
+  height: 387px;
+  position: absolute;
+}
+.component-component27 {
+  top: 232px;
+  left: 15px;
+  width: 376px;
+  height: 72px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.component-rectangle11 {
+  top: -4px;
+  left: -2px;
+  width: 376px;
+  height: 72px;
+  position: absolute;
+  border-color: rgba(41, 121, 255, 1);
+  border-style: solid;
+  border-width: 1px;
+}
+.component-text {
+  color: rgba(0, 0, 0, 1);
+  width: 376px;
+  height: auto;
+  z-index: 100;
+  font-size: 25px;
+  align-self: center;
+  font-style: Regular;
+  text-align: center;
+  font-family: Inter;
+  font-weight: 400;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.component-component26 {
+  top: 160px;
+  left: 15px;
+  width: 376px;
+  height: 72px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.component-rectangle111 {
+  top: -3px;
+  left: -2px;
+  width: 376px;
+  height: 72px;
+  position: absolute;
+  align-self: center;
+  border-color: rgba(41, 121, 255, 1);
+  border-style: solid;
+  border-width: 1px;
+}
+.component-text02 {
+  color: rgba(0, 0, 0, 1);
+  width: 376px;
+  height: auto;
+  z-index: 100;
+  font-size: 25px;
+  align-self: center;
+  font-style: Regular;
+  text-align: center;
+  font-family: Inter;
+  font-weight: 400;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.component-text04 {
+  top: 24px;
+  left: 0px;
+  color: rgba(0, 0, 0, 1);
+  right: 0px;
+  width: 376px;
+  height: auto;
+  margin: auto;
+  z-index: 100;
+  position: absolute;
+  font-size: 25px;
+  align-self: center;
+  font-style: Regular;
+  text-align: center;
+  font-family: Inter;
+  font-weight: 400;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.component-component17 {
+  top: 88px;
+  left: 15px;
+  width: 376px;
+  height: 72px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.component-rectangle101 {
+  top: -2px;
+  left: -2px;
+  width: 376px;
+  height: 72px;
+  position: absolute;
+  border-color: rgba(41, 121, 255, 1);
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 20px 20px 0 0;
+  background-color:transparent;
+}
+.component-text06 {
+  color: rgba(0, 0, 0, 1);
+  width: 376px;
+  height: auto;
+  z-index: 100;
+  font-size: 25px;
+  align-self: center;
+  font-style: Regular;
+  text-align: center;
+  font-family: Inter;
+  font-weight: 400;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.component-component16 {
+  top: 304px;
+  left: 15px;
+  width: 376px;
+  height: 72px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.component-rectangle112 {
+  top: -5px;
+  left: -2px;
+  width: 376px;
+  height: 72px;
+  position: absolute;
+  border-color: rgba(41, 121, 255, 1);
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 0 0 20px 20px;
+}
+.component-text08 {
+  color: rgba(0, 0, 0, 1);
+  width: 376px;
+  height: auto;
+  z-index: 100;
+  font-size: 25px;
+  align-self: center;
+  font-style: Regular;
+  text-align: center;
+  font-family: Inter;
+  font-weight: 400;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.component-rectangle12 {
+  top: 75px;
+  left: 8px;
+  right: 0px;
+  width: calc(100% - 7px);
+  height: 1px;
+  margin: auto;
+  position: absolute;
+  border-color: transparent;
+}
+.menu-root-class-name{
+  position: absolute;
+  top: 120px;
+  left:calc(90% - 453px);
+  visibility: visible;
+}
+.component-component17:hover .component-rectangle101{
+  background-color:rgba(41, 121, 255, 1);
+}
+.component-component17:hover .component-text06{
+  color:white;
+}
+.component-component26:hover .component-rectangle111{
+  background-color:rgba(41, 121, 255, 1);
+}
+.component-component26:hover .component-text02{
+  color:white;
+}
+.component-component27:hover .component-rectangle11{
+  background-color:rgba(41, 121, 255, 1);
+}
+.component-component27:hover .component-text{
+  color:white;
+}
+.component-component16:hover .component-rectangle112{
+  background-color:rgba(41, 121, 255, 1);
+}
+.component-component16:hover .component-text08{
+  color:white;
+}

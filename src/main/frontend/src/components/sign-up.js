@@ -1,10 +1,23 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { useState } from 'react';
+import axios from 'axios'
+import JQuery from 'jquery'
+
+let $ = JQuery
+
+var frontendUrl = 'http://' + '127.0.0.1' + ':' + ':8087'
+var backendUrl = 'http://' + '127.0.0.1' + ':' + ':8080'
+
+var AXIOS = axios.create({
+  baseURL: backendUrl,
+  headers: { 'Access-Control-Allow-Origin': frontendUrl }
+})
 
 import './sign-up.css'
 
 const SignUp = (props) => {
+  
   const [firstName, setfirstName] = useState("");
   const [userName, setuserName] = useState("");
   const [aboutMe, setaboutMe] = useState("");
@@ -13,8 +26,20 @@ const SignUp = (props) => {
   const [rePassword,setrePassword] = useState("");
   const [lastName, setlastName] = useState("");
 
+  // for buyer
+ async function fetchQuotes(){
+    var x = (`/person/buyer/register/` + $.param({firstName:'firstName', lastName:'lastName',userName:'userName', password: 'password', email: 'email', residentialAddress:'address', about:'aboutMe'}));
+    var y = `http://localhost:8080` +  x;
+    const res = await axios.post(y)
+    .catch(e => {
+      var errorMsg = e.message
+      console.log(errorMsg)
+    });
+    console.log(y)
+    return res.data;
+  };
 
-  //ToDo: Example of input handeling
+  //ToDo: is statement checking if it's buyer or sitter
   const handleSubmit = (event) => {
     event.preventDefault();
     alert(`Values are: \n 
@@ -25,6 +50,8 @@ const SignUp = (props) => {
     re-Password: ${rePassword}\n
     Address: ${address}\n
     About Me: ${aboutMe}`);
+    //createBuyer();
+    fetchQuotes();
   }
   return (
     <div id="signupbox1" className={`sign-up-container ${props.rootClassName} `}>
@@ -182,6 +209,24 @@ function closeall(){
   document.getElementById("signInClicktxt1").style.color = "black";
   document.getElementById("signupbox1").style.visibility = "hidden";
 }
+
+function createBuyer(){
+  var x = (`/person/buyer/register` + $.param({email: "email", password: "password"}));
+  AXIOS.post(`/person/buyer/register`,$.param({email: "email", password: "password"}))
+  .then(response => {
+    // JSON responses are automatically parsed.
+    this.response = response.data
+    this.errorLogin =''
+  })
+  .catch(e => {
+    var errorMsg = e.message
+    console.log(errorMsg)
+  });
+  console.log(AXIOS.headers);
+}
+
+
+
 
 SignUp.defaultProps = {
   rootClassName: '',

@@ -11,8 +11,8 @@ module.exports = {
     env: require('./dev.env'),
     host: '127.0.0.1',
     port: 8087,
-    backendHost: '127.0.0.1',
-    backendPort: 8080,
+    backendHost: 'eventregistration-backend-123.herokuapp.com',
+    backendPort: 443,
     //...
   }
 }

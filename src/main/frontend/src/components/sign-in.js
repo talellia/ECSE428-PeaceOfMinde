@@ -1,19 +1,38 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { useState } from 'react';
+import axios from 'axios'
+import JQuery from 'jquery'
 
 import './sign-in.css'
+
+let $ = JQuery
 
 const SignIn = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  //ToDo: Example of input handeling
+  // for buyer
+  async function fetchQuotes(){
+    var x = (`/person/buyer/login` + $.param({userName:username, password: password}));
+    var y = `http://localhost:8080` +  x;
+    const res = await axios.post(y)
+    .catch(e => {
+      var errorMsg = e.message
+      console.log(errorMsg)
+    });
+    console.log(y)
+    return res.data;
+    
+  };
+
+  //ToDo: is statement checking if it's buyer or sitter
   const handleSubmit = (event) => {
     event.preventDefault();
     alert(`Values are:\n 
       UserName: ${username}\n
       Password: ${password}`);
+      fetchQuotes();
   }
   return (
     <div id="signinbox1" className={`sign-in-container ${props.rootClassName} `}>
